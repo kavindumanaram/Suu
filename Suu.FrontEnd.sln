@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.26228.9
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Suu.FrontEnd", "Suu.FrontEnd\Suu.FrontEnd.csproj", "{D01C6463-5568-4831-89C3-600A1D00827A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Suu.TweeterProcessor", "Suu.TweeterProcessor\Suu.TweeterProcessor.csproj", "{92FC6897-C10F-4095-80C5-805F5A10AB90}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{D01C6463-5568-4831-89C3-600A1D00827A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D01C6463-5568-4831-89C3-600A1D00827A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D01C6463-5568-4831-89C3-600A1D00827A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{92FC6897-C10F-4095-80C5-805F5A10AB90}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{92FC6897-C10F-4095-80C5-805F5A10AB90}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{92FC6897-C10F-4095-80C5-805F5A10AB90}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{92FC6897-C10F-4095-80C5-805F5A10AB90}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
