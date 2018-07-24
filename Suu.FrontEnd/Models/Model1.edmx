@@ -1,0 +1,141 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="SuuModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Suu.dbo.TwitterMessage1' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="TwitterMessage1">
+          <Key>
+            <PropertyRef Name="TwitterMessage" />
+          </Key>
+          <Property Name="TwitterMessage" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CreatedAt" Type="datetime" />
+          <Property Name="Id" Type="int" />
+          <Property Name="Text" Type="nvarchar(max)" />
+          <Property Name="Truncated" Type="bit" />
+          <Property Name="EntitiesId" Type="int" />
+          <Property Name="MetadataId" Type="int" />
+          <Property Name="Source" Type="nvarchar(max)" />
+          <Property Name="InReplyToStatusId" Type="int" />
+          <Property Name="inReplyToUserId" Type="int" />
+          <Property Name="InReplyToScreenName" Type="nvarchar" MaxLength="50" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="50" />
+          <Property Name="Geo" Type="nvarchar" MaxLength="50" />
+          <Property Name="Coordinates" Type="nvarchar" MaxLength="50" />
+          <Property Name="Place" Type="nvarchar" MaxLength="100" />
+          <Property Name="Contributors" Type="nvarchar" MaxLength="100" />
+          <Property Name="IsQuoteStatus" Type="bit" />
+          <Property Name="RetweetCount" Type="int" />
+        </EntityType>
+        <EntityContainer Name="SuuModelStoreContainer">
+          <EntitySet Name="TwitterMessage1" EntityType="Self.TwitterMessage1" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [TwitterMessage1].[TwitterMessage] AS [TwitterMessage], 
+    [TwitterMessage1].[CreatedAt] AS [CreatedAt], 
+    [TwitterMessage1].[Id] AS [Id], 
+    [TwitterMessage1].[Text] AS [Text], 
+    [TwitterMessage1].[Truncated] AS [Truncated], 
+    [TwitterMessage1].[EntitiesId] AS [EntitiesId], 
+    [TwitterMessage1].[MetadataId] AS [MetadataId], 
+    [TwitterMessage1].[Source] AS [Source], 
+    [TwitterMessage1].[InReplyToStatusId] AS [InReplyToStatusId], 
+    [TwitterMessage1].[inReplyToUserId] AS [inReplyToUserId], 
+    [TwitterMessage1].[InReplyToScreenName] AS [InReplyToScreenName], 
+    [TwitterMessage1].[UserId] AS [UserId], 
+    [TwitterMessage1].[Geo] AS [Geo], 
+    [TwitterMessage1].[Coordinates] AS [Coordinates], 
+    [TwitterMessage1].[Place] AS [Place], 
+    [TwitterMessage1].[Contributors] AS [Contributors], 
+    [TwitterMessage1].[IsQuoteStatus] AS [IsQuoteStatus], 
+    [TwitterMessage1].[RetweetCount] AS [RetweetCount]
+    FROM [dbo].[TwitterMessage1] AS [TwitterMessage1]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="SuuModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="TwitterMessage1">
+          <Key>
+            <PropertyRef Name="TwitterMessage" />
+          </Key>
+          <Property Name="TwitterMessage" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CreatedAt" Type="DateTime" Precision="3" />
+          <Property Name="Id" Type="Int32" />
+          <Property Name="Text" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Truncated" Type="Boolean" />
+          <Property Name="EntitiesId" Type="Int32" />
+          <Property Name="MetadataId" Type="Int32" />
+          <Property Name="Source" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="InReplyToStatusId" Type="Int32" />
+          <Property Name="inReplyToUserId" Type="Int32" />
+          <Property Name="InReplyToScreenName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UserId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Geo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Coordinates" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Place" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Contributors" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="IsQuoteStatus" Type="Boolean" />
+          <Property Name="RetweetCount" Type="Int32" />
+        </EntityType>
+        <EntityContainer Name="SuuEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="TwitterMessage1" EntityType="Self.TwitterMessage1" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="SuuModelStoreContainer" CdmEntityContainer="SuuEntities">
+          <EntitySetMapping Name="TwitterMessage1">
+            <EntityTypeMapping TypeName="SuuModel.TwitterMessage1">
+              <MappingFragment StoreEntitySet="TwitterMessage1">
+                <ScalarProperty Name="TwitterMessage" ColumnName="TwitterMessage" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Text" ColumnName="Text" />
+                <ScalarProperty Name="Truncated" ColumnName="Truncated" />
+                <ScalarProperty Name="EntitiesId" ColumnName="EntitiesId" />
+                <ScalarProperty Name="MetadataId" ColumnName="MetadataId" />
+                <ScalarProperty Name="Source" ColumnName="Source" />
+                <ScalarProperty Name="InReplyToStatusId" ColumnName="InReplyToStatusId" />
+                <ScalarProperty Name="inReplyToUserId" ColumnName="inReplyToUserId" />
+                <ScalarProperty Name="InReplyToScreenName" ColumnName="InReplyToScreenName" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Geo" ColumnName="Geo" />
+                <ScalarProperty Name="Coordinates" ColumnName="Coordinates" />
+                <ScalarProperty Name="Place" ColumnName="Place" />
+                <ScalarProperty Name="Contributors" ColumnName="Contributors" />
+                <ScalarProperty Name="IsQuoteStatus" ColumnName="IsQuoteStatus" />
+                <ScalarProperty Name="RetweetCount" ColumnName="RetweetCount" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
