@@ -6,6 +6,7 @@
     <edmx:Diagrams>
       <Diagram DiagramId="636bc62cf8274c81867a07a5e99ce7d0" Name="Diagram1">
         <EntityTypeShape EntityType="SuuModel.TwitterMessage1" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SuuModel.TwitterMessage" Width="1.5" PointX="3.375" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

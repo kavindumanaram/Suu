@@ -4,7 +4,30 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="SuuModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="SuuModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="TwitterMessage">
+          <Key>
+            <PropertyRef Name="TwitterMessageId" />
+          </Key>
+          <Property Name="TwitterMessageId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CreatedAt" Type="datetime" />
+          <Property Name="Id" Type="int" />
+          <Property Name="Text" Type="nvarchar(max)" />
+          <Property Name="Truncated" Type="bit" />
+          <Property Name="EntitiesId" Type="int" />
+          <Property Name="MetadataId" Type="int" />
+          <Property Name="Source" Type="nvarchar(max)" />
+          <Property Name="InReplyToStatusId" Type="int" />
+          <Property Name="inReplyToUserId" Type="int" />
+          <Property Name="InReplyToScreenName" Type="nvarchar" MaxLength="50" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="50" />
+          <Property Name="Geo" Type="nvarchar" MaxLength="50" />
+          <Property Name="Coordinates" Type="nvarchar" MaxLength="50" />
+          <Property Name="Place" Type="nvarchar" MaxLength="100" />
+          <Property Name="Contributors" Type="nvarchar" MaxLength="100" />
+          <Property Name="IsQuoteStatus" Type="bit" />
+          <Property Name="RetweetCount" Type="int" />
+        </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'Suu.dbo.TwitterMessage1' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="TwitterMessage1">
@@ -31,6 +54,7 @@ warning 6002: The table/view 'Suu.dbo.TwitterMessage1' does not have a primary k
           <Property Name="RetweetCount" Type="int" />
         </EntityType>
         <EntityContainer Name="SuuModelStoreContainer">
+          <EntitySet Name="TwitterMessage" EntityType="Self.TwitterMessage" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TwitterMessage1" EntityType="Self.TwitterMessage1" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [TwitterMessage1].[TwitterMessage] AS [TwitterMessage], 
@@ -54,8 +78,7 @@ warning 6002: The table/view 'Suu.dbo.TwitterMessage1' does not have a primary k
     FROM [dbo].[TwitterMessage1] AS [TwitterMessage1]</DefiningQuery>
           </EntitySet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="SuuModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -84,7 +107,31 @@ warning 6002: The table/view 'Suu.dbo.TwitterMessage1' does not have a primary k
         </EntityType>
         <EntityContainer Name="SuuEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="TwitterMessage1" EntityType="Self.TwitterMessage1" />
+          <EntitySet Name="TwitterMessages" EntityType="SuuModel.TwitterMessage" />
         </EntityContainer>
+        <EntityType Name="TwitterMessage">
+          <Key>
+            <PropertyRef Name="TwitterMessageId" />
+          </Key>
+          <Property Name="TwitterMessageId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CreatedAt" Type="DateTime" Precision="3" />
+          <Property Name="Id" Type="Int32" />
+          <Property Name="Text" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Truncated" Type="Boolean" />
+          <Property Name="EntitiesId" Type="Int32" />
+          <Property Name="MetadataId" Type="Int32" />
+          <Property Name="Source" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="InReplyToStatusId" Type="Int32" />
+          <Property Name="inReplyToUserId" Type="Int32" />
+          <Property Name="InReplyToScreenName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UserId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Geo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Coordinates" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Place" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Contributors" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="IsQuoteStatus" Type="Boolean" />
+          <Property Name="RetweetCount" Type="Int32" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -112,6 +159,30 @@ warning 6002: The table/view 'Suu.dbo.TwitterMessage1' does not have a primary k
                 <ScalarProperty Name="Contributors" ColumnName="Contributors" />
                 <ScalarProperty Name="IsQuoteStatus" ColumnName="IsQuoteStatus" />
                 <ScalarProperty Name="RetweetCount" ColumnName="RetweetCount" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TwitterMessages">
+            <EntityTypeMapping TypeName="SuuModel.TwitterMessage">
+              <MappingFragment StoreEntitySet="TwitterMessage">
+                <ScalarProperty Name="RetweetCount" ColumnName="RetweetCount" />
+                <ScalarProperty Name="IsQuoteStatus" ColumnName="IsQuoteStatus" />
+                <ScalarProperty Name="Contributors" ColumnName="Contributors" />
+                <ScalarProperty Name="Place" ColumnName="Place" />
+                <ScalarProperty Name="Coordinates" ColumnName="Coordinates" />
+                <ScalarProperty Name="Geo" ColumnName="Geo" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="InReplyToScreenName" ColumnName="InReplyToScreenName" />
+                <ScalarProperty Name="inReplyToUserId" ColumnName="inReplyToUserId" />
+                <ScalarProperty Name="InReplyToStatusId" ColumnName="InReplyToStatusId" />
+                <ScalarProperty Name="Source" ColumnName="Source" />
+                <ScalarProperty Name="MetadataId" ColumnName="MetadataId" />
+                <ScalarProperty Name="EntitiesId" ColumnName="EntitiesId" />
+                <ScalarProperty Name="Truncated" ColumnName="Truncated" />
+                <ScalarProperty Name="Text" ColumnName="Text" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="TwitterMessageId" ColumnName="TwitterMessageId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

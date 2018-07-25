@@ -26,5 +26,6 @@ namespace Suu.FrontEnd.Models
         }
     
         public virtual DbSet<TwitterMessage1> TwitterMessage1 { get; set; }
+        public virtual DbSet<TwitterMessage> TwitterMessages { get; set; }
     }
 }

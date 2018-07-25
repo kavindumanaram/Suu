@@ -9,7 +9,7 @@ using System.ServiceProcess;
 using System.Text;
 using System.Threading.Tasks;
 using System.Timers;
-
+using Suu.FrontEnd.Models;
 namespace Suu.TweeterProcessor
 {
     public partial class Service1 : ServiceBase
@@ -33,6 +33,12 @@ namespace Suu.TweeterProcessor
 
             try
             {
+                using (SuuEntities SuuContext = new SuuEntities()) {
+                    var x = new TwitterMessage();
+                    x.Text = DateTime.Now.ToString();
+                    SuuContext.TwitterMessages.Add(x);
+                    SuuContext.SaveChanges();
+                }
                 //using (SuuDatabaseEntities Suu = new SuuDatabaseEntities())
                 //{
                 //    var x = new TwitterMessage();
