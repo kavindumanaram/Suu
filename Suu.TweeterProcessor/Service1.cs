@@ -55,6 +55,7 @@ namespace Suu.TweeterProcessor
 
         protected override void OnStart(string[] args)
         {
+          //  System.Diagnostics.Debugger.Break();
             timeDelay.Interval = 30000; //30 seconds
             LogService("Service is Started....");
             timeDelay.Enabled = true;
