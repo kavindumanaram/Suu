@@ -70,5 +70,11 @@
     </None>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\oAuthTwitterWrapper\oAuthTwitterWrapper.csproj">
+      <Project>{8BB6CE98-A55B-495A-B8D2-37ECE69E2956}</Project>
+      <Name>oAuthTwitterWrapper</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -1,4 +1,5 @@
-﻿using Quartz;
+﻿using OAuthTwitterWrapper;
+using Quartz;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +12,11 @@ namespace Suu.TwitterFetcher
     {
         public void Execute(IJobExecutionContext context)
         {
-            Console.WriteLine($"[{DateTime.UtcNow}] Welcome from MyJob!!!!");
+            //Console.WriteLine($"[{DateTime.UtcNow}] Welcome from MyJob!!!!");
+            var twit = new OAuthTwitterWrapper.OAuthTwitterWrapper();
+            var timeline = twit.GetMyTimeline();
+            Console.WriteLine(timeline);
+            Console.ReadLine();
         }
     }
 }

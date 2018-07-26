@@ -18,9 +18,6 @@ namespace OAuthTwitterWrapper
 			AuthResponse twitAuthResponse = null;
 			// Do the Authenticate
 			var authHeaderFormat = "Basic {0}";
-            if (authenticateSettings.OAuthConsumerKey == null) {
-
-            }
 			var authHeader = string.Format(authHeaderFormat,
 										   Convert.ToBase64String(
 											   Encoding.UTF8.GetBytes(Uri.EscapeDataString(authenticateSettings.OAuthConsumerKey) + ":" +
