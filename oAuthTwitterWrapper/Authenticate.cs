@@ -8,17 +8,22 @@ using System.Web.Script.Serialization;
 using Newtonsoft.Json;
 using System.IO;
 using OAuthTwitterWrapper.JsonTypes;
+using NLog;
 
 namespace OAuthTwitterWrapper
 {
 	class Authenticate : IAuthenticate
 	{
-		public AuthResponse AuthenticateMe(IAuthenticateSettings authenticateSettings)
+        private readonly Logger logger = LogManager.GetCurrentClassLogger(); // creates a logger using the class name
+
+        public AuthResponse AuthenticateMe(IAuthenticateSettings authenticateSettings)
 		{
 			AuthResponse twitAuthResponse = null;
 			// Do the Authenticate
 			var authHeaderFormat = "Basic {0}";
+            if (authenticateSettings.OAuthConsumerKey == null) {
 
+            }
 			var authHeader = string.Format(authHeaderFormat,
 										   Convert.ToBase64String(
 											   Encoding.UTF8.GetBytes(Uri.EscapeDataString(authenticateSettings.OAuthConsumerKey) + ":" +
