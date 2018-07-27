@@ -1,0 +1,51 @@
+# Build Folders (you can keep bin if you'd like, to store dlls and pdbs)
+bin
+obj
+Debug
+Release
+
+# mstest test results
+TestResults
+
+deploy
+deploy/*
+_ReSharper.*
+*.csproj.user
+*.resharper.user
+*.resharper
+*.suo
+*.cache
+StyleCop.Cache
+Thumbs.db
+~$*
+*.log
+bower_components
+node_modules
+typings
+bower_components/*
+node_modules/*
+typings/*
+npm-debug.log.*
+*.sqlsuo
+*.orig
+*.sqlsuo
+packages
+
+# Mac OS System Files
+.DS_Store*
+
+# Xcode User Data
+xcuserdata/
+project.xcworkspace/
+
+#PyCharm Projects
+*.pyc
+.idea/
+Html5Apps
+Logs
+Logs/*
+/src/Server/src/UpgradeLog2.htm
+/src/Server/src/UpgradeLog.htm
+src/Server/src/UpgradeLog4.htm
+src/Services/SFDC/src/.vs/config/applicationhost.config
+src/Server/src/Macs.sln.DotSettings.user
