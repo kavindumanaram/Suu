@@ -18,17 +18,23 @@ namespace Suu.TwitterFetcher
             //Console.WriteLine($"[{DateTime.UtcNow}] Welcome from MyJob!!!!");
             var twit = new OAuthTwitterWrapper.OAuthTwitterWrapper();
             var timeline = twit.GetMyTimeline();
-            var result = JsonConvert.DeserializeObject<List<TimeLine>>(timeline);
+            var results = JsonConvert.DeserializeObject<List<TimeLine>>(timeline);
 
             using (SuuEntities SuuContext = new SuuEntities())
             {
-                var x = new TwitterMessage();
-                x.Text = DateTime.Now.ToString();
-                SuuContext.TwitterMessages.Add(x);
-                SuuContext.SaveChanges();
+                    for(int a = 0; a < results.Count; a++)
+                {
+
+                        var x = new TwitterMessage();
+                        x.Text = results[a].Text;
+                        SuuContext.TwitterMessages.Add(x);
+                        SuuContext.SaveChanges();
+                    
+                }
+
             }
 
-            Console.WriteLine(result);
+           // Console.WriteLine(result);
             Console.ReadLine();
         }
     }
