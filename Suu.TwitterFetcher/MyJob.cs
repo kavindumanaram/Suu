@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Script.Serialization;
 
 namespace Suu.TwitterFetcher
 {
@@ -15,27 +16,70 @@ namespace Suu.TwitterFetcher
     {
         public void Execute(IJobExecutionContext context)
         {
-            //Console.WriteLine($"[{DateTime.UtcNow}] Welcome from MyJob!!!!");
             var twit = new OAuthTwitterWrapper.OAuthTwitterWrapper();
-            var timeline = twit.GetMyTimeline();
-            var results = JsonConvert.DeserializeObject<List<TimeLine>>(timeline);
+            var sesarch = twit.GetSearch();
+            var SearchResponse = JsonConvert.DeserializeObject<Search>(sesarch);
 
-            using (SuuEntities SuuContext = new SuuEntities())
+            foreach (var result in SearchResponse.Results)
             {
-                    for(int a = 0; a < results.Count; a++)
-                {
 
-                        var x = new TwitterMessage();
-                        x.Text = results[a].Text;
-                        SuuContext.TwitterMessages.Add(x);
-                        SuuContext.SaveChanges();
-                    
-                }
+
+                Console.Write(result.Text + " —> " + result.place + " : " + result.id_str + "<br>");
+
 
             }
 
-           // Console.WriteLine(result);
+
+
+            //using (SuuEntities SuuContext = new SuuEntities())
+            //{
+
+            //    var UserIdList = SuuContext.Users.Select(u => u.Id);
+
+            //    for (int a = 0; a < results.Count; a++)
+            //    {
+            //        //var blog = new FrontEnd.Models.Status()
+            //        //{
+            //        //    text = results[a].Text,
+            //        //    Id = ConvertToLong(results[a].Id),
+            //        //    User = new FrontEnd.Models.User()
+            //        //    {
+            //        //        name = results[a].User.Name,
+            //        //        Id = results[a].User.Id
+            //        //    }
+            //        //};
+            //        //SuuContext.Status.Add(blog);
+            //        //SuuContext.SaveChanges();
+
+
+            //        // ---------------------
+            //       /* var status = new FrontEnd.Models.Status();
+            //        status.text = results[a].Text;
+            //        status.Id = ConvertToLong(results[a].Id);
+            //        status.User.name = results[a].User.Name;
+            //        status.User.Id = results[a].User.Id;
+            //        SuuContext.Status.Add(status);
+            //        SuuContext.SaveChanges();
+            //        */
+
+
+            //    }
+            //}
             Console.ReadLine();
         }
+
+        private long ConvertToLong(string x)
+        {
+            long temp;
+            if (long.TryParse(x, out temp))
+            {
+                return temp;
+            }
+
+            return 0;
+        }
+
     }
+
+
 }

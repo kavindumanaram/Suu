@@ -34,10 +34,10 @@ namespace Suu.TweeterProcessor
             try
             {
                 using (SuuEntities SuuContext = new SuuEntities()) {
-                    var x = new TwitterMessage();
-                    x.Text = DateTime.Now.ToString();
-                    SuuContext.TwitterMessages.Add(x);
-                    SuuContext.SaveChanges();
+                    //var x = new TwitterMessage();
+                    //x.Text = DateTime.Now.ToString();
+                    //SuuContext.TwitterMessages.Add(x);
+                    //SuuContext.SaveChanges();
                 }
                 //using (SuuDatabaseEntities Suu = new SuuDatabaseEntities())
                 //{

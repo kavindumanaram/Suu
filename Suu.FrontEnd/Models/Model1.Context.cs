@@ -25,7 +25,8 @@ namespace Suu.FrontEnd.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<TwitterMessage1> TwitterMessage1 { get; set; }
-        public virtual DbSet<TwitterMessage> TwitterMessages { get; set; }
+        public virtual DbSet<Metadata> Metadatas { get; set; }
+        public virtual DbSet<Status> Status { get; set; }
+        public virtual DbSet<User> Users { get; set; }
     }
 }

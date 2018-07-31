@@ -5,184 +5,337 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="SuuModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="TwitterMessage">
+        <EntityType Name="Metadata">
           <Key>
-            <PropertyRef Name="TwitterMessageId" />
+            <PropertyRef Name="Id" />
           </Key>
-          <Property Name="TwitterMessageId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="CreatedAt" Type="datetime" />
-          <Property Name="Id" Type="int" />
-          <Property Name="Text" Type="nvarchar(max)" />
-          <Property Name="Truncated" Type="bit" />
-          <Property Name="EntitiesId" Type="int" />
-          <Property Name="MetadataId" Type="int" />
-          <Property Name="Source" Type="nvarchar(max)" />
-          <Property Name="InReplyToStatusId" Type="int" />
-          <Property Name="inReplyToUserId" Type="int" />
-          <Property Name="InReplyToScreenName" Type="nvarchar" MaxLength="50" />
-          <Property Name="UserId" Type="nvarchar" MaxLength="50" />
-          <Property Name="Geo" Type="nvarchar" MaxLength="50" />
-          <Property Name="Coordinates" Type="nvarchar" MaxLength="50" />
-          <Property Name="Place" Type="nvarchar" MaxLength="100" />
-          <Property Name="Contributors" Type="nvarchar" MaxLength="100" />
-          <Property Name="IsQuoteStatus" Type="bit" />
-          <Property Name="RetweetCount" Type="int" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="iso_language_code" Type="varchar" MaxLength="50" />
+          <Property Name="result_type" Type="varchar" MaxLength="50" />
+          <Property Name="status_id" Type="bigint" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'Suu.dbo.TwitterMessage1' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="TwitterMessage1">
+        <EntityType Name="Status">
           <Key>
-            <PropertyRef Name="TwitterMessage" />
+            <PropertyRef Name="Id" />
           </Key>
-          <Property Name="TwitterMessage" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="CreatedAt" Type="datetime" />
-          <Property Name="Id" Type="int" />
-          <Property Name="Text" Type="nvarchar(max)" />
-          <Property Name="Truncated" Type="bit" />
-          <Property Name="EntitiesId" Type="int" />
-          <Property Name="MetadataId" Type="int" />
-          <Property Name="Source" Type="nvarchar(max)" />
-          <Property Name="InReplyToStatusId" Type="int" />
-          <Property Name="inReplyToUserId" Type="int" />
-          <Property Name="InReplyToScreenName" Type="nvarchar" MaxLength="50" />
-          <Property Name="UserId" Type="nvarchar" MaxLength="50" />
-          <Property Name="Geo" Type="nvarchar" MaxLength="50" />
-          <Property Name="Coordinates" Type="nvarchar" MaxLength="50" />
-          <Property Name="Place" Type="nvarchar" MaxLength="100" />
-          <Property Name="Contributors" Type="nvarchar" MaxLength="100" />
-          <Property Name="IsQuoteStatus" Type="bit" />
-          <Property Name="RetweetCount" Type="int" />
+          <Property Name="Id" Type="bigint" Nullable="false" />
+          <Property Name="created_at" Type="varchar" MaxLength="50" />
+          <Property Name="text" Type="varchar" MaxLength="300" />
+          <Property Name="truncated" Type="bit" />
+          <Property Name="metadata" Type="int" />
+          <Property Name="source" Type="nvarchar(max)" />
+          <Property Name="in_reply_to_status_id" Type="bigint" />
+          <Property Name="in_reply_to_user_id" Type="int" />
+          <Property Name="in_reply_to_screen_name" Type="varchar" MaxLength="50" />
+          <Property Name="geo" Type="varchar" MaxLength="50" />
+          <Property Name="coordinates" Type="varchar" MaxLength="50" />
+          <Property Name="place" Type="varchar" MaxLength="50" />
+          <Property Name="contributors" Type="varchar" MaxLength="50" />
+          <Property Name="retweeted_status" Type="varchar" MaxLength="50" />
+          <Property Name="is_quote_status" Type="bit" />
+          <Property Name="retweet_count" Type="int" />
+          <Property Name="favorite_count" Type="int" />
+          <Property Name="favorited" Type="bit" />
+          <Property Name="retweeted" Type="bit" />
+          <Property Name="lang" Type="nvarchar" MaxLength="50" />
+          <Property Name="possibly_sensitive" Type="bit" />
+          <Property Name="user_id" Type="bigint" />
         </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="50" />
+          <Property Name="screen_name" Type="varchar" MaxLength="50" />
+          <Property Name="location" Type="varchar" MaxLength="50" />
+          <Property Name="description" Type="varchar" MaxLength="50" />
+          <Property Name="url" Type="varchar" MaxLength="50" />
+          <Property Name="protected" Type="bit" />
+          <Property Name="followers_count" Type="int" />
+          <Property Name="friends_count" Type="int" />
+          <Property Name="listed_count" Type="int" />
+          <Property Name="created_at" Type="varchar" MaxLength="50" />
+          <Property Name="favourites_count" Type="int" />
+          <Property Name="utc_offset" Type="nvarchar" MaxLength="50" />
+          <Property Name="time_zone" Type="nvarchar" MaxLength="50" />
+          <Property Name="geo_enabled" Type="bit" />
+          <Property Name="verified" Type="bit" />
+          <Property Name="statuses_count" Type="int" />
+          <Property Name="lang" Type="varchar" MaxLength="50" />
+          <Property Name="contributors_enabled" Type="bit" />
+          <Property Name="is_translator" Type="bit" />
+          <Property Name="is_translation_enabled" Type="bit" />
+          <Property Name="profile_background_color" Type="varchar" MaxLength="50" />
+          <Property Name="profile_background_image_url" Type="varchar" MaxLength="50" />
+          <Property Name="profile_background_image_url_https" Type="varchar" MaxLength="50" />
+          <Property Name="profile_background_tile" Type="bit" />
+          <Property Name="profile_image_url" Type="varchar" MaxLength="50" />
+          <Property Name="profile_image_url_https" Type="varchar" MaxLength="50" />
+          <Property Name="profile_banner_url" Type="varchar" MaxLength="50" />
+          <Property Name="profile_link_color" Type="varchar" MaxLength="50" />
+          <Property Name="profile_sidebar_border_color" Type="varchar" MaxLength="50" />
+          <Property Name="profile_sidebar_fill_color" Type="varchar" MaxLength="50" />
+          <Property Name="profile_text_color" Type="varchar" MaxLength="50" />
+          <Property Name="profile_use_background_image" Type="bit" />
+          <Property Name="has_extended_profile" Type="bit" />
+          <Property Name="default_profile" Type="bit" />
+          <Property Name="default_profile_image" Type="bit" />
+          <Property Name="following" Type="bit" />
+          <Property Name="follow_request_sent" Type="bit" />
+          <Property Name="notifications" Type="bit" />
+          <Property Name="translator_type" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK__Metadata__status__21B6055D">
+          <End Role="Status" Type="Self.Status" Multiplicity="0..1" />
+          <End Role="Metadata" Type="Self.Metadata" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Status">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Metadata">
+              <PropertyRef Name="status_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Status__user_id__1ED998B2">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Status" Type="Self.Status" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Status">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="SuuModelStoreContainer">
-          <EntitySet Name="TwitterMessage" EntityType="Self.TwitterMessage" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="TwitterMessage1" EntityType="Self.TwitterMessage1" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [TwitterMessage1].[TwitterMessage] AS [TwitterMessage], 
-    [TwitterMessage1].[CreatedAt] AS [CreatedAt], 
-    [TwitterMessage1].[Id] AS [Id], 
-    [TwitterMessage1].[Text] AS [Text], 
-    [TwitterMessage1].[Truncated] AS [Truncated], 
-    [TwitterMessage1].[EntitiesId] AS [EntitiesId], 
-    [TwitterMessage1].[MetadataId] AS [MetadataId], 
-    [TwitterMessage1].[Source] AS [Source], 
-    [TwitterMessage1].[InReplyToStatusId] AS [InReplyToStatusId], 
-    [TwitterMessage1].[inReplyToUserId] AS [inReplyToUserId], 
-    [TwitterMessage1].[InReplyToScreenName] AS [InReplyToScreenName], 
-    [TwitterMessage1].[UserId] AS [UserId], 
-    [TwitterMessage1].[Geo] AS [Geo], 
-    [TwitterMessage1].[Coordinates] AS [Coordinates], 
-    [TwitterMessage1].[Place] AS [Place], 
-    [TwitterMessage1].[Contributors] AS [Contributors], 
-    [TwitterMessage1].[IsQuoteStatus] AS [IsQuoteStatus], 
-    [TwitterMessage1].[RetweetCount] AS [RetweetCount]
-    FROM [dbo].[TwitterMessage1] AS [TwitterMessage1]</DefiningQuery>
-          </EntitySet>
+          <EntitySet Name="Metadata" EntityType="Self.Metadata" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Status" EntityType="Self.Status" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Metadata__status__21B6055D" Association="Self.FK__Metadata__status__21B6055D">
+            <End Role="Status" EntitySet="Status" />
+            <End Role="Metadata" EntitySet="Metadata" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Status__user_id__1ED998B2" Association="Self.FK__Status__user_id__1ED998B2">
+            <End Role="User" EntitySet="User" />
+            <End Role="Status" EntitySet="Status" />
+          </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="SuuModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="TwitterMessage1">
-          <Key>
-            <PropertyRef Name="TwitterMessage" />
-          </Key>
-          <Property Name="TwitterMessage" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="CreatedAt" Type="DateTime" Precision="3" />
-          <Property Name="Id" Type="Int32" />
-          <Property Name="Text" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Truncated" Type="Boolean" />
-          <Property Name="EntitiesId" Type="Int32" />
-          <Property Name="MetadataId" Type="Int32" />
-          <Property Name="Source" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="InReplyToStatusId" Type="Int32" />
-          <Property Name="inReplyToUserId" Type="Int32" />
-          <Property Name="InReplyToScreenName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="UserId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Geo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Coordinates" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Place" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="Contributors" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="IsQuoteStatus" Type="Boolean" />
-          <Property Name="RetweetCount" Type="Int32" />
-        </EntityType>
         <EntityContainer Name="SuuEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="TwitterMessage1" EntityType="Self.TwitterMessage1" />
-          <EntitySet Name="TwitterMessages" EntityType="SuuModel.TwitterMessage" />
+          <EntitySet Name="Metadatas" EntityType="SuuModel.Metadata" />
+          <EntitySet Name="Status" EntityType="SuuModel.Status" />
+          <EntitySet Name="Users" EntityType="SuuModel.User" />
+          <AssociationSet Name="FK__Metadata__status__21B6055D" Association="SuuModel.FK__Metadata__status__21B6055D">
+            <End Role="Status" EntitySet="Status" />
+            <End Role="Metadata" EntitySet="Metadatas" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Status__user_id__1ED998B2" Association="SuuModel.FK__Status__user_id__1ED998B2">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Status" EntitySet="Status" />
+          </AssociationSet>
         </EntityContainer>
-        <EntityType Name="TwitterMessage">
+        <EntityType Name="Metadata">
           <Key>
-            <PropertyRef Name="TwitterMessageId" />
+            <PropertyRef Name="Id" />
           </Key>
-          <Property Name="TwitterMessageId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="CreatedAt" Type="DateTime" Precision="3" />
-          <Property Name="Id" Type="Int32" />
-          <Property Name="Text" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Truncated" Type="Boolean" />
-          <Property Name="EntitiesId" Type="Int32" />
-          <Property Name="MetadataId" Type="Int32" />
-          <Property Name="Source" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="InReplyToStatusId" Type="Int32" />
-          <Property Name="inReplyToUserId" Type="Int32" />
-          <Property Name="InReplyToScreenName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="UserId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Geo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Coordinates" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Place" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="Contributors" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="IsQuoteStatus" Type="Boolean" />
-          <Property Name="RetweetCount" Type="Int32" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="iso_language_code" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="result_type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="status_id" Type="Int64" />
+          <NavigationProperty Name="Status" Relationship="SuuModel.FK__Metadata__status__21B6055D" FromRole="Metadata" ToRole="Status" />
         </EntityType>
-      </Schema>
+        <EntityType Name="Status">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" />
+          <Property Name="created_at" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="text" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="truncated" Type="Boolean" />
+          <Property Name="metadata" Type="Int32" />
+          <Property Name="source" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="in_reply_to_status_id" Type="Int64" />
+          <Property Name="in_reply_to_user_id" Type="Int32" />
+          <Property Name="in_reply_to_screen_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="geo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="coordinates" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="place" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="contributors" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="retweeted_status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="is_quote_status" Type="Boolean" />
+          <Property Name="retweet_count" Type="Int32" />
+          <Property Name="favorite_count" Type="Int32" />
+          <Property Name="favorited" Type="Boolean" />
+          <Property Name="retweeted" Type="Boolean" />
+          <Property Name="lang" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="possibly_sensitive" Type="Boolean" />
+          <Property Name="user_id" Type="Int64" />
+          <NavigationProperty Name="Metadatas" Relationship="SuuModel.FK__Metadata__status__21B6055D" FromRole="Status" ToRole="Metadata" />
+          <NavigationProperty Name="User" Relationship="SuuModel.FK__Status__user_id__1ED998B2" FromRole="Status" ToRole="User" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="screen_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="location" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="description" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="url" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="protected" Type="Boolean" />
+          <Property Name="followers_count" Type="Int32" />
+          <Property Name="friends_count" Type="Int32" />
+          <Property Name="listed_count" Type="Int32" />
+          <Property Name="created_at" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="favourites_count" Type="Int32" />
+          <Property Name="utc_offset" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="time_zone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="geo_enabled" Type="Boolean" />
+          <Property Name="verified" Type="Boolean" />
+          <Property Name="statuses_count" Type="Int32" />
+          <Property Name="lang" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="contributors_enabled" Type="Boolean" />
+          <Property Name="is_translator" Type="Boolean" />
+          <Property Name="is_translation_enabled" Type="Boolean" />
+          <Property Name="profile_background_color" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="profile_background_image_url" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="profile_background_image_url_https" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="profile_background_tile" Type="Boolean" />
+          <Property Name="profile_image_url" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="profile_image_url_https" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="profile_banner_url" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="profile_link_color" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="profile_sidebar_border_color" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="profile_sidebar_fill_color" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="profile_text_color" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="profile_use_background_image" Type="Boolean" />
+          <Property Name="has_extended_profile" Type="Boolean" />
+          <Property Name="default_profile" Type="Boolean" />
+          <Property Name="default_profile_image" Type="Boolean" />
+          <Property Name="following" Type="Boolean" />
+          <Property Name="follow_request_sent" Type="Boolean" />
+          <Property Name="notifications" Type="Boolean" />
+          <Property Name="translator_type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Status" Relationship="SuuModel.FK__Status__user_id__1ED998B2" FromRole="User" ToRole="Status" />
+        </EntityType>
+        <Association Name="FK__Metadata__status__21B6055D">
+          <End Type="SuuModel.Status" Role="Status" Multiplicity="0..1" />
+          <End Type="SuuModel.Metadata" Role="Metadata" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Status">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Metadata">
+              <PropertyRef Name="status_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Status__user_id__1ED998B2">
+          <End Type="SuuModel.User" Role="User" Multiplicity="0..1" />
+          <End Type="SuuModel.Status" Role="Status" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Status">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="SuuModelStoreContainer" CdmEntityContainer="SuuEntities">
-          <EntitySetMapping Name="TwitterMessage1">
-            <EntityTypeMapping TypeName="SuuModel.TwitterMessage1">
-              <MappingFragment StoreEntitySet="TwitterMessage1">
-                <ScalarProperty Name="TwitterMessage" ColumnName="TwitterMessage" />
-                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+          <EntitySetMapping Name="Metadatas">
+            <EntityTypeMapping TypeName="SuuModel.Metadata">
+              <MappingFragment StoreEntitySet="Metadata">
+                <ScalarProperty Name="status_id" ColumnName="status_id" />
+                <ScalarProperty Name="result_type" ColumnName="result_type" />
+                <ScalarProperty Name="iso_language_code" ColumnName="iso_language_code" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Text" ColumnName="Text" />
-                <ScalarProperty Name="Truncated" ColumnName="Truncated" />
-                <ScalarProperty Name="EntitiesId" ColumnName="EntitiesId" />
-                <ScalarProperty Name="MetadataId" ColumnName="MetadataId" />
-                <ScalarProperty Name="Source" ColumnName="Source" />
-                <ScalarProperty Name="InReplyToStatusId" ColumnName="InReplyToStatusId" />
-                <ScalarProperty Name="inReplyToUserId" ColumnName="inReplyToUserId" />
-                <ScalarProperty Name="InReplyToScreenName" ColumnName="InReplyToScreenName" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="Geo" ColumnName="Geo" />
-                <ScalarProperty Name="Coordinates" ColumnName="Coordinates" />
-                <ScalarProperty Name="Place" ColumnName="Place" />
-                <ScalarProperty Name="Contributors" ColumnName="Contributors" />
-                <ScalarProperty Name="IsQuoteStatus" ColumnName="IsQuoteStatus" />
-                <ScalarProperty Name="RetweetCount" ColumnName="RetweetCount" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="TwitterMessages">
-            <EntityTypeMapping TypeName="SuuModel.TwitterMessage">
-              <MappingFragment StoreEntitySet="TwitterMessage">
-                <ScalarProperty Name="RetweetCount" ColumnName="RetweetCount" />
-                <ScalarProperty Name="IsQuoteStatus" ColumnName="IsQuoteStatus" />
-                <ScalarProperty Name="Contributors" ColumnName="Contributors" />
-                <ScalarProperty Name="Place" ColumnName="Place" />
-                <ScalarProperty Name="Coordinates" ColumnName="Coordinates" />
-                <ScalarProperty Name="Geo" ColumnName="Geo" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="InReplyToScreenName" ColumnName="InReplyToScreenName" />
-                <ScalarProperty Name="inReplyToUserId" ColumnName="inReplyToUserId" />
-                <ScalarProperty Name="InReplyToStatusId" ColumnName="InReplyToStatusId" />
-                <ScalarProperty Name="Source" ColumnName="Source" />
-                <ScalarProperty Name="MetadataId" ColumnName="MetadataId" />
-                <ScalarProperty Name="EntitiesId" ColumnName="EntitiesId" />
-                <ScalarProperty Name="Truncated" ColumnName="Truncated" />
-                <ScalarProperty Name="Text" ColumnName="Text" />
+          <EntitySetMapping Name="Status">
+            <EntityTypeMapping TypeName="SuuModel.Status">
+              <MappingFragment StoreEntitySet="Status">
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="possibly_sensitive" ColumnName="possibly_sensitive" />
+                <ScalarProperty Name="lang" ColumnName="lang" />
+                <ScalarProperty Name="retweeted" ColumnName="retweeted" />
+                <ScalarProperty Name="favorited" ColumnName="favorited" />
+                <ScalarProperty Name="favorite_count" ColumnName="favorite_count" />
+                <ScalarProperty Name="retweet_count" ColumnName="retweet_count" />
+                <ScalarProperty Name="is_quote_status" ColumnName="is_quote_status" />
+                <ScalarProperty Name="retweeted_status" ColumnName="retweeted_status" />
+                <ScalarProperty Name="contributors" ColumnName="contributors" />
+                <ScalarProperty Name="place" ColumnName="place" />
+                <ScalarProperty Name="coordinates" ColumnName="coordinates" />
+                <ScalarProperty Name="geo" ColumnName="geo" />
+                <ScalarProperty Name="in_reply_to_screen_name" ColumnName="in_reply_to_screen_name" />
+                <ScalarProperty Name="in_reply_to_user_id" ColumnName="in_reply_to_user_id" />
+                <ScalarProperty Name="in_reply_to_status_id" ColumnName="in_reply_to_status_id" />
+                <ScalarProperty Name="source" ColumnName="source" />
+                <ScalarProperty Name="metadata" ColumnName="metadata" />
+                <ScalarProperty Name="truncated" ColumnName="truncated" />
+                <ScalarProperty Name="text" ColumnName="text" />
+                <ScalarProperty Name="created_at" ColumnName="created_at" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
-                <ScalarProperty Name="TwitterMessageId" ColumnName="TwitterMessageId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="SuuModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="translator_type" ColumnName="translator_type" />
+                <ScalarProperty Name="notifications" ColumnName="notifications" />
+                <ScalarProperty Name="follow_request_sent" ColumnName="follow_request_sent" />
+                <ScalarProperty Name="following" ColumnName="following" />
+                <ScalarProperty Name="default_profile_image" ColumnName="default_profile_image" />
+                <ScalarProperty Name="default_profile" ColumnName="default_profile" />
+                <ScalarProperty Name="has_extended_profile" ColumnName="has_extended_profile" />
+                <ScalarProperty Name="profile_use_background_image" ColumnName="profile_use_background_image" />
+                <ScalarProperty Name="profile_text_color" ColumnName="profile_text_color" />
+                <ScalarProperty Name="profile_sidebar_fill_color" ColumnName="profile_sidebar_fill_color" />
+                <ScalarProperty Name="profile_sidebar_border_color" ColumnName="profile_sidebar_border_color" />
+                <ScalarProperty Name="profile_link_color" ColumnName="profile_link_color" />
+                <ScalarProperty Name="profile_banner_url" ColumnName="profile_banner_url" />
+                <ScalarProperty Name="profile_image_url_https" ColumnName="profile_image_url_https" />
+                <ScalarProperty Name="profile_image_url" ColumnName="profile_image_url" />
+                <ScalarProperty Name="profile_background_tile" ColumnName="profile_background_tile" />
+                <ScalarProperty Name="profile_background_image_url_https" ColumnName="profile_background_image_url_https" />
+                <ScalarProperty Name="profile_background_image_url" ColumnName="profile_background_image_url" />
+                <ScalarProperty Name="profile_background_color" ColumnName="profile_background_color" />
+                <ScalarProperty Name="is_translation_enabled" ColumnName="is_translation_enabled" />
+                <ScalarProperty Name="is_translator" ColumnName="is_translator" />
+                <ScalarProperty Name="contributors_enabled" ColumnName="contributors_enabled" />
+                <ScalarProperty Name="lang" ColumnName="lang" />
+                <ScalarProperty Name="statuses_count" ColumnName="statuses_count" />
+                <ScalarProperty Name="verified" ColumnName="verified" />
+                <ScalarProperty Name="geo_enabled" ColumnName="geo_enabled" />
+                <ScalarProperty Name="time_zone" ColumnName="time_zone" />
+                <ScalarProperty Name="utc_offset" ColumnName="utc_offset" />
+                <ScalarProperty Name="favourites_count" ColumnName="favourites_count" />
+                <ScalarProperty Name="created_at" ColumnName="created_at" />
+                <ScalarProperty Name="listed_count" ColumnName="listed_count" />
+                <ScalarProperty Name="friends_count" ColumnName="friends_count" />
+                <ScalarProperty Name="followers_count" ColumnName="followers_count" />
+                <ScalarProperty Name="protected" ColumnName="protected" />
+                <ScalarProperty Name="url" ColumnName="url" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="location" ColumnName="location" />
+                <ScalarProperty Name="screen_name" ColumnName="screen_name" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
