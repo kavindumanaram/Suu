@@ -9,8 +9,8 @@
         <EntityTypeShape EntityType="SuuModel.Metadata" Width="1.5" PointX="5.25" PointY="4.75" />
         <EntityTypeShape EntityType="SuuModel.Status" Width="1.5" PointX="3" PointY="2.875" />
         <EntityTypeShape EntityType="SuuModel.User" Width="1.5" PointX="0.75" PointY="1.25" />
-        <AssociationConnector Association="SuuModel.FK__Metadata__status__5441852A" />
-        <AssociationConnector Association="SuuModel.FK__Status__user_id__5165187F" />
+        <AssociationConnector Association="SuuModel.FK__Metadata__status__7A672E12" />
+        <AssociationConnector Association="SuuModel.FK__Status__user_id__778AC167" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

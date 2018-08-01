@@ -25,8 +25,8 @@ CONSTRAINT [PK_Url] PRIMARY KEY CLUSTERED
 
 create table [User] (
     [Id] [bigint] primary key NOT NULL,
-    [name] [varchar](50) NULL,
-    [screen_name] [varchar](50) NULL,
+    [name] [nvarchar](50) COLLATE Latin1_General_CI_AI NULL,
+    [screen_name] [nvarchar](50) COLLATE Latin1_General_CI_AI NULL,
     [location] [varchar](50) NULL,
     [description] [varchar](50) NULL,
     [url] [varchar](50) NULL,
@@ -75,13 +75,13 @@ create table [User] (
 create table [Status] (
     [Id] [bigint] primary key NOT NULL,
     [created_at] [varchar](50) NULL,
-    [text] [varchar](300) NULL,
+    [text] [nvarchar](300)  COLLATE Latin1_General_CI_AI NULL,
     [truncated] bit  NULL,
     [metadata] int,
     [source] nvarchar(max) NULL,
     [in_reply_to_status_id] [bigint] NULL,
     [in_reply_to_user_id] [int] NULL,
-    [in_reply_to_screen_name] [varchar](50) NULL,
+    [in_reply_to_screen_name] [nvarchar](50) COLLATE Latin1_General_CI_AI NULL,
    -- [user] int,
     [geo]  [varchar](50) NULL,
     [coordinates]  [varchar](50) NULL,
