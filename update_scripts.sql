@@ -23,49 +23,8 @@ CONSTRAINT [PK_Url] PRIMARY KEY CLUSTERED
 )
 */
 
-create table [Status] (
-    [Id] [int] primary key NOT NULL,
-    [created_at] [varchar](50) NULL,
-    [text] [varchar](300) NULL,
-    [truncated] bit  NULL,
-    [metadata] int,
-    [source] nvarchar(max) NULL,
-    [in_reply_to_status_id] [bigint] NULL,
-    [in_reply_to_user_id] [int] NULL,
-    [in_reply_to_screen_name] [varchar](50) NULL,
-   -- [user] int,
-    [geo]  [varchar](50) NULL,
-    [coordinates]  [varchar](50) NULL,
-    [place]  [varchar](50) NULL,
-    [contributors]  [varchar](50) NULL,
-    [retweeted_status]  [varchar](50),
-    [is_quote_status] bit  NULL,
-    [retweet_count] [int]  NULL,
-    [favorite_count] [int]  NULL,
-    [favorited] bit  NULL,
-    [retweeted] bit  NULL,
-    [lang] nVarchar(50) NULL,
-    [possibly_sensitive] bit NULL,
---CONSTRAINT [PK_Status] PRIMARY KEY CLUSTERED
- --  (
- --     [Id] asc
- --  )
-)
-
-
-create table Metadata (
-    [Id] [int] IDENTITY(1,1) Primary key NOT NULL,
-    [iso_language_code] [varchar](50) NULL,
-    [result_type] [varchar](50) NULL,
-	status_id   INT FOREIGN KEY REFERENCES [Status](Id)
-/*CONSTRAINT [PK_Metadata] PRIMARY KEY CLUSTERED
-   (
-      [Id] asc
-   )*/
-)
-
 create table [User] (
-    [Id] [int] primary key NOT NULL,
+    [Id] [bigint] primary key NOT NULL,
     [name] [varchar](50) NULL,
     [screen_name] [varchar](50) NULL,
     [location] [varchar](50) NULL,
@@ -105,11 +64,54 @@ create table [User] (
     [follow_request_sent] bit  NULL,
     [notifications] bit  NULL,
     [translator_type] [varchar](50) NULL,
-	retweeted_status_id INT UNIQUE FOREIGN KEY REFERENCES [Status](Id)
+	--retweeted_status_id [bigint] UNIQUE FOREIGN KEY REFERENCES [Status](Id)
 --CONSTRAINT [PK_User] PRIMARY KEY CLUSTERED
 --   (
 --      [Id] asc
 --   )
+)
+
+
+create table [Status] (
+    [Id] [bigint] primary key NOT NULL,
+    [created_at] [varchar](50) NULL,
+    [text] [varchar](300) NULL,
+    [truncated] bit  NULL,
+    [metadata] int,
+    [source] nvarchar(max) NULL,
+    [in_reply_to_status_id] [bigint] NULL,
+    [in_reply_to_user_id] [int] NULL,
+    [in_reply_to_screen_name] [varchar](50) NULL,
+   -- [user] int,
+    [geo]  [varchar](50) NULL,
+    [coordinates]  [varchar](50) NULL,
+    [place]  [varchar](50) NULL,
+    [contributors]  [varchar](50) NULL,
+    [retweeted_status]  [varchar](50),
+    [is_quote_status] bit  NULL,
+    [retweet_count] [int]  NULL,
+    [favorite_count] [int]  NULL,
+    [favorited] bit  NULL,
+    [retweeted] bit  NULL,
+    [lang] nVarchar(50) NULL,
+    [possibly_sensitive] bit NULL,
+	[user_id] [bigint] UNIQUE FOREIGN KEY REFERENCES [User](Id)
+--CONSTRAINT [PK_Status] PRIMARY KEY CLUSTERED
+ --  (
+ --     [Id] asc
+ --  )
+)
+
+
+create table Metadata (
+    [Id] [int] IDENTITY(1,1) Primary key NOT NULL,
+    [iso_language_code] [varchar](50) NULL,
+    [result_type] [varchar](50) NULL,
+	status_id   [bigint] FOREIGN KEY REFERENCES [Status](Id)
+/*CONSTRAINT [PK_Metadata] PRIMARY KEY CLUSTERED
+   (
+      [Id] asc
+   )*/
 )
 
 /*create table RetweetedStatus (

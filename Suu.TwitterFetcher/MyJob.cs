@@ -20,51 +20,52 @@ namespace Suu.TwitterFetcher
             var sesarch = twit.GetSearch();
             var SearchResponse = JsonConvert.DeserializeObject<Search>(sesarch);
 
-            foreach (var result in SearchResponse.Results)
-            {
-
-
-                Console.Write(result.Text + " —> " + result.place + " : " + result.id_str + "<br>");
-
-
-            }
-
-
-
-            //using (SuuEntities SuuContext = new SuuEntities())
+            //foreach (var result in SearchResponse.Results)
             //{
 
-            //    var UserIdList = SuuContext.Users.Select(u => u.Id);
 
-            //    for (int a = 0; a < results.Count; a++)
-            //    {
-            //        //var blog = new FrontEnd.Models.Status()
-            //        //{
-            //        //    text = results[a].Text,
-            //        //    Id = ConvertToLong(results[a].Id),
-            //        //    User = new FrontEnd.Models.User()
-            //        //    {
-            //        //        name = results[a].User.Name,
-            //        //        Id = results[a].User.Id
-            //        //    }
-            //        //};
-            //        //SuuContext.Status.Add(blog);
-            //        //SuuContext.SaveChanges();
+            //    Console.Write(result.Text + " —> " + result.place + " : " + result.id_str + "<br>");
 
 
-            //        // ---------------------
-            //       /* var status = new FrontEnd.Models.Status();
-            //        status.text = results[a].Text;
-            //        status.Id = ConvertToLong(results[a].Id);
-            //        status.User.name = results[a].User.Name;
-            //        status.User.Id = results[a].User.Id;
-            //        SuuContext.Status.Add(status);
-            //        SuuContext.SaveChanges();
-            //        */
-
-
-            //    }
             //}
+
+
+
+            using (SuuEntities SuuContext = new SuuEntities())
+            {
+
+             //   var UserIdList = SuuContext.Users.Select(u => u.Id);
+
+                for (int a = 0; a < SearchResponse.Results.Count; a++)
+                {
+                    var results = SearchResponse.Results;
+                    var blog = new FrontEnd.Models.Status()
+                    {
+                        text = results[a].Text,
+                        Id = results[a].id,
+                        User = new FrontEnd.Models.User()
+                        {
+                            name = results[a].User.Name,
+                            Id = results[a].User.Id
+                        }
+                    };
+                    SuuContext.Status.Add(blog);
+                    SuuContext.SaveChanges();
+
+
+                    // ---------------------
+                    /* var status = new FrontEnd.Models.Status();
+                     status.text = results[a].Text;
+                     status.Id = ConvertToLong(results[a].Id);
+                     status.User.name = results[a].User.Name;
+                     status.User.Id = results[a].User.Id;
+                     SuuContext.Status.Add(status);
+                     SuuContext.SaveChanges();
+                     */
+
+
+                }
+            }
             Console.ReadLine();
         }
 

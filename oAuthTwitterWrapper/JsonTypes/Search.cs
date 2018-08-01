@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Newtonsoft.Json;
+using System;
 
 namespace OAuthTwitterWrapper.JsonTypes
 {
@@ -41,7 +42,7 @@ namespace OAuthTwitterWrapper.JsonTypes
         public Metadata metadata { get; set; }
         [JsonProperty("created_at")]
         public string CreatedAt { get; set; }
-        public object id { get; set; }
+        public Int64 id { get; set; }
         public string id_str { get; set; }
         [JsonProperty("text")]
         public string Text { get; set; }

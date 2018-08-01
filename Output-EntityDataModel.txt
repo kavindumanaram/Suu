@@ -1,0 +1,18 @@
+﻿Generated model file: SuuModel.edmx.
+Loading metadata from the database took 00:00:00.6090166.
+Generating the model took 00:00:01.9600256.
+Added the connection string to the Web.Config file.
+Writing the .edmx file took 00:00:00.0080193.
+Generated model file: SuuModel.edmx.
+Loading metadata from the database took 00:00:00.5226107.
+Generating the model took 00:00:02.0586982.
+Added the connection string to the Web.Config file.
+Generated model file: Model1.edmx.
+Loading metadata from the database took 00:00:00.6095444.
+Generating the model took 00:00:02.2597241.
+Generated model file: Model1.edmx.
+Loading metadata from the database took 00:00:00.5980896.
+Generating the model took 00:00:02.3056133.
+Generated model file: Model1.edmx.
+Loading metadata from the database took 00:00:00.5566741.
+Generating the model took 00:00:02.2312224.
