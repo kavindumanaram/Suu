@@ -20,24 +20,13 @@ namespace Suu.TwitterFetcher
             var sesarch = twit.GetSearch();
             var SearchResponse = JsonConvert.DeserializeObject<Search>(sesarch);
 
-            //foreach (var result in SearchResponse.Results)
-            //{
-
-
-            //    Console.Write(result.Text + " —> " + result.place + " : " + result.id_str + "<br>");
-
-
-            //}
-
-
-
             using (SuuEntities SuuContext = new SuuEntities())
             {
-
-             //   var UserIdList = SuuContext.Users.Select(u => u.Id);
-
                 for (int a = 0; a < SearchResponse.Results.Count; a++)
                 {
+                    var UserIdList = SuuContext.Users.ToList().Select(s => s.Id);
+                    var StatusList = SuuContext.Status.ToList().Select(s => s.Id);
+
                     var results = SearchResponse.Results;
                     var blog = new FrontEnd.Models.Status()
                     {
@@ -48,9 +37,28 @@ namespace Suu.TwitterFetcher
                             name = results[a].User.Name,
                             Id = results[a].User.Id
                         }
+
+                        // FrontEnd.Models.User.
                     };
-                    SuuContext.Status.Add(blog);
-                    SuuContext.SaveChanges();
+
+
+                    if (!StatusList.Contains(blog.Id))
+                    {
+                        if (UserIdList.Contains(blog.User.Id))
+                        {
+                            blog.user_id = blog.User.Id;
+                            blog.User = null;
+                          //  SuuContext.Users.Remove(blog.User);
+                            // SuuContext.Users.Where(s => s.Id == blog.User.Id);
+                        }
+                        //SuuContext.Status.Remove(blog);
+                        SuuContext.Status.Add(blog);
+                        SuuContext.SaveChanges();
+                    }
+
+                   // else 
+                    
+                
 
 
                     // ---------------------

@@ -95,7 +95,7 @@ create table [Status] (
     [retweeted] bit  NULL,
     [lang] nVarchar(50) NULL,
     [possibly_sensitive] bit NULL,
-	[user_id] [bigint] UNIQUE FOREIGN KEY REFERENCES [User](Id)
+	[user_id] [bigint] FOREIGN KEY REFERENCES [User](Id)
 --CONSTRAINT [PK_Status] PRIMARY KEY CLUSTERED
  --  (
  --     [Id] asc
