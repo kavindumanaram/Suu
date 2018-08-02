@@ -5,6 +5,21 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="SuuModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="EntityHashtag">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="status_id" Type="bigint" />
+          <Property Name="hashtag_id" Type="int" />
+        </EntityType>
+        <EntityType Name="Hashtag">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="text" Type="nvarchar" MaxLength="500" />
+        </EntityType>
         <EntityType Name="Metadata">
           <Key>
             <PropertyRef Name="Id" />
@@ -85,7 +100,31 @@
           <Property Name="notifications" Type="bit" />
           <Property Name="translator_type" Type="varchar" MaxLength="50" />
         </EntityType>
-        <Association Name="FK__Metadata__status__0F624AF8">
+        <Association Name="FK__EntityHas__hasht__5224328E">
+          <End Role="Hashtag" Type="Self.Hashtag" Multiplicity="0..1" />
+          <End Role="EntityHashtag" Type="Self.EntityHashtag" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Hashtag">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="EntityHashtag">
+              <PropertyRef Name="hashtag_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__EntityHas__statu__51300E55">
+          <End Role="Status" Type="Self.Status" Multiplicity="0..1" />
+          <End Role="EntityHashtag" Type="Self.EntityHashtag" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Status">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="EntityHashtag">
+              <PropertyRef Name="status_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Metadata__status__4C6B5938">
           <End Role="Status" Type="Self.Status" Multiplicity="0..1" />
           <End Role="Metadata" Type="Self.Metadata" Multiplicity="*" />
           <ReferentialConstraint>
@@ -97,7 +136,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Status__user_id__0C85DE4D">
+        <Association Name="FK__Status__user_id__498EEC8D">
           <End Role="User" Type="Self.User" Multiplicity="0..1" />
           <End Role="Status" Type="Self.Status" Multiplicity="*" />
           <ReferentialConstraint>
@@ -110,14 +149,24 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="SuuModelStoreContainer">
+          <EntitySet Name="EntityHashtag" EntityType="Self.EntityHashtag" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Hashtag" EntityType="Self.Hashtag" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Metadata" EntityType="Self.Metadata" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Status" EntityType="Self.Status" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__Metadata__status__0F624AF8" Association="Self.FK__Metadata__status__0F624AF8">
+          <AssociationSet Name="FK__EntityHas__hasht__5224328E" Association="Self.FK__EntityHas__hasht__5224328E">
+            <End Role="Hashtag" EntitySet="Hashtag" />
+            <End Role="EntityHashtag" EntitySet="EntityHashtag" />
+          </AssociationSet>
+          <AssociationSet Name="FK__EntityHas__statu__51300E55" Association="Self.FK__EntityHas__statu__51300E55">
+            <End Role="Status" EntitySet="Status" />
+            <End Role="EntityHashtag" EntitySet="EntityHashtag" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Metadata__status__4C6B5938" Association="Self.FK__Metadata__status__4C6B5938">
             <End Role="Status" EntitySet="Status" />
             <End Role="Metadata" EntitySet="Metadata" />
           </AssociationSet>
-          <AssociationSet Name="FK__Status__user_id__0C85DE4D" Association="Self.FK__Status__user_id__0C85DE4D">
+          <AssociationSet Name="FK__Status__user_id__498EEC8D" Association="Self.FK__Status__user_id__498EEC8D">
             <End Role="User" EntitySet="User" />
             <End Role="Status" EntitySet="Status" />
           </AssociationSet>
@@ -127,18 +176,46 @@
     <edmx:ConceptualModels>
       <Schema Namespace="SuuModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="SuuEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="EntityHashtags" EntityType="SuuModel.EntityHashtag" />
+          <EntitySet Name="Hashtags" EntityType="SuuModel.Hashtag" />
           <EntitySet Name="Metadatas" EntityType="SuuModel.Metadata" />
           <EntitySet Name="Status" EntityType="SuuModel.Status" />
           <EntitySet Name="Users" EntityType="SuuModel.User" />
-          <AssociationSet Name="FK__Metadata__status__0F624AF8" Association="SuuModel.FK__Metadata__status__0F624AF8">
+          <AssociationSet Name="FK__EntityHas__hasht__5224328E" Association="SuuModel.FK__EntityHas__hasht__5224328E">
+            <End Role="Hashtag" EntitySet="Hashtags" />
+            <End Role="EntityHashtag" EntitySet="EntityHashtags" />
+          </AssociationSet>
+          <AssociationSet Name="FK__EntityHas__statu__51300E55" Association="SuuModel.FK__EntityHas__statu__51300E55">
+            <End Role="Status" EntitySet="Status" />
+            <End Role="EntityHashtag" EntitySet="EntityHashtags" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Metadata__status__4C6B5938" Association="SuuModel.FK__Metadata__status__4C6B5938">
             <End Role="Status" EntitySet="Status" />
             <End Role="Metadata" EntitySet="Metadatas" />
           </AssociationSet>
-          <AssociationSet Name="FK__Status__user_id__0C85DE4D" Association="SuuModel.FK__Status__user_id__0C85DE4D">
+          <AssociationSet Name="FK__Status__user_id__498EEC8D" Association="SuuModel.FK__Status__user_id__498EEC8D">
             <End Role="User" EntitySet="Users" />
             <End Role="Status" EntitySet="Status" />
           </AssociationSet>
         </EntityContainer>
+        <EntityType Name="EntityHashtag">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="status_id" Type="Int64" />
+          <Property Name="hashtag_id" Type="Int32" />
+          <NavigationProperty Name="Hashtag" Relationship="SuuModel.FK__EntityHas__hasht__5224328E" FromRole="EntityHashtag" ToRole="Hashtag" />
+          <NavigationProperty Name="Status" Relationship="SuuModel.FK__EntityHas__statu__51300E55" FromRole="EntityHashtag" ToRole="Status" />
+        </EntityType>
+        <EntityType Name="Hashtag">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="text" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="EntityHashtags" Relationship="SuuModel.FK__EntityHas__hasht__5224328E" FromRole="Hashtag" ToRole="EntityHashtag" />
+        </EntityType>
         <EntityType Name="Metadata">
           <Key>
             <PropertyRef Name="Id" />
@@ -147,7 +224,7 @@
           <Property Name="iso_language_code" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="result_type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="status_id" Type="Int64" />
-          <NavigationProperty Name="Status" Relationship="SuuModel.FK__Metadata__status__0F624AF8" FromRole="Metadata" ToRole="Status" />
+          <NavigationProperty Name="Status" Relationship="SuuModel.FK__Metadata__status__4C6B5938" FromRole="Metadata" ToRole="Status" />
         </EntityType>
         <EntityType Name="Status">
           <Key>
@@ -174,8 +251,9 @@
           <Property Name="lang" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="possibly_sensitive" Type="Boolean" />
           <Property Name="user_id" Type="Int64" />
-          <NavigationProperty Name="Metadatas" Relationship="SuuModel.FK__Metadata__status__0F624AF8" FromRole="Status" ToRole="Metadata" />
-          <NavigationProperty Name="User" Relationship="SuuModel.FK__Status__user_id__0C85DE4D" FromRole="Status" ToRole="User" />
+          <NavigationProperty Name="EntityHashtags" Relationship="SuuModel.FK__EntityHas__statu__51300E55" FromRole="Status" ToRole="EntityHashtag" />
+          <NavigationProperty Name="Metadatas" Relationship="SuuModel.FK__Metadata__status__4C6B5938" FromRole="Status" ToRole="Metadata" />
+          <NavigationProperty Name="User" Relationship="SuuModel.FK__Status__user_id__498EEC8D" FromRole="Status" ToRole="User" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -221,9 +299,33 @@
           <Property Name="follow_request_sent" Type="Boolean" />
           <Property Name="notifications" Type="Boolean" />
           <Property Name="translator_type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Status" Relationship="SuuModel.FK__Status__user_id__0C85DE4D" FromRole="User" ToRole="Status" />
+          <NavigationProperty Name="Status" Relationship="SuuModel.FK__Status__user_id__498EEC8D" FromRole="User" ToRole="Status" />
         </EntityType>
-        <Association Name="FK__Metadata__status__0F624AF8">
+        <Association Name="FK__EntityHas__hasht__5224328E">
+          <End Type="SuuModel.Hashtag" Role="Hashtag" Multiplicity="0..1" />
+          <End Type="SuuModel.EntityHashtag" Role="EntityHashtag" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Hashtag">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="EntityHashtag">
+              <PropertyRef Name="hashtag_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__EntityHas__statu__51300E55">
+          <End Type="SuuModel.Status" Role="Status" Multiplicity="0..1" />
+          <End Type="SuuModel.EntityHashtag" Role="EntityHashtag" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Status">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="EntityHashtag">
+              <PropertyRef Name="status_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Metadata__status__4C6B5938">
           <End Type="SuuModel.Status" Role="Status" Multiplicity="0..1" />
           <End Type="SuuModel.Metadata" Role="Metadata" Multiplicity="*" />
           <ReferentialConstraint>
@@ -235,7 +337,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Status__user_id__0C85DE4D">
+        <Association Name="FK__Status__user_id__498EEC8D">
           <End Type="SuuModel.User" Role="User" Multiplicity="0..1" />
           <End Type="SuuModel.Status" Role="Status" Multiplicity="*" />
           <ReferentialConstraint>
@@ -253,6 +355,23 @@
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="SuuModelStoreContainer" CdmEntityContainer="SuuEntities">
+          <EntitySetMapping Name="EntityHashtags">
+            <EntityTypeMapping TypeName="SuuModel.EntityHashtag">
+              <MappingFragment StoreEntitySet="EntityHashtag">
+                <ScalarProperty Name="hashtag_id" ColumnName="hashtag_id" />
+                <ScalarProperty Name="status_id" ColumnName="status_id" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Hashtags">
+            <EntityTypeMapping TypeName="SuuModel.Hashtag">
+              <MappingFragment StoreEntitySet="Hashtag">
+                <ScalarProperty Name="text" ColumnName="text" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Metadatas">
             <EntityTypeMapping TypeName="SuuModel.Metadata">
               <MappingFragment StoreEntitySet="Metadata">

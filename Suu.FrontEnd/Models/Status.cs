@@ -17,6 +17,7 @@ namespace Suu.FrontEnd.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Status()
         {
+            this.EntityHashtags = new HashSet<EntityHashtag>();
             this.Metadatas = new HashSet<Metadata>();
         }
     
@@ -42,6 +43,8 @@ namespace Suu.FrontEnd.Models
         public Nullable<bool> possibly_sensitive { get; set; }
         public Nullable<long> user_id { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<EntityHashtag> EntityHashtags { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Metadata> Metadatas { get; set; }
         public virtual User User { get; set; }

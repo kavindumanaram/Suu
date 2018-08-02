@@ -1,3 +1,6 @@
+
+
+
 /*create table UserMention (
     [Id] [int] IDENTITY(1,1) NOT NULL,
     [screen_name] [varchar](50) NULL,
@@ -95,7 +98,8 @@ create table [Status] (
     [retweeted] bit  NULL,
     [lang] nVarchar(50) NULL,
     [possibly_sensitive] bit NULL,
-	[user_id] [bigint] FOREIGN KEY REFERENCES [User](Id)
+	[user_id] [bigint] FOREIGN KEY REFERENCES [User](Id),
+--	[entity_id] int null
 --CONSTRAINT [PK_Status] PRIMARY KEY CLUSTERED
  --  (
  --     [Id] asc
@@ -113,6 +117,26 @@ create table Metadata (
       [Id] asc
    )*/
 )
+
+create table Hashtag (
+    [Id] [int] IDENTITY(1,1) primary key NOT NULL,
+    [text] [nvarchar](500) COLLATE Latin1_General_CI_AI NULL,
+--	entity_hashtag_id int FOREIGN KEY REFERENCES [EntityHashtag](Id)
+)
+
+create table [EntityHashtag] (
+[Id] [int] IDENTITY(1,1) primary key NOT NULL,
+status_id   [bigint] FOREIGN KEY REFERENCES [Status](Id),
+hashtag_id int FOREIGN KEY REFERENCES [Hashtag](Id),
+)
+
+
+
+
+
+
+
+
 
 /*create table RetweetedStatus (
     [Id] [int] IDENTITY(1,1) NOT NULL,
@@ -162,3 +186,4 @@ CONSTRAINT [PK_SearchMetadata] PRIMARY KEY CLUSTERED
       [Id] asc
    )
 )*/
+

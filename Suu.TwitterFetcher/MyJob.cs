@@ -76,25 +76,39 @@ namespace Suu.TwitterFetcher
                             profile_background_color = results[a].User.ProfileBackgroundColor,
                             profile_background_image_url = results[a].User.ProfileBackgroundImageUrl,
                             profile_background_image_url_https = results[a].User.ProfileBackgroundImageUrlHttps,
-                           // profile_banner_url = results[a].User.profile
-                           profile_link_color = results[a].User.ProfileLinkColor,
-                           profile_sidebar_border_color = results[a].User.ProfileSidebarBorderColor,
-                           profile_sidebar_fill_color = results[a].User.ProfileSidebarFillColor,
-                           profile_text_color = results[a].User.ProfileTextColor,
-                           profile_use_background_image = results[a].User.ProfileUseBackgroundImage,
-                          // has_extended_profile = results[a].User.has
-                          default_profile = results[a].User.DefaultProfile,
-                          default_profile_image = results[a].User.DefaultProfileImage,
-                         following = results[a].User.Following,
-                          follow_request_sent = results[a].User.FollowRequestSent,
-                          notifications = results[a].User.Notifications,
-                          //translator_type = results[a].User.tr
-
-
-
-
-
+                            // profile_banner_url = results[a].User.profile
+                            profile_link_color = results[a].User.ProfileLinkColor,
+                            profile_sidebar_border_color = results[a].User.ProfileSidebarBorderColor,
+                            profile_sidebar_fill_color = results[a].User.ProfileSidebarFillColor,
+                            profile_text_color = results[a].User.ProfileTextColor,
+                            profile_use_background_image = results[a].User.ProfileUseBackgroundImage,
+                            // has_extended_profile = results[a].User.has
+                            default_profile = results[a].User.DefaultProfile,
+                            default_profile_image = results[a].User.DefaultProfileImage,
+                            following = results[a].User.Following,
+                            follow_request_sent = results[a].User.FollowRequestSent,
+                            notifications = results[a].User.Notifications,
+                            //translator_type = results[a].User.tr
                         }
+                    };
+
+
+
+
+                    foreach (var x in results[a].entities.Hashtags)
+                    {
+                        var EntityHashtag = new EntityHashtag()
+                        {
+                            status_id = status.Id,
+                            Hashtag = new FrontEnd.Models.Hashtag()
+                            {
+                                text = x.Text,
+                            },
+                            Status = null
+
+                        };
+
+                        SuuContext.EntityHashtags.Add(EntityHashtag);
                     };
 
                     var UserIdList = SuuContext.Users.ToList().Select(s => s.Id);
