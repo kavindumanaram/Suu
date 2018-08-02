@@ -55,10 +55,11 @@ namespace OAuthTwitterWrapper.JsonTypes
         public string in_reply_to_screen_name { get; set; }
         [JsonProperty("user")]
         public User User { get; set; }
-        public object geo { get; set; }
-        public object coordinates { get; set; }
-        public object place { get; set; }
-        public object contributors { get; set; }
+        public string geo { get; set; }
+        public string coordinates { get; set; }
+        public string place { get; set; }
+        public string contributors { get; set; }
+        public bool is_quote_status { get; set; }
         public int retweet_count { get; set; }
         public int favorite_count { get; set; }
         public Entities entities { get; set; }

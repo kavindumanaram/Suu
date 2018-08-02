@@ -22,10 +22,9 @@
           <Property Name="created_at" Type="varchar" MaxLength="50" />
           <Property Name="text" Type="nvarchar" MaxLength="300" />
           <Property Name="truncated" Type="bit" />
-          <Property Name="metadata" Type="int" />
           <Property Name="source" Type="nvarchar(max)" />
           <Property Name="in_reply_to_status_id" Type="bigint" />
-          <Property Name="in_reply_to_user_id" Type="int" />
+          <Property Name="in_reply_to_user_id" Type="bigint" />
           <Property Name="in_reply_to_screen_name" Type="nvarchar" MaxLength="50" />
           <Property Name="geo" Type="varchar" MaxLength="50" />
           <Property Name="coordinates" Type="varchar" MaxLength="50" />
@@ -86,7 +85,7 @@
           <Property Name="notifications" Type="bit" />
           <Property Name="translator_type" Type="varchar" MaxLength="50" />
         </EntityType>
-        <Association Name="FK__Metadata__status__7A672E12">
+        <Association Name="FK__Metadata__status__07C12930">
           <End Role="Status" Type="Self.Status" Multiplicity="0..1" />
           <End Role="Metadata" Type="Self.Metadata" Multiplicity="*" />
           <ReferentialConstraint>
@@ -98,7 +97,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Status__user_id__778AC167">
+        <Association Name="FK__Status__user_id__04E4BC85">
           <End Role="User" Type="Self.User" Multiplicity="0..1" />
           <End Role="Status" Type="Self.Status" Multiplicity="*" />
           <ReferentialConstraint>
@@ -114,11 +113,11 @@
           <EntitySet Name="Metadata" EntityType="Self.Metadata" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Status" EntityType="Self.Status" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__Metadata__status__7A672E12" Association="Self.FK__Metadata__status__7A672E12">
+          <AssociationSet Name="FK__Metadata__status__07C12930" Association="Self.FK__Metadata__status__07C12930">
             <End Role="Status" EntitySet="Status" />
             <End Role="Metadata" EntitySet="Metadata" />
           </AssociationSet>
-          <AssociationSet Name="FK__Status__user_id__778AC167" Association="Self.FK__Status__user_id__778AC167">
+          <AssociationSet Name="FK__Status__user_id__04E4BC85" Association="Self.FK__Status__user_id__04E4BC85">
             <End Role="User" EntitySet="User" />
             <End Role="Status" EntitySet="Status" />
           </AssociationSet>
@@ -131,11 +130,11 @@
           <EntitySet Name="Metadatas" EntityType="SuuModel.Metadata" />
           <EntitySet Name="Status" EntityType="SuuModel.Status" />
           <EntitySet Name="Users" EntityType="SuuModel.User" />
-          <AssociationSet Name="FK__Metadata__status__7A672E12" Association="SuuModel.FK__Metadata__status__7A672E12">
+          <AssociationSet Name="FK__Metadata__status__07C12930" Association="SuuModel.FK__Metadata__status__07C12930">
             <End Role="Status" EntitySet="Status" />
             <End Role="Metadata" EntitySet="Metadatas" />
           </AssociationSet>
-          <AssociationSet Name="FK__Status__user_id__778AC167" Association="SuuModel.FK__Status__user_id__778AC167">
+          <AssociationSet Name="FK__Status__user_id__04E4BC85" Association="SuuModel.FK__Status__user_id__04E4BC85">
             <End Role="User" EntitySet="Users" />
             <End Role="Status" EntitySet="Status" />
           </AssociationSet>
@@ -148,7 +147,7 @@
           <Property Name="iso_language_code" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="result_type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="status_id" Type="Int64" />
-          <NavigationProperty Name="Status" Relationship="SuuModel.FK__Metadata__status__7A672E12" FromRole="Metadata" ToRole="Status" />
+          <NavigationProperty Name="Status" Relationship="SuuModel.FK__Metadata__status__07C12930" FromRole="Metadata" ToRole="Status" />
         </EntityType>
         <EntityType Name="Status">
           <Key>
@@ -158,10 +157,9 @@
           <Property Name="created_at" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="text" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
           <Property Name="truncated" Type="Boolean" />
-          <Property Name="metadata" Type="Int32" />
           <Property Name="source" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="in_reply_to_status_id" Type="Int64" />
-          <Property Name="in_reply_to_user_id" Type="Int32" />
+          <Property Name="in_reply_to_user_id" Type="Int64" />
           <Property Name="in_reply_to_screen_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="geo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="coordinates" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
@@ -176,8 +174,8 @@
           <Property Name="lang" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="possibly_sensitive" Type="Boolean" />
           <Property Name="user_id" Type="Int64" />
-          <NavigationProperty Name="Metadatas" Relationship="SuuModel.FK__Metadata__status__7A672E12" FromRole="Status" ToRole="Metadata" />
-          <NavigationProperty Name="User" Relationship="SuuModel.FK__Status__user_id__778AC167" FromRole="Status" ToRole="User" />
+          <NavigationProperty Name="Metadatas" Relationship="SuuModel.FK__Metadata__status__07C12930" FromRole="Status" ToRole="Metadata" />
+          <NavigationProperty Name="User" Relationship="SuuModel.FK__Status__user_id__04E4BC85" FromRole="Status" ToRole="User" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -223,9 +221,9 @@
           <Property Name="follow_request_sent" Type="Boolean" />
           <Property Name="notifications" Type="Boolean" />
           <Property Name="translator_type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Status" Relationship="SuuModel.FK__Status__user_id__778AC167" FromRole="User" ToRole="Status" />
+          <NavigationProperty Name="Status" Relationship="SuuModel.FK__Status__user_id__04E4BC85" FromRole="User" ToRole="Status" />
         </EntityType>
-        <Association Name="FK__Metadata__status__7A672E12">
+        <Association Name="FK__Metadata__status__07C12930">
           <End Type="SuuModel.Status" Role="Status" Multiplicity="0..1" />
           <End Type="SuuModel.Metadata" Role="Metadata" Multiplicity="*" />
           <ReferentialConstraint>
@@ -237,7 +235,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Status__user_id__778AC167">
+        <Association Name="FK__Status__user_id__04E4BC85">
           <End Type="SuuModel.User" Role="User" Multiplicity="0..1" />
           <End Type="SuuModel.Status" Role="Status" Multiplicity="*" />
           <ReferentialConstraint>
@@ -285,7 +283,6 @@
                 <ScalarProperty Name="in_reply_to_user_id" ColumnName="in_reply_to_user_id" />
                 <ScalarProperty Name="in_reply_to_status_id" ColumnName="in_reply_to_status_id" />
                 <ScalarProperty Name="source" ColumnName="source" />
-                <ScalarProperty Name="metadata" ColumnName="metadata" />
                 <ScalarProperty Name="truncated" ColumnName="truncated" />
                 <ScalarProperty Name="text" ColumnName="text" />
                 <ScalarProperty Name="created_at" ColumnName="created_at" />

@@ -24,10 +24,9 @@ namespace Suu.FrontEnd.Models
         public string created_at { get; set; }
         public string text { get; set; }
         public Nullable<bool> truncated { get; set; }
-        public Nullable<int> metadata { get; set; }
         public string source { get; set; }
         public Nullable<long> in_reply_to_status_id { get; set; }
-        public Nullable<int> in_reply_to_user_id { get; set; }
+        public Nullable<long> in_reply_to_user_id { get; set; }
         public string in_reply_to_screen_name { get; set; }
         public string geo { get; set; }
         public string coordinates { get; set; }
