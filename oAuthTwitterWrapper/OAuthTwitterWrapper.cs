@@ -42,11 +42,21 @@ namespace OAuthTwitterWrapper
 			};
 			string searchFormat = ConfigurationManager.AppSettings["searchFormat"];
 			string searchQuery = ConfigurationManager.AppSettings["searchQuery"];
-			SearchSettings = new SearchSettings
-			{
-				SearchFormat = searchFormat,
-				SearchQuery = searchQuery
-			};
+            string resultType = "recent";
+            string geoCode = "5.954920,80.554956,12mi";
+            string lang = "si";
+            string until = "2018-07-24";
+
+            SearchSettings = new SearchSettings
+            {
+                SearchFormat = searchFormat,
+                SearchQuery = searchQuery,
+                ResultType = resultType,
+                GeoCode = geoCode,
+                Lang = lang,
+                Count = count,
+                Until = until
+            };
 				
 		}
 

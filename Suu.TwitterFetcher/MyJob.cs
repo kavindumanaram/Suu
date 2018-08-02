@@ -24,8 +24,6 @@ namespace Suu.TwitterFetcher
             {
                 for (int a = 0; a < SearchResponse.Results.Count; a++)
                 {
-                    var UserIdList = SuuContext.Users.ToList().Select(s => s.Id);
-                    var StatusList = SuuContext.Status.ToList().Select(s => s.Id);
 
                     var results = SearchResponse.Results;
                     var blog = new FrontEnd.Models.Status()
@@ -37,41 +35,21 @@ namespace Suu.TwitterFetcher
                             name = results[a].User.Name,
                             Id = results[a].User.Id
                         }
-
-                        // FrontEnd.Models.User.
                     };
 
-
+                    var UserIdList = SuuContext.Users.ToList().Select(s => s.Id);
+                    var StatusList = SuuContext.Status.ToList().Select(s => s.Id);
                     if (!StatusList.Contains(blog.Id))
                     {
                         if (UserIdList.Contains(blog.User.Id))
                         {
                             blog.user_id = blog.User.Id;
                             blog.User = null;
-                          //  SuuContext.Users.Remove(blog.User);
-                            // SuuContext.Users.Where(s => s.Id == blog.User.Id);
+
                         }
-                        //SuuContext.Status.Remove(blog);
                         SuuContext.Status.Add(blog);
                         SuuContext.SaveChanges();
                     }
-
-                   // else 
-                    
-                
-
-
-                    // ---------------------
-                    /* var status = new FrontEnd.Models.Status();
-                     status.text = results[a].Text;
-                     status.Id = ConvertToLong(results[a].Id);
-                     status.User.name = results[a].User.Name;
-                     status.User.Id = results[a].User.Id;
-                     SuuContext.Status.Add(status);
-                     SuuContext.SaveChanges();
-                     */
-
-
                 }
             }
             Console.ReadLine();
