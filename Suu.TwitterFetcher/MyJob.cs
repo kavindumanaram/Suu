@@ -51,8 +51,49 @@ namespace Suu.TwitterFetcher
                         lang = results[a].lang,
                         User = new FrontEnd.Models.User()
                         {
+                            Id = results[a].User.Id,
                             name = results[a].User.Name,
-                            Id = results[a].User.Id
+                            screen_name = results[a].User.ScreenName,
+                            location = results[a].User.Location,
+                            description = results[a].User.Description,
+                            url = results[a].User.Url,
+                            //entities
+                            ///->protected
+                            followers_count = results[a].User.FollowersCount,
+                            friends_count = results[a].User.FriendsCount,
+                            listed_count = results[a].User.ListedCount,
+                            created_at = results[a].User.CreatedAt,
+                            favourites_count = results[a].User.FavouritesCount,
+                            utc_offset = results[a].User.UtcOffset,
+                            time_zone = results[a].User.TimeZone,
+                            geo_enabled = results[a].User.GeoEnabled,
+                            verified = results[a].User.Verified,
+                            statuses_count = results[a].User.StatusesCount,
+                            lang = results[a].User.Lang,
+                            contributors_enabled = results[a].User.ContributorsEnabled,
+                            is_translator = results[a].User.IsTranslator,
+                            is_translation_enabled = results[a].User.IsTranslationEnabled,
+                            profile_background_color = results[a].User.ProfileBackgroundColor,
+                            profile_background_image_url = results[a].User.ProfileBackgroundImageUrl,
+                            profile_background_image_url_https = results[a].User.ProfileBackgroundImageUrlHttps,
+                           // profile_banner_url = results[a].User.profile
+                           profile_link_color = results[a].User.ProfileLinkColor,
+                           profile_sidebar_border_color = results[a].User.ProfileSidebarBorderColor,
+                           profile_sidebar_fill_color = results[a].User.ProfileSidebarFillColor,
+                           profile_text_color = results[a].User.ProfileTextColor,
+                           profile_use_background_image = results[a].User.ProfileUseBackgroundImage,
+                          // has_extended_profile = results[a].User.has
+                          default_profile = results[a].User.DefaultProfile,
+                          default_profile_image = results[a].User.DefaultProfileImage,
+                         following = results[a].User.Following,
+                          follow_request_sent = results[a].User.FollowRequestSent,
+                          notifications = results[a].User.Notifications,
+                          //translator_type = results[a].User.tr
+
+
+
+
+
                         }
                     };
 

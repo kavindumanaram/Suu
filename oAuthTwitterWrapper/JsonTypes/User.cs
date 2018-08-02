@@ -79,8 +79,11 @@ namespace OAuthTwitterWrapper.JsonTypes
 		[JsonProperty("is_translator")]
 		public bool IsTranslator { get; set; }
 
-		[JsonProperty("profile_background_color")]
-		public string ProfileBackgroundColor { get; set; }
+        [JsonProperty("profile_background_color")]
+        public string ProfileBackgroundColor { get; set; }
+
+        [JsonProperty("is_translation_enabled")]
+		public bool IsTranslationEnabled { get; set; }
 
 		[JsonProperty("profile_background_image_url")]
 		public string ProfileBackgroundImageUrl { get; set; }
@@ -119,13 +122,13 @@ namespace OAuthTwitterWrapper.JsonTypes
 		public bool DefaultProfileImage { get; set; }
 
 		[JsonProperty("following")]
-		public string Following { get; set; }
+		public bool? Following { get; set; }
 
 		[JsonProperty("follow_request_sent")]
-		public string FollowRequestSent { get; set; }
+		public bool? FollowRequestSent { get; set; }
 
 		[JsonProperty("notifications")]
-		public string Notifications { get; set; }
+		public bool? Notifications { get; set; }
     }
 
 }

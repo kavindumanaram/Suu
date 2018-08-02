@@ -48,7 +48,7 @@
           <Property Name="name" Type="nvarchar" MaxLength="50" />
           <Property Name="screen_name" Type="nvarchar" MaxLength="50" />
           <Property Name="location" Type="varchar" MaxLength="50" />
-          <Property Name="description" Type="varchar" MaxLength="50" />
+          <Property Name="description" Type="nvarchar(max)" />
           <Property Name="url" Type="varchar" MaxLength="50" />
           <Property Name="protected" Type="bit" />
           <Property Name="followers_count" Type="int" />
@@ -66,12 +66,12 @@
           <Property Name="is_translator" Type="bit" />
           <Property Name="is_translation_enabled" Type="bit" />
           <Property Name="profile_background_color" Type="varchar" MaxLength="50" />
-          <Property Name="profile_background_image_url" Type="varchar" MaxLength="50" />
-          <Property Name="profile_background_image_url_https" Type="varchar" MaxLength="50" />
+          <Property Name="profile_background_image_url" Type="varchar" MaxLength="500" />
+          <Property Name="profile_background_image_url_https" Type="varchar" MaxLength="500" />
           <Property Name="profile_background_tile" Type="bit" />
-          <Property Name="profile_image_url" Type="varchar" MaxLength="50" />
-          <Property Name="profile_image_url_https" Type="varchar" MaxLength="50" />
-          <Property Name="profile_banner_url" Type="varchar" MaxLength="50" />
+          <Property Name="profile_image_url" Type="varchar" MaxLength="500" />
+          <Property Name="profile_image_url_https" Type="varchar" MaxLength="500" />
+          <Property Name="profile_banner_url" Type="varchar" MaxLength="500" />
           <Property Name="profile_link_color" Type="varchar" MaxLength="50" />
           <Property Name="profile_sidebar_border_color" Type="varchar" MaxLength="50" />
           <Property Name="profile_sidebar_fill_color" Type="varchar" MaxLength="50" />
@@ -85,7 +85,7 @@
           <Property Name="notifications" Type="bit" />
           <Property Name="translator_type" Type="varchar" MaxLength="50" />
         </EntityType>
-        <Association Name="FK__Metadata__status__07C12930">
+        <Association Name="FK__Metadata__status__0F624AF8">
           <End Role="Status" Type="Self.Status" Multiplicity="0..1" />
           <End Role="Metadata" Type="Self.Metadata" Multiplicity="*" />
           <ReferentialConstraint>
@@ -97,7 +97,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Status__user_id__04E4BC85">
+        <Association Name="FK__Status__user_id__0C85DE4D">
           <End Role="User" Type="Self.User" Multiplicity="0..1" />
           <End Role="Status" Type="Self.Status" Multiplicity="*" />
           <ReferentialConstraint>
@@ -113,11 +113,11 @@
           <EntitySet Name="Metadata" EntityType="Self.Metadata" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Status" EntityType="Self.Status" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__Metadata__status__07C12930" Association="Self.FK__Metadata__status__07C12930">
+          <AssociationSet Name="FK__Metadata__status__0F624AF8" Association="Self.FK__Metadata__status__0F624AF8">
             <End Role="Status" EntitySet="Status" />
             <End Role="Metadata" EntitySet="Metadata" />
           </AssociationSet>
-          <AssociationSet Name="FK__Status__user_id__04E4BC85" Association="Self.FK__Status__user_id__04E4BC85">
+          <AssociationSet Name="FK__Status__user_id__0C85DE4D" Association="Self.FK__Status__user_id__0C85DE4D">
             <End Role="User" EntitySet="User" />
             <End Role="Status" EntitySet="Status" />
           </AssociationSet>
@@ -130,11 +130,11 @@
           <EntitySet Name="Metadatas" EntityType="SuuModel.Metadata" />
           <EntitySet Name="Status" EntityType="SuuModel.Status" />
           <EntitySet Name="Users" EntityType="SuuModel.User" />
-          <AssociationSet Name="FK__Metadata__status__07C12930" Association="SuuModel.FK__Metadata__status__07C12930">
+          <AssociationSet Name="FK__Metadata__status__0F624AF8" Association="SuuModel.FK__Metadata__status__0F624AF8">
             <End Role="Status" EntitySet="Status" />
             <End Role="Metadata" EntitySet="Metadatas" />
           </AssociationSet>
-          <AssociationSet Name="FK__Status__user_id__04E4BC85" Association="SuuModel.FK__Status__user_id__04E4BC85">
+          <AssociationSet Name="FK__Status__user_id__0C85DE4D" Association="SuuModel.FK__Status__user_id__0C85DE4D">
             <End Role="User" EntitySet="Users" />
             <End Role="Status" EntitySet="Status" />
           </AssociationSet>
@@ -147,7 +147,7 @@
           <Property Name="iso_language_code" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="result_type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="status_id" Type="Int64" />
-          <NavigationProperty Name="Status" Relationship="SuuModel.FK__Metadata__status__07C12930" FromRole="Metadata" ToRole="Status" />
+          <NavigationProperty Name="Status" Relationship="SuuModel.FK__Metadata__status__0F624AF8" FromRole="Metadata" ToRole="Status" />
         </EntityType>
         <EntityType Name="Status">
           <Key>
@@ -174,8 +174,8 @@
           <Property Name="lang" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="possibly_sensitive" Type="Boolean" />
           <Property Name="user_id" Type="Int64" />
-          <NavigationProperty Name="Metadatas" Relationship="SuuModel.FK__Metadata__status__07C12930" FromRole="Status" ToRole="Metadata" />
-          <NavigationProperty Name="User" Relationship="SuuModel.FK__Status__user_id__04E4BC85" FromRole="Status" ToRole="User" />
+          <NavigationProperty Name="Metadatas" Relationship="SuuModel.FK__Metadata__status__0F624AF8" FromRole="Status" ToRole="Metadata" />
+          <NavigationProperty Name="User" Relationship="SuuModel.FK__Status__user_id__0C85DE4D" FromRole="Status" ToRole="User" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -185,7 +185,7 @@
           <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="screen_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="location" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="description" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="url" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="protected" Type="Boolean" />
           <Property Name="followers_count" Type="Int32" />
@@ -203,12 +203,12 @@
           <Property Name="is_translator" Type="Boolean" />
           <Property Name="is_translation_enabled" Type="Boolean" />
           <Property Name="profile_background_color" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="profile_background_image_url" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="profile_background_image_url_https" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="profile_background_image_url" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="profile_background_image_url_https" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="profile_background_tile" Type="Boolean" />
-          <Property Name="profile_image_url" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="profile_image_url_https" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="profile_banner_url" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="profile_image_url" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="profile_image_url_https" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="profile_banner_url" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="profile_link_color" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="profile_sidebar_border_color" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="profile_sidebar_fill_color" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
@@ -221,9 +221,9 @@
           <Property Name="follow_request_sent" Type="Boolean" />
           <Property Name="notifications" Type="Boolean" />
           <Property Name="translator_type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Status" Relationship="SuuModel.FK__Status__user_id__04E4BC85" FromRole="User" ToRole="Status" />
+          <NavigationProperty Name="Status" Relationship="SuuModel.FK__Status__user_id__0C85DE4D" FromRole="User" ToRole="Status" />
         </EntityType>
-        <Association Name="FK__Metadata__status__07C12930">
+        <Association Name="FK__Metadata__status__0F624AF8">
           <End Type="SuuModel.Status" Role="Status" Multiplicity="0..1" />
           <End Type="SuuModel.Metadata" Role="Metadata" Multiplicity="*" />
           <ReferentialConstraint>
@@ -235,7 +235,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Status__user_id__04E4BC85">
+        <Association Name="FK__Status__user_id__0C85DE4D">
           <End Type="SuuModel.User" Role="User" Multiplicity="0..1" />
           <End Type="SuuModel.Status" Role="Status" Multiplicity="*" />
           <ReferentialConstraint>
