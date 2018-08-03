@@ -4,4 +4,4 @@
 # To run the windows service 
 1. open Develper Command Promt in Admin mood
 2. Got debug folder path
-3. InstallUtil.exe "Suu.TweeterProcessor.exe"
+3. just type Suu.TwitterFetcher.exe install and press enter.
