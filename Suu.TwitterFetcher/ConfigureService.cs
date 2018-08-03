@@ -36,9 +36,9 @@ namespace Suu.TwitterFetcher
                     .StartAutomatically()
                     .EnableServiceRecovery(rc => rc.RestartService(1));
 
-                x.SetServiceName("My Topshelf Service");
-                x.SetDisplayName("My Topshelf Service");
-                x.SetDescription("My Topshelf Service's description");
+                x.SetServiceName("Suu.TwitterFetcher");
+                x.SetDisplayName("Suu.TwitterFetcher");
+                x.SetDescription("Fetcher Service for Twitter");
             });
         }
 
