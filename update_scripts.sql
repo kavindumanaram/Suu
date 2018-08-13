@@ -67,6 +67,7 @@ create table [User] (
     [follow_request_sent] bit  NULL,
     [notifications] bit  NULL,
     [translator_type] [varchar](50) NULL,
+	[count] int 
 	--retweeted_status_id [bigint] UNIQUE FOREIGN KEY REFERENCES [Status](Id)
 --CONSTRAINT [PK_User] PRIMARY KEY CLUSTERED
 --   (
@@ -106,21 +107,22 @@ create table [Status] (
  --  )
 )
 
-
+/*
 create table Metadata (
     [Id] [int] IDENTITY(1,1) Primary key NOT NULL,
     [iso_language_code] [varchar](50) NULL,
     [result_type] [varchar](50) NULL,
 	status_id   [bigint] FOREIGN KEY REFERENCES [Status](Id)
-/*CONSTRAINT [PK_Metadata] PRIMARY KEY CLUSTERED
-   (
-      [Id] asc
-   )*/
+//CONSTRAINT [PK_Metadata] PRIMARY KEY CLUSTERED
+ //  (
+ //     [Id] asc
+ //  )
 )
-
+*/
 create table Hashtag (
     [Id] [int] IDENTITY(1,1) primary key NOT NULL,
     [text] [nvarchar](500) COLLATE Latin1_General_CI_AI NULL,
+	[count] int 
 --	entity_hashtag_id int FOREIGN KEY REFERENCES [EntityHashtag](Id)
 )
 

@@ -27,7 +27,6 @@ namespace Suu.FrontEnd.Models
     
         public virtual DbSet<EntityHashtag> EntityHashtags { get; set; }
         public virtual DbSet<Hashtag> Hashtags { get; set; }
-        public virtual DbSet<Metadata> Metadatas { get; set; }
         public virtual DbSet<Status> Status { get; set; }
         public virtual DbSet<User> Users { get; set; }
     }

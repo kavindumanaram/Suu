@@ -22,6 +22,7 @@ namespace Suu.FrontEnd.Models
     
         public int Id { get; set; }
         public string text { get; set; }
+        public Nullable<int> count { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<EntityHashtag> EntityHashtags { get; set; }

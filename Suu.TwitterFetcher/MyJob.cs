@@ -89,38 +89,87 @@ namespace Suu.TwitterFetcher
                             follow_request_sent = results[a].User.FollowRequestSent,
                             notifications = results[a].User.Notifications,
                             //translator_type = results[a].User.tr
+                            count = 1
                         }
                     };
 
 
 
 
-                    foreach (var x in results[a].entities.Hashtags)
-                    {
-                        var EntityHashtag = new EntityHashtag()
-                        {
-                            status_id = status.Id,
-                            Hashtag = new FrontEnd.Models.Hashtag()
-                            {
-                                text = x.Text,
-                            },
-                            Status = null
 
-                        };
-
-                        SuuContext.EntityHashtags.Add(EntityHashtag);
-                    };
 
                     var UserIdList = SuuContext.Users.ToList().Select(s => s.Id);
                     var StatusList = SuuContext.Status.ToList().Select(s => s.Id);
+                    var HashTagTextList = SuuContext.Hashtags.ToList().Select(s => s.text);
                     if (!StatusList.Contains(status.Id))
                     {
                         if (UserIdList.Contains(status.User.Id))
                         {
                             status.user_id = status.User.Id;
+                            //status.User = null;
+                            //if(string.IsNullOrEmpty(status.User.count)  )
+
+                           var currentUser = SuuContext.Users.ToList().Where(s => s.Id == status.User.Id).FirstOrDefault();
+                            var curentUserCurrentOccrence = currentUser.count;
+                           var UserlatestOccurence =  curentUserCurrentOccrence = curentUserCurrentOccrence + 1;
+                            currentUser.count = UserlatestOccurence;
+                            SuuContext.SaveChanges();
+
                             status.User = null;
 
                         }
+
+
+                        foreach (var x in results[a].entities.Hashtags)
+                        {
+                            if (!HashTagTextList.Contains(x.Text))
+                            {
+                                var EntityHashtag = new EntityHashtag()
+                                {
+                                    status_id = status.Id,
+                                    Hashtag = new FrontEnd.Models.Hashtag()
+                                    {
+                                        text = x.Text,
+                                        count = 1
+                                    },
+                                    Status = null
+
+                                };
+
+                                SuuContext.EntityHashtags.Add(EntityHashtag);
+                            }
+                            else
+                            {
+                                //var EntityHashtag = new EntityHashtag()
+                                //{
+                                //    status_id = status.Id,
+                                //    Hashtag = new FrontEnd.Models.Hashtag()
+                                //    {
+                                //        text = x.Text,
+                                //    },
+                                //    Status = null
+
+                                //};
+                                
+
+                                var currentHashTag = SuuContext.Hashtags.ToList().Where(s => s.text == x.Text).FirstOrDefault();
+                                var curentHashTagCurrentOccrence = currentHashTag.count;
+                                var HashTaglatestOccurence  = curentHashTagCurrentOccrence = curentHashTagCurrentOccrence + 1;
+                                currentHashTag.count = HashTaglatestOccurence;
+                                //SuuContext.SaveChanges();
+
+                                var EntityHashtag = new EntityHashtag()
+                                {
+                                    status_id = status.Id,
+                                    hashtag_id = currentHashTag.Id
+                                };
+                                SuuContext.EntityHashtags.Add(EntityHashtag);
+                                
+
+                               // SuuContext.EntityHashtags.Add(EntityHashtag);
+                            }
+                        };
+
                         SuuContext.Status.Add(status);
                         SuuContext.SaveChanges();
                     }

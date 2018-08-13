@@ -25,7 +25,7 @@ namespace OAuthTwitterWrapper.JsonTypes
         public string in_reply_to_user_id_str { get; set; }
         public string in_reply_to_screen_name { get; set; }
         public User user { get; set; }
-        public object geo { get; set; }
+        public string geo { get; set; }
         public object coordinates { get; set; }
         public object place { get; set; }
         public object contributors { get; set; }
