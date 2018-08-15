@@ -255,7 +255,7 @@
                                             <ul class="nav nav-tabs" data-tabs="tabs">
                                                 <li class="nav-item">
                                                     <a class="nav-link active" href="#profile" data-toggle="tab">
-                                                        <i class="material-icons">bug_report</i> Hash Tags
+                                                        <i class="material-icons">#</i> Hash Tags
                                                         <div class="ripple-container"></div>
                                                     </a>
                                                 </li>
@@ -286,12 +286,14 @@
                                                 <th>Location</th>
                                                 </thead>
                                                 <tbody>
+                                                    @foreach(var hashtag in @ViewBag.HashTag){
                                                     <tr>
                                                         <td>1</td>
-                                                        <td>#Dakota</td>
-                                                        <td>36,738</td>
+                                                        <td>#@hashtag.text</td>
+                                                        <td>@hashtag.count</td>
                                                         <td>Colombo</td>
                                                     </tr>
+                                                    }
                                                 </tbody>
                                             </table>
                                         </div>
