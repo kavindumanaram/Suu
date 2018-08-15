@@ -26,9 +26,18 @@ namespace Suu.TwitterFetcher
                             JobBuilder.Create<MyJob>().Build())
                             .AddTrigger(() => TriggerBuilder.Create()
                                 .WithSimpleSchedule(b => b
-                                    .WithIntervalInSeconds(1500)
+                                    .WithIntervalInSeconds(150)
                                     .RepeatForever())
                                 .Build()));
+
+                    s.ScheduleQuartzJob(q =>
+                       q.WithJob(() =>
+                           JobBuilder.Create<WordCountJob>().Build())
+                           .AddTrigger(() => TriggerBuilder.Create()
+                               .WithSimpleSchedule(b => b
+                                   .WithIntervalInSeconds(200)
+                                   .RepeatForever())
+                               .Build()));
                 });
 
                 x.RunAsLocalSystem()

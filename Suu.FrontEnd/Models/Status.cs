@@ -41,6 +41,7 @@ namespace Suu.FrontEnd.Models
         public string lang { get; set; }
         public Nullable<bool> possibly_sensitive { get; set; }
         public Nullable<long> user_id { get; set; }
+        public Nullable<int> is_count { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<EntityHashtag> EntityHashtags { get; set; }

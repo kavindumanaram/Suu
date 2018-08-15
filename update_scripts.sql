@@ -100,6 +100,7 @@ create table [Status] (
     [lang] nVarchar(50) NULL,
     [possibly_sensitive] bit NULL,
 	[user_id] [bigint] FOREIGN KEY REFERENCES [User](Id),
+	[is_count] [int] 
 --	[entity_id] int null
 --CONSTRAINT [PK_Status] PRIMARY KEY CLUSTERED
  --  (
@@ -130,6 +131,13 @@ create table [EntityHashtag] (
 [Id] [int] IDENTITY(1,1) primary key NOT NULL,
 status_id   [bigint] FOREIGN KEY REFERENCES [Status](Id),
 hashtag_id int FOREIGN KEY REFERENCES [Hashtag](Id),
+)
+
+
+create table [messageCount] (
+[Id] [int] IDENTITY(1,1) primary key NOT NULL,
+[message_text] [nvarchar](100) COLLATE Latin1_General_CI_AI NULL,
+[count] int
 )
 
 

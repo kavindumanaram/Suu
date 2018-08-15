@@ -4,15 +4,16 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="636bc62cf8274c81867a07a5e99ce7d0" Name="Diagram1" ZoomLevel="64">
+      <Diagram DiagramId="636bc62cf8274c81867a07a5e99ce7d0" Name="Diagram1" ZoomLevel="56">
         <EntityTypeShape EntityType="SuuModel.TwitterMessage1" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="SuuModel.EntityHashtag" Width="1.5" PointX="5.25" PointY="5.625" />
         <EntityTypeShape EntityType="SuuModel.Hashtag" Width="1.5" PointX="3" PointY="0.75" />
+        <EntityTypeShape EntityType="SuuModel.messageCount" Width="1.5" PointX="5.75" PointY="1.625" />
         <EntityTypeShape EntityType="SuuModel.Status" Width="1.5" PointX="3" PointY="3.875" />
         <EntityTypeShape EntityType="SuuModel.User" Width="1.5" PointX="0.75" PointY="2.125" />
-        <AssociationConnector Association="SuuModel.FK__EntityHas__hasht__69FBBC1F" />
-        <AssociationConnector Association="SuuModel.FK__EntityHas__statu__690797E6" />
-        <AssociationConnector Association="SuuModel.FK__Status__user_id__6442E2C9" />
+        <AssociationConnector Association="SuuModel.FK__EntityHas__hasht__28B808A7" />
+        <AssociationConnector Association="SuuModel.FK__EntityHas__statu__27C3E46E" />
+        <AssociationConnector Association="SuuModel.FK__Status__user_id__22FF2F51" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
