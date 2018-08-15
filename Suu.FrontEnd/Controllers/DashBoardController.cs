@@ -15,8 +15,9 @@ namespace Suu.FrontEnd.Controllers
             using (SuuEntities SuuContext = new SuuEntities())
             {
                 ViewBag.Status = SuuContext.Status.ToList();
-                ViewBag.User = SuuContext.Users.ToList();
-                ViewBag.HashTag = SuuContext.Hashtags.ToList();
+                ViewBag.User = SuuContext.Users.OrderByDescending(x => x.count).Take(10).ToList();
+                ViewBag.HashTag = SuuContext.Hashtags.OrderByDescending(x => x.count).Take(10).ToList();
+                ViewBag.MessageWord = SuuContext.messageCounts.OrderByDescending(x => x.count).Take(10).ToList();
                 return View();
             }
                 
