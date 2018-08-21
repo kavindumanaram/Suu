@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Suu.FrontEnd.Models;
+using System.Web.Services;
+using Newtonsoft.Json;
 
 namespace Suu.FrontEnd.Controllers
 {
@@ -21,6 +23,46 @@ namespace Suu.FrontEnd.Controllers
                 return View();
             }
                 
+        }
+
+        //public IEnumerable<Status> filtetStatus(int? hashTagId1)
+        //{
+        //    var hashTagId = 1029055333451223041;
+        //    using (SuuEntities SuuContext = new SuuEntities())
+        //    {
+        //        var EntityHashtagObject = SuuContext.EntityHashtags.Where(s => s.Id == hashTagId).FirstOrDefault();
+        //        var StatausObject = SuuContext.Status.Where(w => w.Id == EntityHashtagObject.Id).FirstOrDefault();
+
+        //        return SuuContext.Status.Where(s => s.Id == StatausObject.Id).ToList();
+        //    }
+        //}
+
+        [HttpGet] // can be HttpGet
+        public JsonResult Test(int hashTagId)
+        {
+
+          //  var hashTagId = 1029055333451223041;
+            //using (SuuEntities SuuContext = new SuuEntities())
+            //{
+            //    var EntityHashtagObject = SuuContext.EntityHashtags.Where(s => s.Id == hashTagId).FirstOrDefault();
+            //    var StatausObject = SuuContext.Status.Where(w => w.Id == EntityHashtagObject.Id).FirstOrDefault();
+
+            //    // return SuuContext.Status.Where(s => s.Id == StatausObject.Id).ToList();
+            //    return Json(new { data = SuuContext.Status.Where(s => s.Id == StatausObject.Id).ToList() }, JsonRequestBehavior.AllowGet);
+
+            //}
+
+            IEnumerable<Status> status = null;
+            using (SuuEntities SuuContext = new SuuEntities())
+            {
+                SuuContext.Configuration.LazyLoadingEnabled = false;
+                //   status = SuuContext.Status.ToList() ;
+                //  status = SuuContext.EntityHashtags.Where(x => x.hashtag_id == hashTagId).ToList();
+                var entity = SuuContext.EntityHashtags.Where(x => x.hashtag_id == hashTagId).Select(s => s.status_id).ToList();
+                status = SuuContext.Status.Where(s => entity.Contains(s.Id)).ToList();
+            }
+            var json = JsonConvert.SerializeObject(status);
+            return Json(new { data = json }, JsonRequestBehavior.AllowGet);
         }
     }
 }

@@ -286,7 +286,7 @@
                                                 <tbody>
                                                     @foreach(var hashtag in @ViewBag.HashTag){
                                                     <tr>
-                                                        <td>#@hashtag.text</td>
+                                                        <td><span onclick="DisplayRelatedTweets(@hashtag.Id)">#@hashtag.text</span></td>
                                                         <td>@hashtag.count</td>
                                                     </tr>
                                                     }
@@ -394,8 +394,30 @@
       // Javascript method's body can be found in assets/js/demos.js
       md.initDashboardPageCharts();
 
-    });
+              });
+
+        function DisplayRelatedTweets(hashTagId) {
+            //console.log(hashTagId);
+            $.ajax({
+                type: "GET",
+                url: "/DashBoard/Test",
+                data: { hashTagId: hashTagId },
+                //contentType: "application/json;charset=utf-8",
+                dataType: "json",
+                success: function (data) {
+                    //    debugger;
+                        for (var x = 0; x < 10; x++)
+                        {
+                            var y = 0;
+                            setTimeout(function () {
+                                demo.showNotification('top', 'left', 'rose', $.parseJSON(data.data)[y]["text"]);
+                                console.log(y);
+                                y++;
+                            }, 2000 * x);
+                        }
+                }
+            });
+        }
     </script>
 </body>
 </html>
-

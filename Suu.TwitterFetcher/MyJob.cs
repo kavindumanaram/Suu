@@ -26,7 +26,7 @@ namespace Suu.TwitterFetcher
                 {
 
                     var results = SearchResponse.Results;
-                    if (results.FirstOrDefault().Text.Substring(0, 2).ToString() != "RT")
+                    if (results[a].Text.Trim().Substring(0, 2).ToString() != "RT")
                     {
                         var status = new FrontEnd.Models.Status()
                         {
