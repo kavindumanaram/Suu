@@ -38,6 +38,16 @@ namespace Suu.TwitterFetcher
                                    .WithIntervalInSeconds(200)
                                    .RepeatForever())
                                .Build()));
+
+
+                    s.ScheduleQuartzJob(q =>
+                      q.WithJob(() =>
+                          JobBuilder.Create<DownloadContent>().Build())
+                          .AddTrigger(() => TriggerBuilder.Create()
+                              .WithSimpleSchedule(b => b
+                                  .WithIntervalInSeconds(100)
+                                  .RepeatForever())
+                              .Build()));
                 });
 
                 x.RunAsLocalSystem()
