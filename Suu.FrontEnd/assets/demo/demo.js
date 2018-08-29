@@ -234,17 +234,17 @@ demo = {
     marker.setMap(map);
   },
 
-  showNotification: function (from, align, type, message)  {
+  showNotification: function (from, align, type, message, userid)  {
       // type = ['', 'info', 'danger', 'success', 'warning', 'rose', 'primary'];
 
       color = Math.floor((Math.random() * 6) + 1);
 
       $.notify({
-          icon: "add_alert",
+          icon: '<img class="img" src="../assets/img/ProfilePic/' + userid +'.jpg" style="border-radius: 50%">',
           message: message
 
       }, {
-              type: type,
+              type: color,
             //  timer: 3000,
               placement: {
                   from: from,

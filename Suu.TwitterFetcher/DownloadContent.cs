@@ -11,6 +11,7 @@ using System.IO;
 using Suu.FrontEnd.Models;
 using Dropbox.Api;
 using Dropbox.Api.Files;
+using System.Configuration;
 
 namespace Suu.TwitterFetcher
 {
@@ -27,19 +28,46 @@ namespace Suu.TwitterFetcher
 
                     WebClient client = new WebClient();
                     client.DownloadFileCompleted += new AsyncCompletedEventHandler(client_DownloadFileCompleted);
-                    var filePath = AppDomain.CurrentDomain.BaseDirectory + "\\Inserts\\";
+                    var filePath = AppDomain.CurrentDomain.BaseDirectory;
+                    string mainFilePath = ConfigurationManager.AppSettings["filePath"];
+
+                    if (!string.IsNullOrEmpty(mainFilePath))
+                    {
+                        filePath =  mainFilePath + "\\Suu.TwitterFetcherDownloadFolder\\ProfilePic\\";
+                    }
+
                     var extension = Path.GetExtension(user.profile_image_url);
                     var imageName = $"{user.Id.ToString()}{extension}";
                     if (!Directory.Exists(filePath))
                     {
                         Directory.CreateDirectory(filePath);
                     }
+                    try
+                    {
+                        client.DownloadFile(new Uri(user.profile_image_url), $"{filePath}{ imageName}");
+                    }
+                    catch (Exception e)
+                    {
 
-                     client.DownloadFile(new Uri(user.profile_image_url), $"{filePath}{ imageName}");
-                    var dbx = new DropboxClient("bwUjLwfs0zAAAAAAAAAAGmL_efee1PRAMvTqewDyfZeu4eV5iLa677oEzwheG49y");
-                    var t = Task.Run(() => Upload(dbx, "/Suu.TweeterFetcher", imageName, $"{filePath}{ imageName}"));
-                    t.Wait();
+                    }
+                     
 
+                    //var dbx = new DropboxClient("bwUjLwfs0zAAAAAAAAAAGmL_efee1PRAMvTqewDyfZeu4eV5iLa677oEzwheG49y");
+                    //var t = Task.Run(() => Upload(dbx, "/Suu.TweeterFetcher", imageName, $"{filePath}{ imageName}"));
+                    //t.Wait();
+
+                    //var v = Task.Run(() => Upload(dbx, "/Suu.TweeterFetcher", imageName, $"{filePath}{ imageName}"));
+                    //v.Wait();
+                    ////////////////////////////
+                    ////client.
+                    ////var result =  dbx.Sharing.CreateSharedLinkWithSettingsAsync("/Suu.TweeterFetcher");
+                    ////var url = result.Result.Url;
+                    ////Console.WriteLine(url.ToString());
+
+                    //var tempPath = dbx.Files.GetTemporaryLinkAsync($"/Suu.TweeterFetcher{filePath}{ imageName}");
+                    //Console.WriteLine(tempPath);
+
+                 //   var x = DownloadThumbnail(string path, ThumbnailFormat format, ThumbnailSize size);
                 }
             }
 
@@ -51,16 +79,18 @@ namespace Suu.TwitterFetcher
         }
 
 
-        async Task Upload(DropboxClient dbx, string folder, string file, string content)
-        {
-            using (var mem = new MemoryStream(File.ReadAllBytes(content)))
-            {
-                var updated = await dbx.Files.UploadAsync(
-                    folder + "/" + file,
-                    WriteMode.Overwrite.Instance,
-                    body: mem);
-                Console.WriteLine("Saved {0}/{1} rev {2}", folder, file, updated.Rev);
-            }
-        }
+        //async Task Upload(DropboxClient dbx, string folder, string file, string content)
+        //{
+        //    using (var mem = new MemoryStream(File.ReadAllBytes(content)))
+        //    {
+        //        var updated = await dbx.Files.UploadAsync(
+        //            folder + "/" + file,
+        //            WriteMode.Overwrite.Instance,
+        //            body: mem);
+        //        Console.WriteLine("Saved {0}/{1} rev {2}", folder, file, updated.Rev);
+        //    }
+        //}
+
+
     }
 }
