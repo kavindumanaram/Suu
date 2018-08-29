@@ -101,8 +101,9 @@
           <Property Name="notifications" Type="bit" />
           <Property Name="translator_type" Type="varchar" MaxLength="50" />
           <Property Name="count" Type="int" />
+          <Property Name="is_ready" Type="int" />
         </EntityType>
-        <Association Name="FK__EntityHas__hasht__28B808A7">
+        <Association Name="FK__EntityHas__hasht__3BCADD1B">
           <End Role="Hashtag" Type="Self.Hashtag" Multiplicity="0..1" />
           <End Role="EntityHashtag" Type="Self.EntityHashtag" Multiplicity="*" />
           <ReferentialConstraint>
@@ -114,7 +115,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__EntityHas__statu__27C3E46E">
+        <Association Name="FK__EntityHas__statu__3AD6B8E2">
           <End Role="Status" Type="Self.Status" Multiplicity="0..1" />
           <End Role="EntityHashtag" Type="Self.EntityHashtag" Multiplicity="*" />
           <ReferentialConstraint>
@@ -126,7 +127,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Status__user_id__22FF2F51">
+        <Association Name="FK__Status__user_id__361203C5">
           <End Role="User" Type="Self.User" Multiplicity="0..1" />
           <End Role="Status" Type="Self.Status" Multiplicity="*" />
           <ReferentialConstraint>
@@ -144,15 +145,15 @@
           <EntitySet Name="messageCount" EntityType="Self.messageCount" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Status" EntityType="Self.Status" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__EntityHas__hasht__28B808A7" Association="Self.FK__EntityHas__hasht__28B808A7">
+          <AssociationSet Name="FK__EntityHas__hasht__3BCADD1B" Association="Self.FK__EntityHas__hasht__3BCADD1B">
             <End Role="Hashtag" EntitySet="Hashtag" />
             <End Role="EntityHashtag" EntitySet="EntityHashtag" />
           </AssociationSet>
-          <AssociationSet Name="FK__EntityHas__statu__27C3E46E" Association="Self.FK__EntityHas__statu__27C3E46E">
+          <AssociationSet Name="FK__EntityHas__statu__3AD6B8E2" Association="Self.FK__EntityHas__statu__3AD6B8E2">
             <End Role="Status" EntitySet="Status" />
             <End Role="EntityHashtag" EntitySet="EntityHashtag" />
           </AssociationSet>
-          <AssociationSet Name="FK__Status__user_id__22FF2F51" Association="Self.FK__Status__user_id__22FF2F51">
+          <AssociationSet Name="FK__Status__user_id__361203C5" Association="Self.FK__Status__user_id__361203C5">
             <End Role="User" EntitySet="User" />
             <End Role="Status" EntitySet="Status" />
           </AssociationSet>
@@ -282,6 +283,7 @@
           <Property Name="translator_type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="count" Type="Int32" />
           <NavigationProperty Name="Status" Relationship="SuuModel.FK__Status__user_id__22FF2F51" FromRole="User" ToRole="Status" />
+          <Property Name="is_ready" Type="Int32" />
         </EntityType>
         <Association Name="FK__EntityHas__hasht__28B808A7">
           <End Type="SuuModel.Hashtag" Role="Hashtag" Multiplicity="0..1" />
@@ -383,6 +385,7 @@
           <EntitySetMapping Name="Users">
             <EntityTypeMapping TypeName="SuuModel.User">
               <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="is_ready" ColumnName="is_ready" />
                 <ScalarProperty Name="count" ColumnName="count" />
                 <ScalarProperty Name="translator_type" ColumnName="translator_type" />
                 <ScalarProperty Name="notifications" ColumnName="notifications" />

@@ -411,7 +411,12 @@
                         {
                             var y = 0;
                             setTimeout(function () {
-                                demo.showNotification('top', 'left', 'rose', $.parseJSON(data.data)[y]["text"], $.parseJSON(data.data)[y]["user_id"]);
+                                var user_id = $.parseJSON(data.data)[y]["user_id"];
+                                if ($.parseJSON(data.data)[y]["is_ready"] == 0)
+                                {
+                                    user_id = "default"
+                                }
+                                demo.showNotification('top', 'left', 'rose', $.parseJSON(data.data)[y]["text"], user_id);
                                 console.log(y);
                                 y++;
                             }, 2000 * x);

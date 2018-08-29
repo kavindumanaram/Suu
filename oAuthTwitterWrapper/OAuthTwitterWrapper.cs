@@ -45,7 +45,7 @@ namespace OAuthTwitterWrapper
             string resultType = "recent";
             string geoCode = "5.954920,80.554956,12mi";
             string lang = "si";
-            string until = "2018-08-19";
+            string until = "2018-08-29";
 
             SearchSettings = new SearchSettings
             {

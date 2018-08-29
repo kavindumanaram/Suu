@@ -61,6 +61,7 @@ namespace Suu.FrontEnd.Models
         public Nullable<bool> notifications { get; set; }
         public string translator_type { get; set; }
         public Nullable<int> count { get; set; }
+        public Nullable<int> is_ready { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Status> Status { get; set; }

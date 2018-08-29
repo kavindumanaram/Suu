@@ -93,7 +93,8 @@ namespace Suu.TwitterFetcher
                                 notifications = results[a].User.Notifications,
                                 //translator_type = results[a].User.tr
                                 profile_image_url = results[a].User.ProfileImageUrl,
-                                count = 1
+                                count = 1,
+                                is_ready = 0
                             }
                         };
 

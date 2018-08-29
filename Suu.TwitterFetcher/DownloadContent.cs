@@ -25,31 +25,36 @@ namespace Suu.TwitterFetcher
 
                 foreach (var user in userList)
                 {
-
-                    WebClient client = new WebClient();
-                    client.DownloadFileCompleted += new AsyncCompletedEventHandler(client_DownloadFileCompleted);
-                    var filePath = AppDomain.CurrentDomain.BaseDirectory;
-                    string mainFilePath = ConfigurationManager.AppSettings["filePath"];
-
-                    if (!string.IsNullOrEmpty(mainFilePath))
+                    if (user.is_ready == 0)
                     {
-                        filePath =  mainFilePath + "\\Suu.TwitterFetcherDownloadFolder\\ProfilePic\\";
-                    }
+                        WebClient client = new WebClient();
+                        client.DownloadFileCompleted += new AsyncCompletedEventHandler(client_DownloadFileCompleted);
+                        var filePath = AppDomain.CurrentDomain.BaseDirectory;
+                        string projectPath = ConfigurationManager.AppSettings["filePath"];
 
-                    var extension = Path.GetExtension(user.profile_image_url);
-                    var imageName = $"{user.Id.ToString()}{extension}";
-                    if (!Directory.Exists(filePath))
-                    {
-                        Directory.CreateDirectory(filePath);
-                    }
-                    try
-                    {
-                        client.DownloadFile(new Uri(user.profile_image_url), $"{filePath}{ imageName}");
-                    }
-                    catch (Exception e)
-                    {
+                        if (!string.IsNullOrEmpty(projectPath))
+                        {
+                            filePath = projectPath + "\\Suu.FrontEnd\\\assets\\img\\ProfilePic";
+                        }
 
+                        var extension = Path.GetExtension(user.profile_image_url);
+                        var imageName = $"{user.Id.ToString()}{extension}";
+                        if (!Directory.Exists(filePath))
+                        {
+                            Directory.CreateDirectory(filePath);
+                        }
+                        try
+                        {
+                            client.DownloadFile(new Uri(user.profile_image_url), $"{filePath}{ imageName}");
+                            user.is_ready = 1;
+                            SuuContext.SaveChanges();
+                        }
+                        catch (Exception e)
+                        {
+
+                        }
                     }
+                    
                      
 
                     //var dbx = new DropboxClient("bwUjLwfs0zAAAAAAAAAAGmL_efee1PRAMvTqewDyfZeu4eV5iLa677oEzwheG49y");

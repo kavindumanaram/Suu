@@ -67,7 +67,8 @@ create table [User] (
     [follow_request_sent] bit  NULL,
     [notifications] bit  NULL,
     [translator_type] [varchar](50) NULL,
-	[count] int 
+	[count] int ,
+	[is_ready] int
 	--retweeted_status_id [bigint] UNIQUE FOREIGN KEY REFERENCES [Status](Id)
 --CONSTRAINT [PK_User] PRIMARY KEY CLUSTERED
 --   (
