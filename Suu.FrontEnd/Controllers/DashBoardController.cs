@@ -60,6 +60,14 @@ namespace Suu.FrontEnd.Controllers
                 //  status = SuuContext.EntityHashtags.Where(x => x.hashtag_id == hashTagId).ToList();
                 var entity = SuuContext.EntityHashtags.Where(x => x.hashtag_id == hashTagId).Select(s => s.status_id).ToList();
                 status = SuuContext.Status.Where(s => entity.Contains(s.Id)).ToList();
+                foreach (var statusObject in status)
+                {
+                    statusObject.User = new Models.User()
+                    {
+                       profile_image_url = SuuContext.Users.Where(s => s.Id == statusObject.user_id).Select(s => s.profile_image_url).FirstOrDefault(),
+                       is_ready = SuuContext.Users.Where(s => s.Id == statusObject.user_id).Select(s => s.is_ready).FirstOrDefault(),
+                    };
+                }
             }
             var json = JsonConvert.SerializeObject(status);
             return Json(new { data = json }, JsonRequestBehavior.AllowGet);

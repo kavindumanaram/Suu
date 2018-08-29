@@ -34,7 +34,7 @@ namespace Suu.TwitterFetcher
 
                         if (!string.IsNullOrEmpty(projectPath))
                         {
-                            filePath = projectPath + "\\Suu.FrontEnd\\\assets\\img\\ProfilePic";
+                            filePath = projectPath + "\\Suu.FrontEnd\\assets\\Suu.Temp\\ProfilePic\\";
                         }
 
                         var extension = Path.GetExtension(user.profile_image_url);

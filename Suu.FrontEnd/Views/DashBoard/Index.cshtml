@@ -203,7 +203,6 @@
                                 <div class="card-footer">
                                     <div class="stats">
                                         <i class="material-icons">local_offer</i> Tracked from Github 
-                                        <img src="//D|/Suu.TwitterFetcherDownloadFolder/ProfilePic/14611672.jpg">
                                         <div class="col-md-4">
                                             <button class="btn btn-primary btn-block" onclick="demo.showNotification('top','right','rose', 'Welcome to <b>Material Dashboard</b> - a beautiful freebie for every web developer 123.')">Top Right</button>
                                         </div>
@@ -406,17 +405,22 @@
                 //contentType: "application/json;charset=utf-8",
                 dataType: "json",
                 success: function (data) {
-                    //    debugger;
+                      debugger;
                         for (var x = 0; x < 10; x++)
                         {
                             var y = 0;
                             setTimeout(function () {
-                                var user_id = $.parseJSON(data.data)[y]["user_id"];
-                                if ($.parseJSON(data.data)[y]["is_ready"] == 0)
-                                {
-                                    user_id = "default"
+                                //debugger;
+                                var profile_image_extention = $.parseJSON(data.data)[y]["User"]["profile_image_url"].split('.').pop();
+                                var profile_image;
+
+                                if (profile_image_extention && $.parseJSON(data.data)[y]["User"]["is_ready"] == 1) {
+                                    profile_image = "../assets/Suu.Temp/ProfilePic/"+$.parseJSON(data.data)[y]["user_id"] + "." + profile_image_extention;
                                 }
-                                demo.showNotification('top', 'left', 'rose', $.parseJSON(data.data)[y]["text"], user_id);
+                                else {
+                                    profile_image = "../assets/img/default.jpg";
+                                }
+                                demo.showNotification('top', 'left', 'rose', $.parseJSON(data.data)[y]["text"], profile_image);
                                 console.log(y);
                                 y++;
                             }, 2000 * x);

@@ -44,8 +44,7 @@ project.xcworkspace/
 Html5Apps
 Logs
 Logs/*
-/src/Server/src/UpgradeLog2.htm
-/src/Server/src/UpgradeLog.htm
-src/Server/src/UpgradeLog4.htm
+Suu.Temp
+Suu.Temp/*
 src/Services/SFDC/src/.vs/config/applicationhost.config
 src/Server/src/Macs.sln.DotSettings.user
