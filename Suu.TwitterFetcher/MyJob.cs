@@ -5,6 +5,7 @@ using Quartz;
 using Suu.FrontEnd.Models;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -31,7 +32,7 @@ namespace Suu.TwitterFetcher
                         var status = new FrontEnd.Models.Status()
                         {
                             Id = results[a].id,
-                            created_at = results[a].CreatedAt,
+                            created_at =  DateFormatter(results[a].CreatedAt) ,
                             text = results[a].Text,
                             truncated = results[a].truncated,
                             //entities
@@ -65,7 +66,7 @@ namespace Suu.TwitterFetcher
                                 followers_count = results[a].User.FollowersCount,
                                 friends_count = results[a].User.FriendsCount,
                                 listed_count = results[a].User.ListedCount,
-                                created_at = results[a].User.CreatedAt,
+                                created_at = DateFormatter(results[a].User.CreatedAt),
                                 favourites_count = results[a].User.FavouritesCount,
                                 utc_offset = results[a].User.UtcOffset,
                                 time_zone = results[a].User.TimeZone,
@@ -193,6 +194,22 @@ namespace Suu.TwitterFetcher
             }
 
             return 0;
+        }
+
+        private string DateFormatter(string dateString)
+        {
+            if (!string.IsNullOrEmpty(dateString))
+            {
+                var date = DateTime.ParseExact(dateString,
+                                       "ddd MMM dd HH:mm:ss '+0000' yyyy",
+                                       CultureInfo.InvariantCulture);
+                return date.ToString("mm/dd/yyyy-HH:mm:ss");
+            }
+            else
+            {
+                return string.Empty;
+            }
+            
         }
 
     }

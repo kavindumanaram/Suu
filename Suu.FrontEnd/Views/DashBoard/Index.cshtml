@@ -313,6 +313,7 @@
                                         <div class="tab-pane" id="settings">
                                             <table class="table table-hover">
                                                 <thead class="text-warning">
+                                                <th>Profile Pic</th>
                                                 <th>HashTag</th>
                                                 <th>Occurence</th>
                                                 <th>Location</th>
@@ -321,6 +322,14 @@
                                                     @foreach (var user in @ViewBag.User)
                                                     {
                                                         <tr>
+                                                            @if (@user.is_ready == 1)
+                                                            {
+                                                                <td><img class="img" src="@("../assets/Suu.Temp/ProfilePic/"+@user.Id+".jpg")" style="border-radius: 100%"></td>
+                                                            }
+                                                            else
+                                                            {
+                                                                <td><img class="img" src="../assets/img/default.jpg" style="border-radius: 100%"></td>
+                                                            }
                                                             <td>@user.name</td>
                                                             <td>@user.count</td>
                                                             <td>@user.location</td>
