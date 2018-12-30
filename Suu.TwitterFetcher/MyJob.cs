@@ -44,7 +44,7 @@ namespace Suu.TwitterFetcher
                             //user
                             geo = results[a].geo,
                             coordinates = results[a].coordinates,
-                            place = results[a].place,
+                         //   place = results[a].place ? results[a].place. : ,
                             contributors = results[a].contributors,
                             is_quote_status = results[a].is_quote_status,
                             retweet_count = results[a].retweet_count,

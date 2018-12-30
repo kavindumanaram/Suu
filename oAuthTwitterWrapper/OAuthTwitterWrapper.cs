@@ -43,9 +43,9 @@ namespace OAuthTwitterWrapper
 			string searchFormat = ConfigurationManager.AppSettings["searchFormat"];
 			string searchQuery = ConfigurationManager.AppSettings["searchQuery"];
             string resultType = "recent";
-            string geoCode = "5.954920,80.554956,12mi";
+            string geoCode = "5.954920,80.554956,1200mi";
             string lang = "si";
-            string until = "2018-08-28";
+            string until = "2018-09-22"; //DateTime.Now.ToString("yyyy-MM-dd");//"2018-08-28";
 
             SearchSettings = new SearchSettings
             {

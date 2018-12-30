@@ -57,7 +57,7 @@ namespace OAuthTwitterWrapper.JsonTypes
         public User User { get; set; }
         public string geo { get; set; }
         public string coordinates { get; set; }
-        public string place { get; set; }
+        public Place place { get; set; }
         public string contributors { get; set; }
         public bool is_quote_status { get; set; }
         public int retweet_count { get; set; }
@@ -81,6 +81,31 @@ namespace OAuthTwitterWrapper.JsonTypes
         public int count { get; set; }
         public int since_id { get; set; }
         public string since_id_str { get; set; }
+    }
+
+    public class Place
+    {
+        public string id { get; set; }
+        public string url { get; set; }
+        public string place_type { get; set; }
+        public string name { get; set; }
+        public string full_name { get; set; }
+        public string country_code { get; set; }
+        public string country { get; set; }
+        public IList<object> contained_within { get; set; }
+        public BoundingBox bounding_box { get; set; }
+        public Attributes attributes { get; set; }
+    }
+
+    public class BoundingBox
+    {
+        public string type { get; set; }
+        public IList<IList<IList<double>>> coordinates { get; set; }
+    }
+
+    //When using PowerTrack, 30-Day and Full-Archive Search APIs, and Volume Streams this hash is null. Example:
+    public class Attributes
+    {
     }
 
     public class Search
