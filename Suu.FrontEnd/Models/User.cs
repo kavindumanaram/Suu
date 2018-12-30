@@ -62,6 +62,7 @@ namespace Suu.FrontEnd.Models
         public string translator_type { get; set; }
         public Nullable<int> count { get; set; }
         public Nullable<int> is_ready { get; set; }
+        public int user_id { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Status> Status { get; set; }

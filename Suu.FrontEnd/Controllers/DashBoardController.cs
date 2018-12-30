@@ -74,5 +74,34 @@ namespace Suu.FrontEnd.Controllers
             var json = JsonConvert.SerializeObject(status);
             return Json(new { data = json }, JsonRequestBehavior.AllowGet);
         }
-    }
+
+		/// <summary>
+		/// Retrive top ten tweets.
+		/// </summary>
+		/// <param name="userId">The user id</param>
+		/// <returns></returns>
+		[HttpGet] 
+		public JsonResult ReriveTopTenTweetForUser(int userId)
+		{
+			IEnumerable<Status> status = null;
+			using (SuuEntities SuuContext = new SuuEntities())
+			{
+				SuuContext.Configuration.LazyLoadingEnabled = false;
+				//var entity = SuuContext.EntityHashtags.Where(x => x.hashtag_id == hashTagId).Select(s => s.status_id).ToList();
+				//var TopTenTweets = SuuContext.Status.Where(s => s.user_id = userId)
+				var currentUserId = SuuContext.Users.Where(a => a.user_id == userId).Select(x => x.Id).FirstOrDefault();
+				status = SuuContext.Status.Where(s => s.user_id == currentUserId).ToList();
+				foreach (var statusObject in status)
+				{
+					statusObject.User = new Models.User()
+					{
+						profile_image_url = SuuContext.Users.Where(s => s.Id == statusObject.user_id).Select(s => s.profile_image_url).FirstOrDefault(),
+						is_ready = SuuContext.Users.Where(s => s.Id == statusObject.user_id).Select(s => s.is_ready).FirstOrDefault(),
+					};
+				}
+			}
+			var json = JsonConvert.SerializeObject(status);
+			return Json(new { data = json }, JsonRequestBehavior.AllowGet);
+		}
+	}
 }

@@ -243,7 +243,7 @@ demo = {
           message: message
 
       }, {
-              type: '',
+              type: type,
             //  timer: 3000,
               placement: {
                   from: from,

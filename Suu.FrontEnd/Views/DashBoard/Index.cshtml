@@ -314,27 +314,24 @@
                                             <table class="table table-hover">
                                                 <thead class="text-warning">
                                                 <th>Profile Pic</th>
-                                                <th>HashTag</th>
+                                                <th>Name</th>
                                                 <th>Occurence</th>
                                                 <th>Location</th>
                                                 </thead>
                                                 <tbody>
                                                     @foreach (var user in @ViewBag.User)
                                                     {
-                                                        <tr>
+                                                    <tr onclick="DisplayTopTenTweets(@user.user_id)">
                                                             @if (@user.is_ready == 1)
                                                             {
-                                                                <td><img class="img" src="@("../assets/Suu.Temp/ProfilePic/"+@user.Id+".jpg")" style="border-radius: 100%"></td>
-                                                            }
+                                                            <td><img class="img" src="@("../assets/Suu.Temp/ProfilePic/"+@user.Id+".jpg")" style="border-radius: 100%"></td>}
                                                             else
                                                             {
-                                                                <td><img class="img" src="../assets/img/default.jpg" style="border-radius: 100%"></td>
-                                                            }
+                                                            <td><img class="img" src="../assets/img/default.jpg" style="border-radius: 100%"></td>}
                                                             <td>@user.name</td>
                                                             <td>@user.count</td>
-                                                            <td>@user.location</td>
-                                                        </tr>
-                                                    }
+                                                            <td>@user.location | @user.user_id</td>
+                                                    </tr>}
                                                 </tbody>
                                             </table>
                                         </div>
@@ -434,6 +431,43 @@
                                 y++;
                             }, 2000 * x);
                         }
+                }
+            });
+        }
+
+        function DisplayTopTenTweets(userId) {
+            alert(userId);
+            //console.log(hashTagId);
+            $.ajax({
+                type: "GET",
+                url: "/DashBoard/ReriveTopTenTweetForUser",
+                data: { userId: userId },
+                //contentType: "application/json;charset=utf-8",
+                dataType: "json",
+                success: function (data) {
+                    debugger;
+                    for (var x = 0; x < 10; x++) {
+                        var y = 0;
+                        setTimeout(function () {
+                            //debugger;
+                            var profile_image_extention = $.parseJSON(data.data)[y]["User"]["profile_image_url"].split('.').pop();
+                            var profile_image;
+
+                            if (profile_image_extention && $.parseJSON(data.data)[y]["User"]["is_ready"] == 1) {
+                                profile_image = "../assets/Suu.Temp/ProfilePic/" + $.parseJSON(data.data)[y]["user_id"] + "." + profile_image_extention;
+                            }
+                            else {
+                                profile_image = "../assets/img/default.jpg";
+                            }
+                            demo.showNotification('top', 'left', 'info', $.parseJSON(data.data)[y]["text"], profile_image);
+                            console.log(y);
+                            y++;
+                        }, 2000 * x);
+                    }
+                },
+                error: function (xhr, status, error) {
+                    var err = eval("(" + xhr.responseText + ")");
+                    alert(err.Message);
                 }
             });
         }

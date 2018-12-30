@@ -9,8 +9,6 @@ using System.Threading.Tasks;
 using static System.Net.Mime.MediaTypeNames;
 using System.IO;
 using Suu.FrontEnd.Models;
-using Dropbox.Api;
-using Dropbox.Api.Files;
 using System.Configuration;
 
 namespace Suu.TwitterFetcher
