@@ -19,7 +19,35 @@ namespace Suu.FrontEnd.Controllers
             {
                 ViewBag.Status = SuuContext.Status.ToList();
 
-                ViewBag.User = SuuContext.Users.OrderByDescending(x => x.count).Take(10).ToList();
+				var StatusMonthGroupByName = SuuContext.Status.GroupBy(s => s.created_at).Select(n => new
+				{
+					Name = n.Key,
+				//	Count = n.Count()
+				}).ToList().Take(30);
+
+				var StatusMonthGroupByCount = SuuContext.Status.GroupBy(s => s.created_at).Select(n => new
+				{
+					//Name = n.Key,
+						Count = n.Count()
+				}).ToList().Take(30);
+
+				//List<double?> rainValues = new List<double?> { 49.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 1054.4 };
+				//List<double?> temperatureValues = new List<double?> { 7.0, 6.9, 9.5, 14.5, 18.2, 21.5, 25.2, 26.5, 23.3, 18.3, 13.9, 9.6 };
+
+				//List<ColumnSeriesData> rainData = new List<ColumnSeriesData>();
+				//List<SplineSeriesData> temperatureData = new List<SplineSeriesData>();
+
+				//rainValues.ForEach(p => rainData.Add(new ColumnSeriesData { Y = p }));
+				//temperatureValues.ForEach(p => temperatureData.Add(new SplineSeriesData { Y = p }));
+
+				ViewData["TweetDataCount"] = $"[{string.Join(",", StatusMonthGroupByCount.Select(s => s.Count).ToList())}]";
+				ViewData["TweetDataDate"] = $"['{string.Join("','", StatusMonthGroupByName.Select(s => s.Name).ToList())}']".ToString();
+
+				//.FirstOrDefault().Select(x => x.created_at);
+				//.Count();
+
+
+				ViewBag.User = SuuContext.Users.OrderByDescending(x => x.count).Take(10).ToList();
                 ViewBag.HashTag = SuuContext.Hashtags.OrderByDescending(x => x.count).Take(10).ToList();
                 ViewBag.MessageWord = SuuContext.messageCounts.OrderByDescending(x => x.count).Take(10).ToList();
                 return View();

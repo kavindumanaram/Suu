@@ -19,7 +19,10 @@ namespace Suu.TwitterFetcher
         {
             var twit = new OAuthTwitterWrapper.OAuthTwitterWrapper();
             var sesarch = twit.GetSearch();
-            var SearchResponse = JsonConvert.DeserializeObject<Search>(sesarch);
+			try
+			{
+				var SearchResponse = JsonConvert.DeserializeObject<Search>(sesarch);
+
 
             using (SuuEntities SuuContext = new SuuEntities())
             {
@@ -42,8 +45,8 @@ namespace Suu.TwitterFetcher
                             in_reply_to_user_id = results[a].in_reply_to_user_id,
                             in_reply_to_screen_name = results[a].in_reply_to_screen_name,
                             //user
-                            geo = results[a].geo,
-                            coordinates = results[a].coordinates,
+                            //geo = results[a].geo,
+                           // coordinates = results[a].coordinates,
                          //   place = results[a].place ? results[a].place. : ,
                             contributors = results[a].contributors,
                             is_quote_status = results[a].is_quote_status,
@@ -182,8 +185,12 @@ namespace Suu.TwitterFetcher
                     }
                 }
             }
-            //   Console.ReadLine();
-        }
+			   Console.WriteLine("finish save to db cycle .........");
+		}
+			catch(Exception ex) {
+				Console.WriteLine(ex.Message);
+			}
+}
 
         private long ConvertToLong(string x)
         {
@@ -203,8 +210,8 @@ namespace Suu.TwitterFetcher
                 var date = DateTime.ParseExact(dateString,
                                        "ddd MMM dd HH:mm:ss '+0000' yyyy",
                                        CultureInfo.InvariantCulture);
-                return date.ToString("mm/dd/yyyy-HH:mm:ss");
-            }
+                return date.ToString("dd/MM/yyyy");
+			}
             else
             {
                 return string.Empty;

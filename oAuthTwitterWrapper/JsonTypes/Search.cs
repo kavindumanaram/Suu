@@ -55,8 +55,8 @@ namespace OAuthTwitterWrapper.JsonTypes
         public string in_reply_to_screen_name { get; set; }
         [JsonProperty("user")]
         public User User { get; set; }
-        public string geo { get; set; }
-        public string coordinates { get; set; }
+        public Geo geo { get; set; }
+        public Coordinates coordinates { get; set; }
         public Place place { get; set; }
         public string contributors { get; set; }
         public bool is_quote_status { get; set; }
@@ -103,8 +103,20 @@ namespace OAuthTwitterWrapper.JsonTypes
         public IList<IList<IList<double>>> coordinates { get; set; }
     }
 
-    //When using PowerTrack, 30-Day and Full-Archive Search APIs, and Volume Streams this hash is null. Example:
-    public class Attributes
+	public class Coordinates
+	{
+		public string type { get; set; }
+		public IList<double> coordinates { get; set; }
+	}
+
+	public class Geo
+	{
+		public string type { get; set; }
+		public IList<double> coordinates { get; set; }
+	}
+
+	//When using PowerTrack, 30-Day and Full-Archive Search APIs, and Volume Streams this hash is null. Example:
+	public class Attributes
     {
     }
 
