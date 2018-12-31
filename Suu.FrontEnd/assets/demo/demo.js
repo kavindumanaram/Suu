@@ -6,7 +6,7 @@ demo = {
       dataDailySalesChart = {
         labels: ['M', 'T', 'W', 'T', 'F', 'S', 'S'],
         series: [
-          [12, 17, 7, 17, 23, 18, 38]
+          [12, 0, 7, 17, 23, 18, 38]
         ]
       };
 
@@ -65,7 +65,7 @@ demo = {
       /* ----------==========     Completed Tasks Chart initialization    ==========---------- */
 
       dataCompletedTasksChart = {
-        labels: ['12p', '3p', '6p', '9p', '12p', '3a', '6a', '9a'],
+        labels: ['12p', '3p', '6p', '9p', '12p', '3a', '6a', '9B'],
         series: [
           [230, 750, 450, 300, 280, 240, 200, 190]
         ]
@@ -248,7 +248,8 @@ demo = {
               placement: {
                   from: from,
                   align: align
-              }
+              },
+              newest_on_top: true
           });
   }
 

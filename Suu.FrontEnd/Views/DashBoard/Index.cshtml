@@ -231,7 +231,7 @@
                         <div class="col-md-8">
                             <div class="card card-chart">
                                 <div class="card-header card-header-success">
-                                    <div class="ct-chart" id="dailySalesChart"></div>
+                                    <div class="ct-chart" id="completedTasksChart"></div>
                                 </div>
                                 <div class="card-body">
                                     <h4 class="card-title">Daily Sales</h4>
@@ -403,6 +403,7 @@
               });
 
         function DisplayRelatedTweets(hashTagId) {
+            var randomColor = get_random(['', 'info', 'danger', 'success', 'warning', 'rose', 'primary']);
             //console.log(hashTagId);
             $.ajax({
                 type: "GET",
@@ -426,7 +427,7 @@
                                 else {
                                     profile_image = "../assets/img/default.jpg";
                                 }
-                                demo.showNotification('top', 'left', 'rose', $.parseJSON(data.data)[y]["text"], profile_image);
+                                demo.showNotification('top', 'left', randomColor, $.parseJSON(data.data)[y]["text"], profile_image);
                                 console.log(y);
                                 y++;
                             }, 2000 * x);
@@ -436,20 +437,16 @@
         }
 
         function DisplayTopTenTweets(userId) {
-            alert(userId);
-            //console.log(hashTagId);
+            var randomColor = get_random(['', 'info', 'danger', 'success', 'warning', 'rose', 'primary']);
             $.ajax({
                 type: "GET",
                 url: "/DashBoard/ReriveTopTenTweetForUser",
                 data: { userId: userId },
-                //contentType: "application/json;charset=utf-8",
                 dataType: "json",
                 success: function (data) {
-                    debugger;
                     for (var x = 0; x < 10; x++) {
                         var y = 0;
                         setTimeout(function () {
-                            //debugger;
                             var profile_image_extention = $.parseJSON(data.data)[y]["User"]["profile_image_url"].split('.').pop();
                             var profile_image;
 
@@ -459,7 +456,7 @@
                             else {
                                 profile_image = "../assets/img/default.jpg";
                             }
-                            demo.showNotification('top', 'left', 'info', $.parseJSON(data.data)[y]["text"], profile_image);
+                            demo.showNotification('top', 'left', randomColor, $.parseJSON(data.data)[y]["text"], profile_image);
                             console.log(y);
                             y++;
                         }, 2000 * x);
@@ -471,6 +468,11 @@
                 }
             });
         }
+
+        get_random = function (list) {
+            return list[Math.floor((Math.random() * list.length))];
+        }
+
     </script>
 </body>
 </html>
