@@ -359,7 +359,7 @@
                             <div class="card card-chart">
                                 <div class="card-header card-header-success">
                                     @*<div class="ct-chart" id="completedTasksChart"></div>*@
-                                    <div id="map" class="map" style="min-width: 310px; height: 400px; margin: 0 auto">100</div>
+                                    <div id="map" class="map" style="min-width: 664px; height: 400px; margin: 0 auto">100</div>
                                 </div>
                                 <div class="card-body">
                                     <h4 class="card-title">Daily Sales</h4>
@@ -376,26 +376,7 @@
                         </div>
                     </div>
 
-                    <script>
-
-
-
-                        var map = L.map('map').setView([7.8731, 80.7718], 6);
-
-
-
-                        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                        }).addTo(map);
-
-                        L.marker([7.8731, 80.7718]).addTo(map)
-                            .bindPopup('A pretty CSS3 popup.<br> Easily customizable.')
-                            .openPopup();
-
-                        L.marker([8.8731, 81.7718]).addTo(map)
-                            .bindPopup('A pretty CSS3 popup.<br> Easily customizable. 123')
-                            .openPopup();
-                    </script>
+                   
 
                 </div>
             </div>
@@ -571,5 +552,50 @@
             ]
         });
     </script>
+
+
+    <script>
+
+              GetCoordinateList();
+
+              var map = L.map('map').setView([7.8731, 80.7718], 10);
+
+
+
+              L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                  attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+              }).addTo(map);
+
+              function GetCoordinateList() {
+                  $.ajax({
+                      type: "GET",
+                      url: "/DashBoard/ReriveUserCoordinates",
+                      data: { userId: 100 },
+                      dataType: "json",
+                      success: function (data) {
+                          //debugger;
+                          obj = JSON.parse(data.data);
+                          Object.keys(obj[0]).length;
+                          for (var x = 0; x < 20; x++) {
+                              // var y = 0;
+                              /// setTimeout(function () {
+                              var locationName = $.parseJSON(data.data)[x]["user_location"];
+                              var lon = $.parseJSON(data.data)[x]["lon"];
+                              var lat = $.parseJSON(data.data)[x]["lat"];
+
+                              L.marker([lat, lon]).addTo(map)
+                                  .bindPopup(locationName)
+                                  .openPopup();
+
+                          }
+                      },
+                      error: function (xhr, status, error) {
+                          var err = eval("(" + xhr.responseText + ")");
+                          alert(err.Message);
+                      }
+                  });
+              }
+    </script>
+
 </body>
 </html>

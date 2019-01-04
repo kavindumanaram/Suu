@@ -30,5 +30,6 @@ namespace Suu.FrontEnd.Models
         public virtual DbSet<messageCount> messageCounts { get; set; }
         public virtual DbSet<Status> Status { get; set; }
         public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<UserLocationCount> UserLocationCounts { get; set; }
     }
 }

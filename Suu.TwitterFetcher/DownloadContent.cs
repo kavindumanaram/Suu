@@ -10,7 +10,7 @@ using static System.Net.Mime.MediaTypeNames;
 using System.IO;
 using Suu.FrontEnd.Models;
 using System.Configuration;
-using GoogleMaps.LocationServices;
+//using GoogleMaps.LocationServices;
 
 namespace Suu.TwitterFetcher
 {
@@ -46,8 +46,37 @@ namespace Suu.TwitterFetcher
                         {
                             client.DownloadFile(new Uri(user.profile_image_url), $"{filePath}{ imageName}");
                             user.is_ready = 1;
-														//GetCoordinatesOfUserLocation();
-                            SuuContext.SaveChanges();
+							//GetCoordinatesOfUserLocation(user);
+							var currentUserlocation = user.location.ToLower();
+							if (currentUserlocation.Any())
+							{
+								var existingLoactionList = SuuContext.UserLocationCounts.Select(g => g.user_location);
+
+
+								if (!existingLoactionList.Contains(currentUserlocation))
+								{
+									var locationCount = new FrontEnd.Models.UserLocationCount()
+									{
+										user_location = currentUserlocation,
+										count = 1
+									};
+									SuuContext.UserLocationCounts.Add(locationCount);
+								}
+								else
+								{
+									{
+										var exsitingLocationCountText = SuuContext.UserLocationCounts.Where(d => d.user_location == currentUserlocation).FirstOrDefault();
+										var exsitingLocationCountTextOccurence = exsitingLocationCountText.count;
+										var exsitingLocationCountTextLatestOccurence = exsitingLocationCountTextOccurence + 1;
+										exsitingLocationCountText.count = exsitingLocationCountTextLatestOccurence;
+									}
+								}
+							}
+
+
+
+
+							SuuContext.SaveChanges();
                         }
                         catch (Exception e)
                         {
@@ -76,7 +105,9 @@ namespace Suu.TwitterFetcher
                 }
             }
 
+			Console.WriteLine("finish user image and location process cycle .......");
         }
+
 
 		void client_DownloadFileCompleted(object sender, AsyncCompletedEventArgs e)
         {

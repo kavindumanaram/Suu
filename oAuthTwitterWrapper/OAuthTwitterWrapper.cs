@@ -45,7 +45,7 @@ namespace OAuthTwitterWrapper
             string resultType = "recent";
             string geoCode = "5.954920,80.554956,1200mi";
             string lang = "si";
-            string until = DateTime.Now.ToString("yyyy-MM-dd");//"2018-08-28";
+			string until = "2019-01-03";// DateTime.Now.ToString("yyyy-MM-dd");//"2018-08-28";
 
             SearchSettings = new SearchSettings
             {

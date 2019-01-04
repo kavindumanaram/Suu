@@ -14,6 +14,7 @@
         <AssociationConnector Association="SuuModel.FK__EntityHas__hasht__28B808A7" />
         <AssociationConnector Association="SuuModel.FK__EntityHas__statu__27C3E46E" />
         <AssociationConnector Association="SuuModel.FK__Status__user_id__22FF2F51" />
+        <EntityTypeShape EntityType="SuuModel.UserLocationCount" Width="1.5" PointX="7.375" PointY="4.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

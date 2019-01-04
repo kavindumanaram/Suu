@@ -104,6 +104,16 @@
           <Property Name="is_ready" Type="int" />
           <Property Name="user_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
         </EntityType>
+        <EntityType Name="UserLocationCount">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="user_location" Type="nvarchar" MaxLength="100" />
+          <Property Name="lat" Type="nvarchar" MaxLength="100" />
+          <Property Name="lon" Type="nvarchar" MaxLength="100" />
+          <Property Name="count" Type="int" />
+        </EntityType>
         <Association Name="FK__EntityHas__hasht__558AAF1E">
           <End Role="Hashtag" Type="Self.Hashtag" Multiplicity="0..1" />
           <End Role="EntityHashtag" Type="Self.EntityHashtag" Multiplicity="*" />
@@ -146,6 +156,7 @@
           <EntitySet Name="messageCount" EntityType="Self.messageCount" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Status" EntityType="Self.Status" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserLocationCount" EntityType="Self.UserLocationCount" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK__EntityHas__hasht__558AAF1E" Association="Self.FK__EntityHas__hasht__558AAF1E">
             <End Role="Hashtag" EntitySet="Hashtag" />
             <End Role="EntityHashtag" EntitySet="EntityHashtag" />
@@ -181,6 +192,7 @@
             <End Role="User" EntitySet="Users" />
             <End Role="Status" EntitySet="Status" />
           </AssociationSet>
+          <EntitySet Name="UserLocationCounts" EntityType="SuuModel.UserLocationCount" />
         </EntityContainer>
         <EntityType Name="EntityHashtag">
           <Key>
@@ -323,6 +335,16 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="UserLocationCount">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="user_location" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="lat" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="lon" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="count" Type="Int32" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -429,6 +451,17 @@
                 <ScalarProperty Name="location" ColumnName="location" />
                 <ScalarProperty Name="screen_name" ColumnName="screen_name" />
                 <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserLocationCounts">
+            <EntityTypeMapping TypeName="SuuModel.UserLocationCount">
+              <MappingFragment StoreEntitySet="UserLocationCount">
+                <ScalarProperty Name="count" ColumnName="count" />
+                <ScalarProperty Name="lon" ColumnName="lon" />
+                <ScalarProperty Name="lat" ColumnName="lat" />
+                <ScalarProperty Name="user_location" ColumnName="user_location" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
