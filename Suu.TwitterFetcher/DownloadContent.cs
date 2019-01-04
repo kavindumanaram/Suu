@@ -10,6 +10,7 @@ using static System.Net.Mime.MediaTypeNames;
 using System.IO;
 using Suu.FrontEnd.Models;
 using System.Configuration;
+using GoogleMaps.LocationServices;
 
 namespace Suu.TwitterFetcher
 {
@@ -45,6 +46,7 @@ namespace Suu.TwitterFetcher
                         {
                             client.DownloadFile(new Uri(user.profile_image_url), $"{filePath}{ imageName}");
                             user.is_ready = 1;
+														//GetCoordinatesOfUserLocation();
                             SuuContext.SaveChanges();
                         }
                         catch (Exception e)
@@ -76,7 +78,7 @@ namespace Suu.TwitterFetcher
 
         }
 
-        void client_DownloadFileCompleted(object sender, AsyncCompletedEventArgs e)
+		void client_DownloadFileCompleted(object sender, AsyncCompletedEventArgs e)
         {
             Console.WriteLine("File downloaded");
         }

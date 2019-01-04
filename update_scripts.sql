@@ -143,10 +143,16 @@ create table [messageCount] (
 
 
 
+--add new auto increment colum
+ ALTER TABLE [Suu].[dbo].[User] ADD [user_id] INT IDENTITY(1,1) 
 
-
-
-
+create table [UserLocationCount] (
+[Id] [int] IDENTITY(1,1) primary key NOT NULL,
+[user_location] [nvarchar](100) COLLATE Latin1_General_CI_AI NULL,
+[lat] [nvarchar](100) NULL,
+[lon] [nvarchar](100) NULL,
+[count] int
+)
 
 
 /*create table RetweetedStatus (
