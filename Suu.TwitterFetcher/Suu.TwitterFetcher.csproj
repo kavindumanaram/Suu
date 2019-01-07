@@ -74,6 +74,7 @@
   <ItemGroup>
     <Compile Include="ConfigureService.cs" />
     <Compile Include="DownloadContent.cs" />
+    <Compile Include="Dto\GeocodingByAddressDto.cs" />
     <Compile Include="FetcherService.cs" />
     <Compile Include="MyJob.cs" />
     <Compile Include="Program.cs" />

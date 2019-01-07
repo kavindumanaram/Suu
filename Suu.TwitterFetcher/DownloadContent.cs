@@ -10,6 +10,8 @@ using static System.Net.Mime.MediaTypeNames;
 using System.IO;
 using Suu.FrontEnd.Models;
 using System.Configuration;
+using Newtonsoft.Json;
+using Suu.TwitterFetcher.Dto;
 //using GoogleMaps.LocationServices;
 
 namespace Suu.TwitterFetcher
@@ -29,22 +31,17 @@ namespace Suu.TwitterFetcher
                         WebClient client = new WebClient();
                         client.DownloadFileCompleted += new AsyncCompletedEventHandler(client_DownloadFileCompleted);
                         var filePath = AppDomain.CurrentDomain.BaseDirectory;
-                        string projectPath = ConfigurationManager.AppSettings["filePath"];
-
-                        if (!string.IsNullOrEmpty(projectPath))
-                        {
-                            filePath = projectPath + "\\Suu.FrontEnd\\assets\\Suu.Temp\\ProfilePic\\";
-                        }
+                        string SuuProPicPath = ConfigurationManager.AppSettings["filePath"];
 
                         var extension = Path.GetExtension(user.profile_image_url);
                         var imageName = $"{user.Id.ToString()}{extension}";
-                        if (!Directory.Exists(filePath))
+                        if (!Directory.Exists(SuuProPicPath))
                         {
-                            Directory.CreateDirectory(filePath);
+                            Directory.CreateDirectory(SuuProPicPath);
                         }
                         try
                         {
-                            client.DownloadFile(new Uri(user.profile_image_url), $"{filePath}{ imageName}");
+                            client.DownloadFile(new Uri(user.profile_image_url), $"{SuuProPicPath}{ imageName}");
                             user.is_ready = 1;
 							//GetCoordinatesOfUserLocation(user);
 							var currentUserlocation = user.location.ToLower();
@@ -55,16 +52,56 @@ namespace Suu.TwitterFetcher
 
 								if (!existingLoactionList.Contains(currentUserlocation))
 								{
+
+									//var locationCount = new FrontEnd.Models.UserLocationCount()
+									//{
+									//	user_location = currentUserlocation,
+									//	count = 1,
+									//	lon = lont.ToString(),
+									//	lat = latt.ToString()
+									//};
+
+									//try
+									//{
+									var latt = 0.00;
+									var lont = 0.00;
+									HttpWebRequest request = (HttpWebRequest)WebRequest.Create("http://open.mapquestapi.com/geocoding/v1/address?key=WBA9ECUGd5XzoEeYlTPMKOivfEEMfTyk&location="+ currentUserlocation);
+										request.AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate;
+
+										using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
+										using (Stream stream = response.GetResponseStream())
+										using (StreamReader reader = new StreamReader(stream))
+										{
+											var x = reader.ReadToEnd();
+											//var y =  serializer.DeserializeObject(reader.ReadToEnd());
+											var GeoLocationResponseResponse = JsonConvert.DeserializeObject<GeocodingByAddressDto>(x);
+											 latt = GeoLocationResponseResponse.results.FirstOrDefault().locations.FirstOrDefault().displayLatLng.lat;
+											 lont = GeoLocationResponseResponse.results.FirstOrDefault().locations.FirstOrDefault().displayLatLng.lng;
+
+											
+										}
+
 									var locationCount = new FrontEnd.Models.UserLocationCount()
 									{
 										user_location = currentUserlocation,
-										count = 1
+										count = 1,
+										lon = lont.ToString(),
+										lat = latt.ToString()
 									};
+									//}
+									//catch (Exception ex)
+									//{
+									//	Console.WriteLine("Error while get coordinates" + ex.Message);
+									//}
+
+
 									SuuContext.UserLocationCounts.Add(locationCount);
 								}
 								else
 								{
 									{
+									
+
 										var exsitingLocationCountText = SuuContext.UserLocationCounts.Where(d => d.user_location == currentUserlocation).FirstOrDefault();
 										var exsitingLocationCountTextOccurence = exsitingLocationCountText.count;
 										var exsitingLocationCountTextLatestOccurence = exsitingLocationCountTextOccurence + 1;

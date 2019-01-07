@@ -26,7 +26,7 @@ namespace Suu.TwitterFetcher
                             JobBuilder.Create<MyJob>().Build())
                             .AddTrigger(() => TriggerBuilder.Create()
                                 .WithSimpleSchedule(b => b
-                                    .WithIntervalInSeconds(150)
+                                    .WithIntervalInHours(12)
                                     .RepeatForever())
                                 .Build()));
 
@@ -35,7 +35,7 @@ namespace Suu.TwitterFetcher
                            JobBuilder.Create<WordCountJob>().Build())
                            .AddTrigger(() => TriggerBuilder.Create()
                                .WithSimpleSchedule(b => b
-                                   .WithIntervalInSeconds(200)
+																	 .WithIntervalInHours(12)
                                    .RepeatForever())
                                .Build()));
 
@@ -45,7 +45,7 @@ namespace Suu.TwitterFetcher
                           JobBuilder.Create<DownloadContent>().Build())
                           .AddTrigger(() => TriggerBuilder.Create()
                               .WithSimpleSchedule(b => b
-                                  .WithIntervalInSeconds(100)
+                                  .WithIntervalInHours(12)
                                   .RepeatForever())
                               .Build()));
                 });

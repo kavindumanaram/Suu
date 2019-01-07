@@ -104,22 +104,23 @@
                     <div class="collapse navbar-collapse justify-content-end">
                         <form class="navbar-form">
                             <div class="input-group no-border">
-                                <input type="text" value="" class="form-control" placeholder="Search...">
+                                @*<input type="text" value="" class="form-control" placeholder="Search...">
                                 <button type="submit" class="btn btn-white btn-round btn-just-icon">
                                     <i class="material-icons">search</i>
                                     <div class="ripple-container"></div>
-                                </button>
+                                </button>*@
+                                <i class="material-icons">access_time</i> updated 4 minutes ago
                             </div>
                         </form>
                         <ul class="navbar-nav">
-                            <li class="nav-item">
+                            @*<li class="nav-item">
                                 <a class="nav-link" href="#pablo">
                                     <i class="material-icons">dashboard</i>
                                     <p class="d-lg-none d-md-block">
                                         Stats
                                     </p>
                                 </a>
-                            </li>
+                            </li>*@
                             <li class="nav-item dropdown">
                                 <a class="nav-link" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <i class="material-icons">notifications</i>
@@ -136,14 +137,14 @@
                                     <a class="dropdown-item" href="#">Another One</a>
                                 </div>
                             </li>
-                            <li class="nav-item">
+                            @*<li class="nav-item">
                                 <a class="nav-link" href="#pablo">
                                     <i class="material-icons">person</i>
                                     <p class="d-lg-none d-md-block">
                                         Account
                                     </p>
                                 </a>
-                            </li>
+                            </li>*@
                         </ul>
                     </div>
                 </div>
@@ -163,14 +164,14 @@
                                     </div>
                                     <p class="card-category">Messages</p>
                                     <h3 class="card-title">
-                                       @ViewBag.Status.Count
+                                       @ViewBag.MessageCount
                                         @*<small>messages</small>*@
                                     </h3>
                                 </div>
                                 <div class="card-footer">
                                     <div class="stats">
-                                        <i class="material-icons text-danger">warning</i>
-                                        <a href="#pablo">Get More Space...</a>
+                                        @*<i class="material-icons text-danger">warning</i>
+                                        <a href="#pablo">Get More Space...</a>*@
                                     </div>
                                 </div>
                             </div>
@@ -181,12 +182,12 @@
                                     <div class="card-icon">
                                         <i class="material-icons">people</i>
                                     </div>
-                                    <p class="card-category">Twitter Users</p>
-                                    <h3 class="card-title">@ViewBag.User.Count</h3>
+                                    <p class="card-category">Users</p>
+                                    <h3 class="card-title">@ViewBag.UserCount</h3>
                                 </div>
                                 <div class="card-footer">
                                     <div class="stats">
-                                        <i class="material-icons">date_range</i> Last 24 Hours
+                                        @*<i class="material-icons">date_range</i> Last 24 Hours*@
                                     </div>
                                 </div>
                             </div>
@@ -198,13 +199,13 @@
                                         <i class="material-icons">#</i>
                                     </div>
                                     <p class="card-category">Hash Tags</p>
-                                    <h3 class="card-title">@ViewBag.HashTag.Count</h3>
+                                    <h3 class="card-title">@ViewBag.HashTagCount</h3>
                                 </div>
                                 <div class="card-footer">
                                     <div class="stats">
-                                        <i class="material-icons">local_offer</i> Tracked from Github 
+                                        @*<i class="material-icons">local_offer</i> Tracked from Github 
                                         <div class="col-md-4">
-                                        </div>
+                                        </div>*@
                                     </div>
                                 </div>
                             </div>
@@ -220,7 +221,7 @@
                                 </div>
                                 <div class="card-footer">
                                     <div class="stats">
-                                        <i class="material-icons">update</i> Just Updated
+                                        @*<i class="material-icons">update</i> Just Updated*@
                                     </div>
                                 </div>
                             </div>
@@ -231,7 +232,7 @@
                             <div class="card card-chart">
                                 <div class="card-header card-header-success">
                                     @*<div class="ct-chart" id="completedTasksChart"></div>*@
-                                    <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+                                    <div id="container" style="min-width: 310px; height: 496px; margin: 0 auto"></div>
                                 </div>
                                 <div class="card-body">
                                     <h4 class="card-title">Daily Sales</h4>
@@ -241,7 +242,7 @@
                                 </div>
                                 <div class="card-footer">
                                     <div class="stats">
-                                        <i class="material-icons">access_time</i> updated 4 minutes ago
+                                        @*<i class="material-icons">access_time</i> updated 4 minutes ago*@
                                     </div>
                                 </div>
                             </div>
@@ -324,13 +325,13 @@
                                                     <tr onclick="DisplayTopTenTweets(@user.user_id)">
                                                             @if (@user.is_ready == 1)
                                                             {
-                                                            <td><img class="img" src="@("../assets/Suu.Temp/ProfilePic/"+@user.Id+".jpg")" style="border-radius: 100%"></td>}
+                                                            <td><img class="img" src="@("D:/Suu.Temp/ProfilePic/"+@user.Id+".jpg")" style="border-radius: 100%"></td>}
                                                             else
                                                             {
                                                             <td><img class="img" src="../assets/img/default.jpg" style="border-radius: 100%"></td>}
                                                             <td>@user.name</td>
                                                             <td>@user.count</td>
-                                                            <td>@user.location | @user.user_id</td>
+                                                            <td>@user.location</td>
                                                     </tr>}
                                                 </tbody>
                                             </table>
@@ -357,9 +358,9 @@
                         
                         <div class="col-md-12">
                             <div class="card card-chart">
-                                <div class="card-header card-header-success">
+                                <div class="card-header card-header-info">
                                     @*<div class="ct-chart" id="completedTasksChart"></div>*@
-                                    <div id="map" class="map" style="min-width: 664px; height: 400px; margin: 0 auto">100</div>
+                                    <div id="map" class="map" style="min-width: 310px; height: 550px; margin: 0 auto">100</div>
                                 </div>
                                 <div class="card-body">
                                     <h4 class="card-title">Daily Sales</h4>
@@ -369,7 +370,7 @@
                                 </div>
                                 <div class="card-footer">
                                     <div class="stats">
-                                        <i class="material-icons">access_time</i> updated 4 minutes ago
+                                        @*<i class="material-icons">access_time</i> updated 4 minutes ago*@
                                     </div>
                                 </div>
                             </div>
@@ -491,7 +492,7 @@
                                   var profile_image;
 
                                   if (profile_image_extention && $.parseJSON(data.data)[y]["User"]["is_ready"] == 1) {
-                                      profile_image = "../assets/Suu.Temp/ProfilePic/" + $.parseJSON(data.data)[y]["user_id"] + "." + profile_image_extention;
+                                      profile_image = "D:\Suu.Temp\ProfilePic\" + $.parseJSON(data.data)[y]["user_id"] + "." + profile_image_extention;
                                   }
                                   else {
                                       profile_image = "../assets/img/default.jpg";
@@ -558,7 +559,7 @@
 
               GetCoordinateList();
 
-              var map = L.map('map').setView([7.8731, 80.7718], 10);
+              var map = L.map('map').setView([7.8731, 80.7718], 8);
 
 
 
@@ -582,9 +583,10 @@
                               var locationName = $.parseJSON(data.data)[x]["user_location"];
                               var lon = $.parseJSON(data.data)[x]["lon"];
                               var lat = $.parseJSON(data.data)[x]["lat"];
+                              var count = $.parseJSON(data.data)[x]["count"];
 
                               L.marker([lat, lon]).addTo(map)
-                                  .bindPopup(locationName)
+                                  .bindPopup(locationName + ": " + count  + " tweeter users")
                                   .openPopup();
 
                           }

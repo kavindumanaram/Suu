@@ -32,15 +32,9 @@ namespace Suu.TwitterFetcher
                     var results = SearchResponse.Results;
                     if (results[a].Text.Trim().Substring(0, 2).ToString() != "RT")
                     {
-							var userLocationLower = results[a].User.Location.ToLower();
-							var userLocation = string.Empty;
-							if (userLocationLower.Any())
-							{
-								if (!userLocationLower.Contains("sri lanka"))
-								{
-									userLocation = $"{results[a].User.Location}, sri lanka";
-								}
-							}
+							//var userLocationLower = results[a].User.Location.ToLower();
+							//var userLocation = string.Empty;
+
                         var status = new FrontEnd.Models.Status()
                         {
                             Id = results[a].id,
@@ -70,7 +64,7 @@ namespace Suu.TwitterFetcher
                                 Id = results[a].User.Id,
                                 name = results[a].User.Name,
                                 screen_name = results[a].User.ScreenName,
-                                location = userLocation.ToLower(),
+                                location = results[a].User.Location.ToLower(),
                                 description = results[a].User.Description,
                                 url = results[a].User.Url,
                                 //entities

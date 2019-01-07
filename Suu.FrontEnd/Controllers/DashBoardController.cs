@@ -23,13 +23,13 @@ namespace Suu.FrontEnd.Controllers
 				{
 					Name = n.Key,
 				//	Count = n.Count()
-				}).ToList().Take(30).OrderBy(m => m.Name);
+				}).ToList().Take(30).OrderByDescending(m => m.Name);
 
 				var StatusMonthGroupByCount = SuuContext.Status.GroupBy(s => s.created_at).Select(n => new
 				{
 					Name = n.Key,
 					Count = n.Count()
-				}).ToList().Take(30).OrderBy(m => m.Name);
+				}).ToList().Take(30).OrderByDescending(m => m.Name);
 
 				ViewData["TweetDataCount"] = $"[{string.Join(",", StatusMonthGroupByCount.Select(s => s.Count).ToList())}]";
 				ViewData["TweetDataDate"] = $"['{string.Join("','", StatusMonthGroupByName.Select(s => s.Name).ToList())}']".ToString();
@@ -41,6 +41,9 @@ namespace Suu.FrontEnd.Controllers
 				ViewBag.User = SuuContext.Users.OrderByDescending(x => x.count).Take(10).ToList();
                 ViewBag.HashTag = SuuContext.Hashtags.OrderByDescending(x => x.count).Take(10).ToList();
                 ViewBag.MessageWord = SuuContext.messageCounts.OrderByDescending(x => x.count).Take(10).ToList();
+				ViewBag.UserCount = SuuContext.Users.Count();
+				ViewBag.MessageCount = SuuContext.Status.Count();
+				ViewBag.HashTagCount = SuuContext.Hashtags.Count();
 				return View();
             }
                 
