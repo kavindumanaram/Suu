@@ -21,6 +21,126 @@
     <link href="../assets/css/material-dashboard.css?v=2.1.0" rel="stylesheet" />
     <!-- CSS Just for demo purpose, don't include it in your project -->
     <link href="../assets/demo/demo.css" rel="stylesheet" />
+
+    <script>
+              $(document).ready(function () {
+                  // Javascript method's body can be found in assets/js/demos.js
+                  md.initDashboardPageCharts();
+
+
+                   function DisplayRelatedTweets(hashTagId) {
+                  var randomColor = get_random(['', 'info', 'danger', 'success', 'warning', 'rose', 'primary']);
+                  //console.log(hashTagId);
+                  $.ajax({
+                      type: "GET",
+                      url: "/DashBoard/Test",
+                      data: { hashTagId: hashTagId },
+                      //contentType: "application/json;charset=utf-8",
+                      dataType: "json",
+                      success: function (data) {
+                          debugger;
+                          for (var x = 0; x < 10; x++) {
+                              var y = 0;
+                              setTimeout(function () {
+                                  //debugger;
+                                  var profile_image_extention = $.parseJSON(data.data)[y]["User"]["profile_image_url"].split('.').pop();
+                                  var profile_image;
+
+                                  if (profile_image_extention && $.parseJSON(data.data)[y]["User"]["is_ready"] == 1) {
+                                      profile_image = "../assets/Suu.Temp/ProfilePic/" + $.parseJSON(data.data)[y]["user_id"] + "." + profile_image_extention;
+                                  }
+                                  else {
+                                      profile_image = "../assets/img/default.jpg";
+                                  }
+                                  demo.showNotification('top', 'left', randomColor, $.parseJSON(data.data)[y]["text"], profile_image);
+                                  console.log(y);
+                                  y++;
+                              }, 2000 * x);
+                          }
+                      }
+                  });
+              }
+
+              function DisplayTopTenTweets(userId) {
+                  var randomColor = get_random(['', 'info', 'danger', 'success', 'warning', 'rose', 'primary']);
+                  $.ajax({
+                      type: "GET",
+                      url: "/DashBoard/ReriveTopTenTweetForUser",
+                      data: { userId: userId },
+                      dataType: "json",
+                      success: function (data) {
+                          for (var x = 0; x < 10; x++) {
+                              var y = 0;
+                              setTimeout(function () {
+                                  var profile_image_extention = $.parseJSON(data.data)[y]["User"]["profile_image_url"].split('.').pop();
+                                  var profile_image;
+
+                                  if (profile_image_extention && $.parseJSON(data.data)[y]["User"]["is_ready"] == 1) {
+                                      profile_image = "D:\Suu.Temp\ProfilePic\" + $.parseJSON(data.data)[y]["user_id"] + "." + profile_image_extention;
+                                  }
+                                  else {
+                                      profile_image = "../assets/img/default.jpg";
+                                  }
+                                  demo.showNotification('top', 'left', randomColor, $.parseJSON(data.data)[y]["text"], profile_image);
+                                  console.log(y);
+                                  y++;
+                              }, 2000 * x);
+                          }
+                      },
+                      error: function (xhr, status, error) {
+                          var err = eval("(" + xhr.responseText + ")");
+                          alert(err.Message);
+                      }
+                  });
+              }
+
+              get_random = function (list) {
+                  return list[Math.floor((Math.random() * list.length))];
+              }
+
+
+              Highcharts.chart('container', {
+                  chart: {
+                      type: 'line'
+                  },
+                  title: {
+                      text: 'Monthly Average Sinhala Tweets'
+                  },
+                  subtitle: {
+                      text: 'Source: developer.twitter.com'
+                  },
+                  xAxis: {
+                      categories: @Html.Raw(@ViewData["TweetDataDate"])//['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+                  },
+                  yAxis: {
+                      title: {
+                          text: 'Tweet Count'
+                      }
+                  },
+                  plotOptions: {
+                      line: {
+                          dataLabels: {
+                              enabled: true
+                          },
+                          enableMouseTracking: false
+                      }
+                  },
+                  series: [{
+                @ViewBag.StatusMonthGroupBy
+                name: 'Tweet messsages count',
+                data: @ViewData["TweetDataCount"]
+            },
+            //{
+            //    name: 'London',
+            //    data: [3.9, 4.2, 5.7, 8.5, 11.9, 15.2, 17.0, 16.6, 14.2, 10.3, 6.6, 4.8]
+            //    }
+            ]
+              });
+
+              });
+
+
+    </script>
 </head>
 <body class="">
     <div class="wrapper ">
@@ -437,122 +557,7 @@
     <script src="../assets/js/material-dashboard.min.js?v=2.1.0" type="text/javascript"></script>
     <!-- Material Dashboard DEMO methods, don't include it in your project! -->
     <script src="../assets/demo/demo.js"></script>
-    <script>
-              $(document).ready(function () {
-                  // Javascript method's body can be found in assets/js/demos.js
-                  md.initDashboardPageCharts();
-
-              });
-
-              function DisplayRelatedTweets(hashTagId) {
-                  var randomColor = get_random(['', 'info', 'danger', 'success', 'warning', 'rose', 'primary']);
-                  //console.log(hashTagId);
-                  $.ajax({
-                      type: "GET",
-                      url: "/DashBoard/Test",
-                      data: { hashTagId: hashTagId },
-                      //contentType: "application/json;charset=utf-8",
-                      dataType: "json",
-                      success: function (data) {
-                          debugger;
-                          for (var x = 0; x < 10; x++) {
-                              var y = 0;
-                              setTimeout(function () {
-                                  //debugger;
-                                  var profile_image_extention = $.parseJSON(data.data)[y]["User"]["profile_image_url"].split('.').pop();
-                                  var profile_image;
-
-                                  if (profile_image_extention && $.parseJSON(data.data)[y]["User"]["is_ready"] == 1) {
-                                      profile_image = "../assets/Suu.Temp/ProfilePic/" + $.parseJSON(data.data)[y]["user_id"] + "." + profile_image_extention;
-                                  }
-                                  else {
-                                      profile_image = "../assets/img/default.jpg";
-                                  }
-                                  demo.showNotification('top', 'left', randomColor, $.parseJSON(data.data)[y]["text"], profile_image);
-                                  console.log(y);
-                                  y++;
-                              }, 2000 * x);
-                          }
-                      }
-                  });
-              }
-
-              function DisplayTopTenTweets(userId) {
-                  var randomColor = get_random(['', 'info', 'danger', 'success', 'warning', 'rose', 'primary']);
-                  $.ajax({
-                      type: "GET",
-                      url: "/DashBoard/ReriveTopTenTweetForUser",
-                      data: { userId: userId },
-                      dataType: "json",
-                      success: function (data) {
-                          for (var x = 0; x < 10; x++) {
-                              var y = 0;
-                              setTimeout(function () {
-                                  var profile_image_extention = $.parseJSON(data.data)[y]["User"]["profile_image_url"].split('.').pop();
-                                  var profile_image;
-
-                                  if (profile_image_extention && $.parseJSON(data.data)[y]["User"]["is_ready"] == 1) {
-                                      profile_image = "D:\Suu.Temp\ProfilePic\" + $.parseJSON(data.data)[y]["user_id"] + "." + profile_image_extention;
-                                  }
-                                  else {
-                                      profile_image = "../assets/img/default.jpg";
-                                  }
-                                  demo.showNotification('top', 'left', randomColor, $.parseJSON(data.data)[y]["text"], profile_image);
-                                  console.log(y);
-                                  y++;
-                              }, 2000 * x);
-                          }
-                      },
-                      error: function (xhr, status, error) {
-                          var err = eval("(" + xhr.responseText + ")");
-                          alert(err.Message);
-                      }
-                  });
-              }
-
-              get_random = function (list) {
-                  return list[Math.floor((Math.random() * list.length))];
-              }
-
-
-              Highcharts.chart('container', {
-                  chart: {
-                      type: 'line'
-                  },
-                  title: {
-                      text: 'Monthly Average Sinhala Tweets'
-                  },
-                  subtitle: {
-                      text: 'Source: developer.twitter.com'
-                  },
-                  xAxis: {
-                      categories: @Html.Raw(@ViewData["TweetDataDate"])//['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
-                  },
-                  yAxis: {
-                      title: {
-                          text: 'Tweet Count'
-                      }
-                  },
-                  plotOptions: {
-                      line: {
-                          dataLabels: {
-                              enabled: true
-                          },
-                          enableMouseTracking: false
-                      }
-                  },
-                  series: [{
-                @ViewBag.StatusMonthGroupBy
-                name: 'Tweet messsages count',
-                data: @ViewData["TweetDataCount"]
-            },
-            //{
-            //    name: 'London',
-            //    data: [3.9, 4.2, 5.7, 8.5, 11.9, 15.2, 17.0, 16.6, 14.2, 10.3, 6.6, 4.8]
-            //    }
-            ]
-        });
-    </script>
+   
 
 
     <script>
@@ -577,7 +582,7 @@
                           //debugger;
                           obj = JSON.parse(data.data);
                           Object.keys(obj[0]).length;
-                          for (var x = 0; x < 20; x++) {
+                          for (var x = 0; x < 100; x++) {
                               // var y = 0;
                               /// setTimeout(function () {
                               var locationName = $.parseJSON(data.data)[x]["user_location"];
