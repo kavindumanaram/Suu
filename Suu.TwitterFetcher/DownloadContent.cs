@@ -49,65 +49,68 @@ namespace Suu.TwitterFetcher
 							{
 								var existingLoactionList = SuuContext.UserLocationCounts.Select(g => g.user_location);
 
+								var latt = 0.00;
+								var lont = 0.00;
+								var locationText = string.Empty;
+								HttpWebRequest request = (HttpWebRequest)WebRequest.Create("http://open.mapquestapi.com/geocoding/v1/address?key=WBA9ECUGd5XzoEeYlTPMKOivfEEMfTyk&location=" + currentUserlocation);
+								request.AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate;
 
-								if (!existingLoactionList.Contains(currentUserlocation))
+								using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
+								using (Stream stream = response.GetResponseStream())
+								using (StreamReader reader = new StreamReader(stream))
 								{
-
-									//var locationCount = new FrontEnd.Models.UserLocationCount()
-									//{
-									//	user_location = currentUserlocation,
-									//	count = 1,
-									//	lon = lont.ToString(),
-									//	lat = latt.ToString()
-									//};
-
-									//try
-									//{
-									var latt = 0.00;
-									var lont = 0.00;
-									HttpWebRequest request = (HttpWebRequest)WebRequest.Create("http://open.mapquestapi.com/geocoding/v1/address?key=WBA9ECUGd5XzoEeYlTPMKOivfEEMfTyk&location="+ currentUserlocation);
-										request.AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate;
-
-										using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
-										using (Stream stream = response.GetResponseStream())
-										using (StreamReader reader = new StreamReader(stream))
-										{
-											var x = reader.ReadToEnd();
-											//var y =  serializer.DeserializeObject(reader.ReadToEnd());
-											var GeoLocationResponseResponse = JsonConvert.DeserializeObject<GeocodingByAddressDto>(x);
-											 latt = GeoLocationResponseResponse.results.FirstOrDefault().locations.FirstOrDefault().displayLatLng.lat;
-											 lont = GeoLocationResponseResponse.results.FirstOrDefault().locations.FirstOrDefault().displayLatLng.lng;
-
-											
-										}
-
-									var locationCount = new FrontEnd.Models.UserLocationCount()
-									{
-										user_location = currentUserlocation,
-										count = 1,
-										lon = lont.ToString(),
-										lat = latt.ToString()
-									};
-									//}
-									//catch (Exception ex)
-									//{
-									//	Console.WriteLine("Error while get coordinates" + ex.Message);
-									//}
-
-
-									SuuContext.UserLocationCounts.Add(locationCount);
+									var x = reader.ReadToEnd();
+									//var y =  serializer.DeserializeObject(reader.ReadToEnd());
+									var GeoLocationResponseResponse = JsonConvert.DeserializeObject<GeocodingByAddressDto>(x);
+									latt = GeoLocationResponseResponse.results.FirstOrDefault().locations.FirstOrDefault().displayLatLng.lat;
+									lont = GeoLocationResponseResponse.results.FirstOrDefault().locations.FirstOrDefault().displayLatLng.lng;
+									locationText = GeoLocationResponseResponse.results.FirstOrDefault().locations.FirstOrDefault().adminArea5;
 								}
-								else
-								{
-									{
-									
 
-										var exsitingLocationCountText = SuuContext.UserLocationCounts.Where(d => d.user_location == currentUserlocation).FirstOrDefault();
-										var exsitingLocationCountTextOccurence = exsitingLocationCountText.count;
-										var exsitingLocationCountTextLatestOccurence = exsitingLocationCountTextOccurence + 1;
-										exsitingLocationCountText.count = exsitingLocationCountTextLatestOccurence;
+								if (!string.IsNullOrEmpty(locationText))
+								{
+									if (!existingLoactionList.Contains(locationText))
+									{
+
+										//var locationCount = new FrontEnd.Models.UserLocationCount()
+										//{
+										//	user_location = currentUserlocation,
+										//	count = 1,
+										//	lon = lont.ToString(),
+										//	lat = latt.ToString()
+										//};
+
+										//try
+										//{
+
+
+										var locationCount = new FrontEnd.Models.UserLocationCount()
+										{
+											user_location = locationText,
+											count = 1,
+											lon = lont.ToString(),
+											lat = latt.ToString()
+										};
+										//}
+										//catch (Exception ex)
+										//{
+										//	Console.WriteLine("Error while get coordinates" + ex.Message);
+										//}
+
+
+										SuuContext.UserLocationCounts.Add(locationCount);
+									}
+									else
+									{
+										{
+											var exsitingLocationCountText = SuuContext.UserLocationCounts.Where(d => d.user_location == locationText).FirstOrDefault();
+											var exsitingLocationCountTextOccurence = exsitingLocationCountText.count;
+											var exsitingLocationCountTextLatestOccurence = exsitingLocationCountTextOccurence + 1;
+											exsitingLocationCountText.count = exsitingLocationCountTextLatestOccurence;
+										}
 									}
 								}
+								
 							}
 
 
