@@ -21,6 +21,10 @@
     <link href="../assets/css/material-dashboard.css?v=2.1.0" rel="stylesheet" />
     <!-- CSS Just for demo purpose, don't include it in your project -->
     <link href="../assets/demo/demo.css" rel="stylesheet" />
+    <!--photopole image galary css-->
+    <link href="../assets/css/photopile.css" rel="stylesheet">
+    @*<link href="../assets/css/demo.css" rel="stylesheet">*@
+    <link rel="icon" href="../assets/images/favicon.ico" type="image/x-icon" />
 
     <script>
               $(document).ready(function () {
@@ -335,7 +339,10 @@
                                                     <tr onclick="DisplayTopTenTweets(@user.user_id)">
                                                             @if (@user.is_ready == 1)
                                                             {
-                                                            <td><img class="img" src="@("D:/Suu.Temp/ProfilePic/"+@user.Id+".jpg")" style="border-radius: 100%"></td>}
+                                                            <td><img class="img" src="@("../assets/Suu.Temp/ProfilePic/"+@user.Id+".jpg")" style="border-radius: 100%"></td>}
+
+                                                        
+
                                                             else
                                                             {
                                                             <td><img class="img" src="../assets/img/default.jpg" style="border-radius: 100%"></td>}
@@ -387,9 +394,23 @@
                         </div>
                     </div>
 
-                   
+                    <div class="photopile-wrapper">
+                        <ul class="photopile">
+@foreach (var user in @ViewBag.AllUser)
+{
+if (@user.is_ready == 1)
+{
+                            <li>
+                                <a href="images/fullsize/01.jpg">
+                                    <img src="@("../assets/Suu.Temp/ProfilePic/" + @user.Id + ".jpg")" alt="@(@user.name)" width="133" height="100" />
+                                </a>
+                            </li>
+    }
+}
+                        </ul>
+                    </div> <!-- .photopile-wrapper -->
 
-                </div>
+                    </div>
             </div>
             <footer class="footer">
                 <div class="container-fluid">
@@ -428,6 +449,13 @@
             </footer>
         </div>
     </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
+    <script src="../assets/js/photopile.js"></script>
+    <script>
+              PhotoPile().scatter();
+    </script>
     @*high charts*@
     <script src="https://code.highcharts.com/highcharts.js"></script>
     <script src="https://code.highcharts.com/modules/exporting.js"></script>
@@ -611,6 +639,7 @@
                   });
               }
     </script>
+ 
 
 </body>
 </html>

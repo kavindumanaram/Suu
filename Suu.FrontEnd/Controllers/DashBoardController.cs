@@ -39,7 +39,8 @@ namespace Suu.FrontEnd.Controllers
 
 
 				ViewBag.User = SuuContext.Users.OrderByDescending(x => x.count).Take(10).ToList();
-                ViewBag.HashTag = SuuContext.Hashtags.OrderByDescending(x => x.count).Take(10).ToList();
+				ViewBag.AllUser = SuuContext.Users.OrderByDescending(x => x.count).Take(50).ToList();
+				ViewBag.HashTag = SuuContext.Hashtags.OrderByDescending(x => x.count).Take(10).ToList();
                 ViewBag.MessageWord = SuuContext.messageCounts.OrderByDescending(x => x.count).Take(10).ToList();
 				ViewBag.UserCount = SuuContext.Users.Count();
 				ViewBag.MessageCount = SuuContext.Status.Count();
