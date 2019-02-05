@@ -34,6 +34,23 @@ namespace Suu.FrontEnd.Controllers
 				ViewData["TweetDataCount"] = $"[{string.Join(",", StatusMonthGroupByCount.Select(s => s.Count).ToList())}]";
 				ViewData["TweetDataDate"] = $"['{string.Join("','", StatusMonthGroupByName.Select(s => s.Name).ToList())}']".ToString();
 
+				String LastSyncDateTime = SuuContext.OrganizationSettings.Where(s => s.SettingName == "Organization.LastSyncDateTime").FirstOrDefault().SettingValue;
+
+				ViewData["LastSyncDateTime"] = CalculateRelativeTime(DateFormatter(LastSyncDateTime));
+
+				var FirstSyncDateTime = SuuContext.OrganizationSettings.Where(s => s.SettingName == "Organization.FirstSyncDateTime").FirstOrDefault();
+				var TotalMonth = 0;
+				if (string.IsNullOrEmpty(FirstSyncDateTime.SettingValue))
+				{
+					//FirstSyncDateTime.SettingValue = DateTime.UtcNow.ToString("dd/MM/yyyy HH:mm:ss", CultureInfo.InvariantCulture);
+					TotalMonth = GetMonthsBetween(DateFormatter(FirstSyncDateTime.SettingValue), DateTime.UtcNow);
+				}
+				ViewData["TotalMonth"] = TotalMonth;
+
+
+					//var LastSyncDateTime = SuuContext.OrganizationSettings.Where(s => s.SettingName == "Organization.LastSyncDateTime").FirstOrDefault();
+
+
 				//.FirstOrDefault().Select(x => x.created_at);
 				//.Count();
 
@@ -139,5 +156,78 @@ namespace Suu.FrontEnd.Controllers
 			var json = JsonConvert.SerializeObject(UserLocationCounts);
 			return Json(new { data = json }, JsonRequestBehavior.AllowGet);
 		}
+
+		private string CalculateRelativeTime(DateTime dt)
+		{
+			var ts = new TimeSpan(DateTime.UtcNow.Ticks - dt.Ticks);
+			double delta = Math.Abs(ts.TotalSeconds);
+
+			if (delta < 60)
+			{
+				return ts.Seconds == 1 ? "one second ago" : ts.Seconds + " seconds ago";
+			}
+			if (delta < 120)
+			{
+				return "a minute ago";
+			}
+			if (delta < 2700) // 45 * 60
+			{
+				return ts.Minutes + " minutes ago";
+			}
+			if (delta < 5400) // 90 * 60
+			{
+				return "an hour ago";
+			}
+			if (delta < 86400) // 24 * 60 * 60
+			{
+				return ts.Hours + " hours ago";
+			}
+			if (delta < 172800) // 48 * 60 * 60
+			{
+				return "yesterday";
+			}
+			if (delta < 2592000) // 30 * 24 * 60 * 60
+			{
+				return ts.Days + " days ago";
+			}
+			if (delta < 31104000) // 12 * 30 * 24 * 60 * 60
+			{
+				int months = Convert.ToInt32(Math.Floor((double)ts.Days / 30));
+				return months <= 1 ? "one month ago" : months + " months ago";
+			}
+			int years = Convert.ToInt32(Math.Floor((double)ts.Days / 365));
+			return years <= 1 ? "one year ago" : years + " years ago";
+		}
+
+		/// <summary>
+		/// The date formatter.
+		/// </summary>
+		/// <param name="dateString">the string date.</param>
+		/// <returns></returns>
+		private DateTime DateFormatter(string dateString)
+		{
+			if (string.IsNullOrEmpty(dateString))
+			{
+				throw new ArgumentException("dateString is null or empty.");
+			}
+			return DateTime.ParseExact(dateString, "dd/MM/yyyy HH:mm:ss", CultureInfo.InvariantCulture);
+		}
+
+		private static int GetMonthsBetween(DateTime from, DateTime to)
+		{
+			if (from > to) return GetMonthsBetween(to, from);
+
+			var monthDiff = Math.Abs((to.Year * 12 + (to.Month - 1)) - (from.Year * 12 + (from.Month - 1)));
+
+			if (from.AddMonths(monthDiff) > to || to.Day < from.Day)
+			{
+				return monthDiff - 1;
+			}
+			else
+			{
+				return monthDiff;
+			}
+		}
+
 	}
 }

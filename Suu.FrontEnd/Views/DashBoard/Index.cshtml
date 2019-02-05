@@ -123,7 +123,7 @@
                                     <i class="material-icons">search</i>
                                     <div class="ripple-container"></div>
                                 </button>*@
-                                <i class="material-icons">access_time</i> updated 4 minutes ago
+                                <i class="material-icons">access_time</i> &nbsp;updated @ViewData["LastSyncDateTime"]
                             </div>
                         </form>
                         <ul class="navbar-nav">
@@ -231,7 +231,7 @@
                                         <i class="material-icons">calendar_today</i>
                                     </div>
                                     <p class="card-category">Months</p>
-                                    <h3 class="card-title">3</h3>
+                                    <h3 class="card-title">@ViewData["TotalMonth"]</h3>
                                 </div>
                                 <div class="card-footer">
                                     <div class="stats">
@@ -597,7 +597,6 @@ if (@user.is_ready == 1)
                       }
                   });
               }
-              alert(1234);
               GetCoordinateList();
 
               var map = L.map('map').setView([7.8731, 80.7718], 8);

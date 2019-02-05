@@ -29,6 +29,14 @@
           <Property Name="message_text" Type="nvarchar" MaxLength="100" />
           <Property Name="count" Type="int" />
         </EntityType>
+        <EntityType Name="OrganizationSetting">
+          <Key>
+            <PropertyRef Name="OrganizationId" />
+          </Key>
+          <Property Name="OrganizationId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SettingName" Type="nvarchar" MaxLength="100" />
+          <Property Name="SettingValue" Type="nvarchar" MaxLength="100" />
+        </EntityType>
         <EntityType Name="Status">
           <Key>
             <PropertyRef Name="Id" />
@@ -154,6 +162,7 @@
           <EntitySet Name="EntityHashtag" EntityType="Self.EntityHashtag" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Hashtag" EntityType="Self.Hashtag" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="messageCount" EntityType="Self.messageCount" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrganizationSetting" EntityType="Self.OrganizationSetting" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Status" EntityType="Self.Status" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserLocationCount" EntityType="Self.UserLocationCount" Schema="dbo" store:Type="Tables" />
@@ -193,6 +202,7 @@
             <End Role="Status" EntitySet="Status" />
           </AssociationSet>
           <EntitySet Name="UserLocationCounts" EntityType="SuuModel.UserLocationCount" />
+          <EntitySet Name="OrganizationSettings" EntityType="SuuModel.OrganizationSetting" />
         </EntityContainer>
         <EntityType Name="EntityHashtag">
           <Key>
@@ -345,6 +355,14 @@
           <Property Name="lon" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="count" Type="Int32" />
         </EntityType>
+        <EntityType Name="OrganizationSetting">
+          <Key>
+            <PropertyRef Name="OrganizationId" />
+          </Key>
+          <Property Name="OrganizationId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SettingName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="SettingValue" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -463,6 +481,15 @@
                 <ScalarProperty Name="lat" ColumnName="lat" />
                 <ScalarProperty Name="user_location" ColumnName="user_location" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrganizationSettings">
+            <EntityTypeMapping TypeName="SuuModel.OrganizationSetting">
+              <MappingFragment StoreEntitySet="OrganizationSetting">
+                <ScalarProperty Name="SettingValue" ColumnName="SettingValue" />
+                <ScalarProperty Name="SettingName" ColumnName="SettingName" />
+                <ScalarProperty Name="OrganizationId" ColumnName="OrganizationId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

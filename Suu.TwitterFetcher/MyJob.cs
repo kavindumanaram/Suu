@@ -26,7 +26,18 @@ namespace Suu.TwitterFetcher
 
             using (SuuEntities SuuContext = new SuuEntities())
             {
-                for (int a = 0; a < SearchResponse.Results.Count; a++)
+
+					var FirstSyncDateTime = SuuContext.OrganizationSettings.Where(s => s.SettingName == "Organization.FirstSyncDateTime").FirstOrDefault();
+					if (string.IsNullOrEmpty(FirstSyncDateTime.SettingValue))
+					{
+						FirstSyncDateTime.SettingValue = DateTime.UtcNow.ToString("dd/MM/yyyy HH:mm:ss", CultureInfo.InvariantCulture);
+					}
+					
+					var LastSyncDateTime = SuuContext.OrganizationSettings.Where(s => s.SettingName == "Organization.LastSyncDateTime").FirstOrDefault();
+					LastSyncDateTime.SettingValue = DateTime.UtcNow.ToString("dd/MM/yyyy HH:mm:ss", CultureInfo.InvariantCulture);
+					SuuContext.SaveChanges();
+
+					for (int a = 0; a < SearchResponse.Results.Count; a++)
                 {
 
                     var results = SearchResponse.Results;

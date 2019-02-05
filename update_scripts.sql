@@ -155,6 +155,32 @@ create table [UserLocationCount] (
 )
 
 
+create table [OrganizationSetting] (
+[OrganizationId] [int] IDENTITY(1,1) primary key NOT NULL,
+[SettingName] [nvarchar](100) COLLATE Latin1_General_CI_AI NULL,
+[SettingValue] [nvarchar](100) COLLATE Latin1_General_CI_AI NULL,
+)
+
+-----------------------------------------------------------------------------------------------------------------
+-- Inclusion of [Organization.LastSyncDateTime] organization setting if does not exist.
+-----------------------------------------------------------------------------------------------------------------
+GO
+IF NOT EXISTS (SELECT * FROM OrganizationSetting WHERE SettingName = 'Organization.LastSyncDateTime')
+BEGIN
+	INSERT INTO OrganizationSetting
+	(
+		
+		SettingName,
+		SettingValue
+		
+	)
+	SELECT
+		'Organization.LastSyncDateTime',
+		(SELECT CONVERT(VARCHAR(10),  GETDATE(), 101) +  ' ' + CONVERT(VARCHAR(8), GETDATE(), 108))
+END
+GO
+
+
 /*create table RetweetedStatus (
     [Id] [int] IDENTITY(1,1) NOT NULL,
     [created_at] [varchar](50) NULL,
@@ -203,4 +229,45 @@ CONSTRAINT [PK_SearchMetadata] PRIMARY KEY CLUSTERED
       [Id] asc
    )
 )*/
+
+
+
+-----------------------------------------------------------------------------------------------------------------
+-- Inclusion of Organization.LastSyncDateTime] organization setting if does not exist.
+-----------------------------------------------------------------------------------------------------------------
+GO
+IF NOT EXISTS (SELECT * FROM OrganizationSetting WHERE SettingName = 'Organization.LastSyncDateTime')
+BEGIN
+	INSERT INTO OrganizationSetting
+	(
+		
+		SettingName,
+		SettingValue
+		
+	)
+	SELECT
+		'Organization.LastSyncDateTime',
+		(SELECT CONVERT(VARCHAR(10),  GETUTCDATE(), 101) +  ' ' + CONVERT(VARCHAR(8), GETUTCDATE(), 108))
+END
+GO
+
+-----------------------------------------------------------------------------------------------------------------
+-- Inclusion of Organization.FirstSyncDateTime] organization setting if does not exist.
+-----------------------------------------------------------------------------------------------------------------
+GO
+IF NOT EXISTS (SELECT * FROM OrganizationSetting WHERE SettingName = 'Organization.FirstSyncDateTime')
+BEGIN
+	INSERT INTO OrganizationSetting
+	(
+		
+		SettingName,
+		SettingValue
+		
+	)
+	SELECT
+		'Organization.FirstSyncDateTime',
+		'31/12/2018 00:00:00'--(SELECT CONVERT(VARCHAR(10),  GETUTCDATE(), 101) +  ' ' + CONVERT(VARCHAR(8), GETUTCDATE(), 108))
+END
+GO
+
 

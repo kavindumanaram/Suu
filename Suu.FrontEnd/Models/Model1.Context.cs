@@ -31,5 +31,6 @@ namespace Suu.FrontEnd.Models
         public virtual DbSet<Status> Status { get; set; }
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<UserLocationCount> UserLocationCounts { get; set; }
+        public virtual DbSet<OrganizationSetting> OrganizationSettings { get; set; }
     }
 }
