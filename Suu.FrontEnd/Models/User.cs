@@ -11,8 +11,9 @@ namespace Suu.FrontEnd.Models
 {
     using System;
     using System.Collections.Generic;
-    
-    public partial class User
+	using System.IO;
+
+	public partial class User
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public User()
@@ -63,8 +64,20 @@ namespace Suu.FrontEnd.Models
         public Nullable<int> count { get; set; }
         public Nullable<int> is_ready { get; set; }
         public int user_id { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+		public string profileImageExtention
+		{
+			get {
+				String imageExtention = string.Empty;
+				if (!string.IsNullOrEmpty(profile_image_url))
+				{
+					//imageExtention = profile_image_url.Split('.')[1];
+					imageExtention = Path.GetExtension(profile_image_url);
+				}
+				return imageExtention;
+			}
+		}
+
+		[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Status> Status { get; set; }
     }
 }

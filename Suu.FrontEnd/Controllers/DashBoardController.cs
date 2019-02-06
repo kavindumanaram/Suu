@@ -40,7 +40,7 @@ namespace Suu.FrontEnd.Controllers
 
 				var FirstSyncDateTime = SuuContext.OrganizationSettings.Where(s => s.SettingName == "Organization.FirstSyncDateTime").FirstOrDefault();
 				var TotalMonth = 0;
-				if (string.IsNullOrEmpty(FirstSyncDateTime.SettingValue))
+				if (!string.IsNullOrEmpty(FirstSyncDateTime.SettingValue))
 				{
 					//FirstSyncDateTime.SettingValue = DateTime.UtcNow.ToString("dd/MM/yyyy HH:mm:ss", CultureInfo.InvariantCulture);
 					TotalMonth = GetMonthsBetween(DateFormatter(FirstSyncDateTime.SettingValue), DateTime.UtcNow);
@@ -54,11 +54,10 @@ namespace Suu.FrontEnd.Controllers
 				//.FirstOrDefault().Select(x => x.created_at);
 				//.Count();
 
-
 				ViewBag.User = SuuContext.Users.OrderByDescending(x => x.count).Take(10).ToList();
 				ViewBag.AllUser = SuuContext.Users.OrderByDescending(x => x.count).Take(50).ToList();
 				ViewBag.HashTag = SuuContext.Hashtags.OrderByDescending(x => x.count).Take(10).ToList();
-                ViewBag.MessageWord = SuuContext.messageCounts.OrderByDescending(x => x.count).Take(10).ToList();
+        ViewBag.MessageWord = SuuContext.messageCounts.OrderByDescending(x => x.count).Take(10).ToList();
 				ViewBag.UserCount = SuuContext.Users.Count();
 				ViewBag.MessageCount = SuuContext.Status.Count();
 				ViewBag.HashTagCount = SuuContext.Hashtags.Count();

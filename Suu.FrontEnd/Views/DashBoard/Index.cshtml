@@ -26,15 +26,6 @@
     @*<link href="../assets/css/demo.css" rel="stylesheet">*@
     <link rel="icon" href="../assets/images/favicon.ico" type="image/x-icon" />
 
-    <script>
-              $(document).ready(function () {
-                  // Javascript method's body can be found in assets/js/demos.js
-                 
-
-              });
-
-
-    </script>
 </head>
 <body class="">
     <div class="wrapper ">
@@ -339,7 +330,7 @@
                                                     <tr onclick="DisplayTopTenTweets(@user.user_id)">
                                                             @if (@user.is_ready == 1)
                                                             {
-                                                            <td><img class="img" src="@("../assets/Suu.Temp/ProfilePic/"+@user.Id+".jpg")" style="border-radius: 100%"></td>}
+                                                            <td><img class="img" src="@("../assets/Suu.Temp/ProfilePic/"+@user.Id+""+@user.profileImageExtention)" style="border-radius: 100%"></td>}
 
                                                         
 
@@ -402,7 +393,7 @@ if (@user.is_ready == 1)
 {
                             <li>
                                 <a href="images/fullsize/01.jpg">
-                                    <img src="@("../assets/Suu.Temp/ProfilePic/" + @user.Id + ".jpg")" alt="@(@user.name)" width="133" height="100" />
+                                    <img src="@("../assets/Suu.Temp/ProfilePic/" + @user.Id + ""+ @user.profileImageExtention)" alt="@(@user.name)" width="133" height="100" />
                                 </a>
                             </li>
     }
@@ -530,38 +521,39 @@ if (@user.is_ready == 1)
 
 
 
-              //function DisplayTopTenTweets(userId) {
-              //    var randomColor = get_random(['', 'info', 'danger', 'success', 'warning', 'rose', 'primary']);
-              //    $.ajax({
-              //        type: "GET",
-              //        url: "/DashBoard/ReriveTopTenTweetForUser",
-              //        data: { userId: userId },
-              //        dataType: "json",
-              //        success: function (data) {
-              //            for (var x = 0; x < 10; x++) {
-              //                var y = 0;
-              //                setTimeout(function () {
-              //                    var profile_image_extention = $.parseJSON(data.data)[y]["User"]["profile_image_url"].split('.').pop();
-              //                    var profile_image;
+              function DisplayTopTenTweets(userId) {
+                  var randomColor = get_random(['', 'info', 'danger', 'success', 'warning', 'rose', 'primary']);
+                  $.ajax({
+                      type: "GET",
+                      url: "/DashBoard/ReriveTopTenTweetForUser",
+                      data: { userId: userId },
+                      dataType: "json",
+                      success: function (data) {
+                          for (var x = 0; x < 10; x++) {
+                              var y = 0;
+                              setTimeout(function () {
+                                  var profile_image_extention = $.parseJSON(data.data)[y]["User"]["profile_image_url"].split('.').pop();
+                                  var profile_image;
 
-              //                    if (profile_image_extention && $.parseJSON(data.data)[y]["User"]["is_ready"] == 1) {
-              //                        profile_image = "D:\Suu.Temp\ProfilePic\" + $.parseJSON(data.data)[y]["user_id"] + "." + profile_image_extention;
-              //                    }
-              //                    else {
-              //                        profile_image = "../assets/img/default.jpg";
-              //                    }
-              //                    demo.showNotification('top', 'left', randomColor, $.parseJSON(data.data)[y]["text"], profile_image);
-              //                    console.log(y);
-              //                    y++;
-              //                }, 2000 * x);
-              //            }
-              //        },
-              //        error: function (xhr, status, error) {
-              //            var err = eval("(" + xhr.responseText + ")");
-              //            alert(err.Message);
-              //        }
-              //    });
-              //}
+                                  if (profile_image_extention && $.parseJSON(data.data)[y]["User"]["is_ready"] == 1) {
+                                    //  profile_image = "D:\Suu.Temp\ProfilePic\" + $.parseJSON(data.data)[y]["user_id"] + "." + profile_image_extention;
+                                        profile_image = "../assets/Suu.Temp/ProfilePic/" + $.parseJSON(data.data)[y]["user_id"] + "." + profile_image_extention;
+                                  }
+                                  else {
+                                      profile_image = "../assets/img/default.jpg";
+                                  }
+                                  demo.showNotification('top', 'left', randomColor, $.parseJSON(data.data)[y]["text"], profile_image);
+                                  console.log(y);
+                                  y++;
+                              }, 2000 * x);
+                          }
+                      },
+                      error: function (xhr, status, error) {
+                          var err = eval("(" + xhr.responseText + ")");
+                          alert(err.Message);
+                      }
+                  });
+              }
 
 
 
