@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "oAuthTwitterWrapper", "oAut
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Suu.TwitterFetcher", "Suu.TwitterFetcher\Suu.TwitterFetcher.csproj", "{CE99C469-403E-47CC-9AD4-1D535F92B0DD}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{C084025D-E77C-4763-81D5-6F99BE0BB673}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,5 +32,9 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{8BB6CE98-A55B-495A-B8D2-37ECE69E2956} = {C084025D-E77C-4763-81D5-6F99BE0BB673}
+		{CE99C469-403E-47CC-9AD4-1D535F92B0DD} = {C084025D-E77C-4763-81D5-6F99BE0BB673}
 	EndGlobalSection
 EndGlobal

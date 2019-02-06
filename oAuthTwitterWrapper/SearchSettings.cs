@@ -14,8 +14,9 @@ namespace OAuthTwitterWrapper
         public string Lang { get; set; }
         public int Count { get; set; }
         public string Until { get; set; }
+		
 
-        public string SearchUrl {
+		public string SearchUrl {
 			get { return string.Format(SearchFormat, SearchQuery, ResultType, GeoCode, Lang, Count, Until); }  
 		}
 	}

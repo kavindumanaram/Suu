@@ -43,9 +43,9 @@ namespace OAuthTwitterWrapper
 			string searchFormat = ConfigurationManager.AppSettings["searchFormat"];
 			string searchQuery = ConfigurationManager.AppSettings["searchQuery"];
             string resultType = "recent";
-            string geoCode = "5.954920,80.554956,1200mi";
+			string geoCode = "";//"5.954920,80.554956,1200mi";
             string lang = "si";
-			string until = DateTime.Now.ToString("yyyy-MM-dd");//"2018-08-28";
+			string until = "";//DateTime.Now.ToString("yyyy-MM-dd");//"2018-08-28";
 
             SearchSettings = new SearchSettings
             {
@@ -55,8 +55,8 @@ namespace OAuthTwitterWrapper
                 GeoCode = geoCode,
                 Lang = lang,
                 Count = count,
-                Until = until
-            };
+                Until = until,
+								            };
 				
 		}
 
@@ -118,5 +118,18 @@ namespace OAuthTwitterWrapper
 
 			return searchJson;
 		}
-    }
+
+		public string GetSearch(string sinceId)
+		{
+			var searchJson = string.Empty;
+			IAuthenticate authenticate = new Authenticate();
+			AuthResponse twitAuthResponse = authenticate.AuthenticateMe(AuthenticateSettings);
+
+			// Do the search
+			var utility = new Utility();
+			searchJson = utility.RequstJson($"{SearchSettings.SearchUrl}&since_id={sinceId}", twitAuthResponse.TokenType, twitAuthResponse.AccessToken);
+
+			return searchJson;
+		}
+	}
 }

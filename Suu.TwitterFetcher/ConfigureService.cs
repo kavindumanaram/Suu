@@ -26,7 +26,7 @@ namespace Suu.TwitterFetcher
                             JobBuilder.Create<MyJob>().Build())
                             .AddTrigger(() => TriggerBuilder.Create()
                                 .WithSimpleSchedule(b => b
-                                    .WithIntervalInHours(12)
+                                    .WithIntervalInHours(2)
                                     .RepeatForever())
                                 .Build()));
 

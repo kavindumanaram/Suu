@@ -79,7 +79,7 @@ namespace OAuthTwitterWrapper.JsonTypes
         public string query { get; set; }
         public string refresh_url { get; set; }
         public int count { get; set; }
-        public int since_id { get; set; }
+        public long since_id { get; set; }
         public string since_id_str { get; set; }
     }
 
